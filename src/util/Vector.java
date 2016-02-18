@@ -17,18 +17,26 @@ public class Vector {
 	/** Default; 0 */
 	public Vector() {}
 	
-	//-----------Puesdo-Constructors------------//
+	//-----------Pseudo-Constructors------------//
 	public static Vector createFromRectangular(double x, double y, double z) {
 		return new Vector(x, y, z);
 	}
 	
+	/** Returns a vector based on a vertical cylindrical system (radians) */
 	public static Vector createFromCylindrical(double r, double theta, double z) {
-		
-		return new Vector();
+		final double x = r * Math.cos(theta);
+		final double y = r * Math.sin(theta);
+		return new Vector(x, y, z);
 	}
 	
-	public static Vector createFromSpherical() {
-		return new Vector();
+	/** Returns a vector based on spherical coordinates
+	 * @param theta on x-y plane (radians)
+	 * @param phi on z axis and vector it self */
+	public static Vector createFromSpherical(double r, double theta, double phi) {
+		final double x = r * Math.cos(phi) * Math.cos(theta);
+		final double y = r * Math.cos(phi) * Math.sin(theta);
+		final double z = r * Math.sin(phi);
+		return new Vector(x, y, z);
 	}
 	
 	//------------Getter-Methods-----//
