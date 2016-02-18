@@ -2,7 +2,7 @@ package util;
 
 public class Vector {
 	//----------Fields----------//
-	// Ze Basic Information   
+	// Basic Information   
 	public double x;
 	public double y;
 	public double z;
@@ -18,7 +18,15 @@ public class Vector {
 	public Vector() {}
 	
 	//-----------Methods------------//
-	public static Vector createFromRect(double x, double y, double z) {
+	public static Vector createFromRectangular(double x, double y, double z) {
 		return new Vector(x, y, z);
+	}
+	
+	public static Vector createFromCylindrical() {
+		return new Vector();
+	}
+	
+	public static Vector createFromSpherical() {
+		return new Vector();
 	}
 }
