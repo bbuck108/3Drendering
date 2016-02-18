@@ -1,5 +1,7 @@
 package util;
 
+import static util.Util.*;
+
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
@@ -37,6 +39,31 @@ public class Vector {
 		final double y = r * Math.cos(phi) * Math.sin(theta);
 		final double z = r * Math.sin(phi);
 		return new Vector(x, y, z);
+	}
+	
+	//------------------Methods----------------------//
+	/** Finds the length of the vector (from origin) */
+	public double norm() {
+		return Math.sqrt(sq(x) + sq(y) + sq(z));
+	}
+	
+	public double theta() {
+		//TODO actually do this
+		return 1.0;
+	}
+	
+	/** computes the dot product (inner product type) with another vector */
+	public double dotProduct(Vector v) {
+		return x * v.x + y * v.y + z * v.z; 
+	}
+	
+	/** computes the cross product with another vector
+	 * oder of cross product -> this x v*/
+	public Vector crossProduct(Vector v) {
+		final double i = y * v.z - v.y * z;
+		final double j = z * v.x - v.z * x;
+		final double k = x * v.y - v.x * y;
+		return createFromRectangular(i, j, k);
 	}
 	
 	//------------Getter-Methods-----//
