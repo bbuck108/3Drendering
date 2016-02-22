@@ -1,6 +1,6 @@
 package util;
 
-import static util.Util.*;
+import static util.Util.sq;
 
 public class Vector {
 	//----------Fields----------//
