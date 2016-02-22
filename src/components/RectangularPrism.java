@@ -2,6 +2,9 @@ package components;
 
 import java.awt.Color;
 
+import util.Axis;
+import util.Position;
+
 /**
  * A rectangular prism
  * @author Benjamin Buck
@@ -13,7 +16,6 @@ public class RectangularPrism {
 	Vector height;
 	Point motion;
 	double mass;
-	
 	Color color;
 	
 	/**
@@ -45,5 +47,57 @@ public class RectangularPrism {
 		double t_z = height.length();
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
+	}
+	public Vector getSide(Position p, Axis a){
+		if(p == Position.FRONT){
+			if(a == Axis.X){
+				return length;
+			}
+			if(a == Axis.Y){
+				return width;
+			}
+			if(a == Axis.Z){
+				return height;
+			}
+		}
+		if(p == Position.BACK){
+			if(a == Axis.X){
+				return length.translate(width.direction().addWith(height.direction()));
+			}
+			if(a == Axis.Y){
+				return width.translate(length.direction().addWith(height.direction()));
+			}
+			if(a == Axis.Z){
+				return height.translate(length.direction().addWith(height.direction()));
+			}
+		}
+		if(p == Position.RIGHT) {
+			if(a == Axis.X){
+				return length.translate(height.direction());
+			}
+			if(a == Axis.Y){
+				return width.translate(length.direction());
+			}
+			if(a == Axis.Z){
+				return height.translate(length.direction());
+			}
+		}
+		if(p == Position.LEFT) {
+			if(a == Axis.X){
+				return length.translate(width.direction());
+			}
+			if(a == Axis.Y){
+				return width.translate(height.direction());
+			}
+			if(a == Axis.Z){
+				return height.translate(width.direction());
+			}
+		}
+		System.err.println("Invalid index");
+		return null;
+	}
+	public boolean isPointInside(Point p){
+		
+		return false;
 	}
 }
