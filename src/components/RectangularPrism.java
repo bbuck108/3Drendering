@@ -48,6 +48,7 @@ public class RectangularPrism {
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
+	/**Returns the specified side of the prism*/
 	public Line getSide(Position p, Axis a){
 		if(p == Position.FRONT){
 			if(a == Axis.X){
