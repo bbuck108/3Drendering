@@ -18,9 +18,25 @@ public class Vector {
 		end = new Point();
 	}
 	
+	/** Creates a Vector based on two points	
+	 * @param s the start of the vector
+	 * @param e the end of the vector */
 	public Vector(Point s, Point e) {
 		start = s;
 		end = e;
+	}
+	
+	/** Creates a Vector based on 6 numbers */
+	public Vector(double sx, double sy, double sz, double ex, double ey, double ez) {
+		start = Point.createFromRectangular(sx, sy, sz);
+		end = Point.createFromRectangular(ex, ey, ez);
+	}
+	
+	/** Creates a Vector based on a point and a length and a direction
+	 * @param l the length */
+	public Vector(Point p, double l, double theta, double phi) {
+		start = p;
+		end = Point.createFromSpherical(l, theta, phi).addWith(p);
 	}
 	
 	//----------------Methods----------------//
@@ -29,6 +45,10 @@ public class Vector {
 		return end.subtractWith(start).norm();
 	}
 	
+	/** Moves vector but does not change direction */
+	public Vector translate(Point p) {
+		return new Vector(start.addWith(p), end.addWith(p));
+	}
 	
 	//--------------Getter-Methods--------------//
 	public Point getStart() { return start; }
