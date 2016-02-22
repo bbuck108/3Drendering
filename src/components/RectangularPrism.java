@@ -1,11 +1,11 @@
 package components;
 import java.awt.Color;
-import util.Vector;
+import util.Point;
 
 public class RectangularPrism {
-	Vector v1;
-	Vector v2;
-	Vector motion;
+	Point v1;
+	Point v2;
+	Point motion;
 	double mass;
 	
 	Color color;
@@ -18,7 +18,7 @@ public class RectangularPrism {
 	 * @param p_4 Mass of the prism
 	 * @param p_5 The color of the rectangle
 	 */
-	public RectangularPrism(Vector p_1, Vector p_2, Vector p_3, double p_4,Color p_5){
+	public RectangularPrism(Point p_1, Point p_2, Point p_3, double p_4,Color p_5){
 		v1 = p_1;
 		v2 = p_2;
 		motion = p_3;
