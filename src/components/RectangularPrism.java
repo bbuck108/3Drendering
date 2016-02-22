@@ -2,43 +2,47 @@ package components;
 
 import java.awt.Color;
 
+/**
+ * A rectangular prism
+ * @author Benjamin Buck
+ *
+ */
 public class RectangularPrism {
-	Point v1;
-	Point v2;
+	Vector length;
+	Vector width;
+	Vector height;
 	Point motion;
 	double mass;
 	
 	Color color;
 	
 	/**
-	 * Constructs a rectangular prism based on two points
-	 * @param p_1 One corner of the prism
-	 * @param p_2 A corner completely opposite of the first
-	 * @param p_3 A vector specifying the object's initial velocity
-	 * @param p_4 Mass of the prism
-	 * @param p_5 The color of the rectangle
+	 * Constructs a rectangular prism based on three vectors with one common point
+	 * @param l A vector specifying the object's length
+	 * @param w A vector specifying the object's width
+	 * @param h A vector specifying the object's height
+	 * @param v A vector specifying the object's initial velocity
+	 * @param m Mass of the prism
+	 * @param c The color of the rectangle
 	 */
-	public RectangularPrism(Point p_1, Point p_2, Point p_3, double p_4,Color p_5){
-		v1 = p_1;
-		v2 = p_2;
-		motion = p_3;
-		mass = p_4;
-		color = p_5;
+	public RectangularPrism(Vector l, Vector w, Vector h, Point v, double m, Color c){
+		length = l;
+		width = w;
+		height = h;
+		motion = v;
+		mass = m;
+		color = c;
 	}
 	
 	/** Returns the volume of the prism*/
 	public double volume(){
-		double t_x = Math.abs(v1.getX()-v2.getX());
-		double t_y = Math.abs(v1.getY()-v2.getY());
-		double t_z = Math.abs(v1.getZ()-v2.getZ());
-		
-		return (t_x * t_y * t_z);
+		return (length.length() * width.length() * height.length());
 	}
 	/** Returns the surface area of the prism*/
 	public double surfaceArea(){
-		double t_x = Math.abs(v1.getX()-v2.getX());
-		double t_y = Math.abs(v1.getY()-v2.getY());
-		double t_z = Math.abs(v1.getZ()-v2.getZ());
+		double t_x = length.length();
+		double t_y = width.length();
+		double t_z = height.length();
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
