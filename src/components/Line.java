@@ -18,7 +18,7 @@ public class Line {
 		end = new Vector();
 	}
 	
-	/** Creates a Vector based on two points	
+	/** Creates a Line based on two points	
 	 * @param s the start of the vector
 	 * @param e the end of the vector */
 	public Line(Vector s, Vector e) {
@@ -26,13 +26,13 @@ public class Line {
 		end = e;
 	}
 	
-	/** Creates a Vector based on 6 numbers */
+	/** Creates a Line based on 6 numbers */
 	public Line(double sx, double sy, double sz, double ex, double ey, double ez) {
 		start = Vector.createFromRectangular(sx, sy, sz);
 		end = Vector.createFromRectangular(ex, ey, ez);
 	}
 	
-	/** Creates a Vector based on a point and a length and a direction
+	/** Creates a Line based on a point and a length and a direction
 	 * @param l the length */
 	public Line(Vector p, double l, double theta, double phi) {
 		start = p;
@@ -46,13 +46,18 @@ public class Line {
 	}
 	
 	/** Moves vector but does not change direction */
-	public Line translate(Vector p) {
-		return new Line(start.addWith(p), end.addWith(p));
+	public Line translate(Vector v) {
+		return new Line(start.addWith(v), end.addWith(v));
 	}
 	
-	/** Finds the direction of the Vector as a point */
+	/** Finds the direction of the line as a vector */
 	public Vector direction() {
 		return end.subtractWith(start);
+	}
+	
+	/** Returns true if two lines are parallel */
+	public boolean isParallel(Line l) {
+		return direction().equals(l.direction());
 	}
 	
 	//--------------Getter-Methods--------------//
