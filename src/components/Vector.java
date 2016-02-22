@@ -23,6 +23,12 @@ public class Vector {
 		end = e;
 	}
 	
+	//----------------Methods----------------//
+	/** Computes the length from start to end */
+	public double length() {
+		return end.subtractWith(start).norm();
+	}
+	
 	
 	//--------------Getter-Methods--------------//
 	public Point getStart() { return start; }

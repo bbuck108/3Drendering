@@ -52,17 +52,32 @@ public class Point {
 		return 1.0;
 	}
 	
+	/** Add one point to another */
+	public Point addWith(Point p) {
+		return createFromRectangular(x + p.x, y + p.y, z + p.z);
+	}
+	
+	/** Finds the Point which is in the same line but negatively with the same norm value */
+	public Point negative() {
+		return createFromRectangular(-x, -y, -z);
+	}
+	
+	/** Subtracts two points with each other this - p */
+	public Point subtractWith(Point p) {
+		return addWith(p.negative());
+	}
+	
 	/** computes the dot product (inner product type) with another vector */
-	public double dotProduct(Point v) {
-		return x * v.x + y * v.y + z * v.z; 
+	public double dotProduct(Point p) {
+		return x * p.x + y * p.y + z * p.z; 
 	}
 	
 	/** computes the cross product with another vector
-	 * oder of cross product -> this x v*/
-	public Point crossProduct(Point v) {
-		final double i = y * v.z - v.y * z;
-		final double j = z * v.x - v.z * x;
-		final double k = x * v.y - v.x * y;
+	 * oder of cross product -> this x p */
+	public Point crossProduct(Point p) {
+		final double i = y * p.z - p.y * z;
+		final double j = z * p.x - p.z * x;
+		final double k = x * p.y - p.x * y;
 		return createFromRectangular(i, j, k);
 	}
 	
