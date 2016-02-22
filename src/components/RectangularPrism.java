@@ -11,10 +11,10 @@ import util.Position;
  *
  */
 public class RectangularPrism {
-	Vector length;
-	Vector width;
-	Vector height;
-	Point motion;
+	Line length;
+	Line width;
+	Line height;
+	Vector motion;
 	double mass;
 	Color color;
 	
@@ -27,7 +27,7 @@ public class RectangularPrism {
 	 * @param m Mass of the prism
 	 * @param c The color of the rectangle
 	 */
-	public RectangularPrism(Vector l, Vector w, Vector h, Point v, double m, Color c){
+	public RectangularPrism(Line l, Line w, Line h, Vector v, double m, Color c){
 		length = l;
 		width = w;
 		height = h;
@@ -48,7 +48,7 @@ public class RectangularPrism {
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
-	public Vector getSide(Position p, Axis a){
+	public Line getSide(Position p, Axis a){
 		if(p == Position.FRONT){
 			if(a == Axis.X){
 				return length;
@@ -96,7 +96,7 @@ public class RectangularPrism {
 		System.err.println("Invalid index");
 		return null;
 	}
-	public boolean isPointInside(Point p){
+	public boolean isPointInside(Vector p){
 		
 		return false;
 	}

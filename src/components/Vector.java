@@ -1,61 +1,88 @@
 package components;
 
-/**
- * A line with a direction
- * @author Connor Lehmacher
- */
+import static util.Util.sq;
+
 public class Vector {
-	//-----------------Fields----------------//
-	/** Initial location */
-	private Point start;
-	/** Final location, defines direction */
-	private Point end;
+	//----------Fields----------//
+	// Basic Information   
+	private double x;
+	private double y;
+	private double z;
 	
-	//---------------Constructors-------------//
-	/** From 0,0,0 to 0,0,0, */
-	public Vector() {
-		start = new Point();
-		end = new Point();
+	//------------Constructors------------//
+	private Vector(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 	
-	/** Creates a Vector based on two points	
-	 * @param s the start of the vector
-	 * @param e the end of the vector */
-	public Vector(Point s, Point e) {
-		start = s;
-		end = e;
+	/** Default; 0 */
+	public Vector() {}
+	
+	//-----------Pseudo-Constructors------------//
+	public static Vector createFromRectangular(double x, double y, double z) {
+		return new Vector(x, y, z);
 	}
 	
-	/** Creates a Vector based on 6 numbers */
-	public Vector(double sx, double sy, double sz, double ex, double ey, double ez) {
-		start = Point.createFromRectangular(sx, sy, sz);
-		end = Point.createFromRectangular(ex, ey, ez);
+	/** Returns a vector based on a vertical cylindrical system (radians) */
+	public static Vector createFromCylindrical(double r, double theta, double z) {
+		final double x = r * Math.cos(theta);
+		final double y = r * Math.sin(theta);
+		return new Vector(x, y, z);
 	}
 	
-	/** Creates a Vector based on a point and a length and a direction
-	 * @param l the length */
-	public Vector(Point p, double l, double theta, double phi) {
-		start = p;
-		end = Point.createFromSpherical(l, theta, phi).addWith(p);
+	/** Returns a vector based on spherical coordinates
+	 * @param theta on x-y plane (radians)
+	 * @param phi on z axis and vector it self */
+	public static Vector createFromSpherical(double r, double theta, double phi) {
+		final double x = r * Math.cos(phi) * Math.cos(theta);
+		final double y = r * Math.cos(phi) * Math.sin(theta);
+		final double z = r * Math.sin(phi);
+		return new Vector(x, y, z);
 	}
 	
-	//----------------Methods----------------//
-	/** Computes the length from start to end */
-	public double length() {
-		return end.subtractWith(start).norm();
+	//------------------Methods----------------------//
+	/** Finds the length of the vector (from origin) */
+	public double norm() {
+		return Math.sqrt(sq(x) + sq(y) + sq(z));
 	}
 	
-	/** Moves vector but does not change direction */
-	public Vector translate(Point p) {
-		return new Vector(start.addWith(p), end.addWith(p));
+	public double theta() {
+		//TODO actually do this
+		return 1.0;
 	}
 	
-	/** Finds the direction of the Vector as a point */
-	public Point direction() {
-		return end.subtractWith(start);
+	/** Add one point to another */
+	public Vector addWith(Vector p) {
+		return createFromRectangular(x + p.x, y + p.y, z + p.z);
 	}
 	
-	//--------------Getter-Methods--------------//
-	public Point getStart() { return start; }
-	public Point getEnd() { return end; }
+	/** Finds the Point which is in the same line but negatively with the same norm value */
+	public Vector negative() {
+		return createFromRectangular(-x, -y, -z);
+	}
+	
+	/** Subtracts two points with each other this - p */
+	public Vector subtractWith(Vector p) {
+		return addWith(p.negative());
+	}
+	
+	/** computes the dot product (inner product type) with another vector */
+	public double dotProduct(Vector p) {
+		return x * p.x + y * p.y + z * p.z; 
+	}
+	
+	/** computes the cross product with another vector
+	 * oder of cross product -> this x p */
+	public Vector crossProduct(Vector p) {
+		final double i = y * p.z - p.y * z;
+		final double j = z * p.x - p.z * x;
+		final double k = x * p.y - p.x * y;
+		return createFromRectangular(i, j, k);
+	}
+	
+	//------------Getter-Methods-----//
+	public double getX() {return x;}
+	public double getY() {return y;}
+	public double getZ() {return z;}
 }
