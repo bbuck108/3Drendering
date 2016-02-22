@@ -1,6 +1,6 @@
 package components;
+
 import java.awt.Color;
-import util.Point;
 
 public class RectangularPrism {
 	Point v1;
