@@ -50,6 +50,10 @@ public class Vector {
 		return new Vector(start.addWith(p), end.addWith(p));
 	}
 	
+	public Point direction() {
+		return end.subtractWith(start);
+	}
+	
 	//--------------Getter-Methods--------------//
 	public Point getStart() { return start; }
 	public Point getEnd() { return end; }
