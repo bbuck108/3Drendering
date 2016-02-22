@@ -50,6 +50,7 @@ public class Vector {
 		return new Vector(start.addWith(p), end.addWith(p));
 	}
 	
+	/** Finds the direction of the Vector as a point */
 	public Point direction() {
 		return end.subtractWith(start);
 	}
