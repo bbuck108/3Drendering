@@ -2,6 +2,7 @@ package components;
 
 import java.awt.Color;
 
+import main.Start;
 import util.Axis;
 import util.Position;
 
@@ -34,6 +35,7 @@ public class RectangularPrism {
 		motion = v;
 		mass = m;
 		color = c;
+		Start.addToRenderList(this);
 	}
 	
 	/** Returns the volume of the prism*/

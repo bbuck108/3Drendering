@@ -51,6 +51,10 @@ public class Vector {
 		//TODO actually do this
 		return 1.0;
 	}
+	public double phi() {
+		//TODO actually do this
+		return 1.0;
+	}
 	
 	/** Add one point to another */
 	public Vector addWith(Vector v) {
