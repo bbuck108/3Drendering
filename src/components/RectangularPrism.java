@@ -98,7 +98,26 @@ public class RectangularPrism {
 		return null;
 	}
 	public boolean isPointInside(Vector p){
+		//Pretty sure that this code is 100% flawed....
+		boolean cx = false;
+		boolean cy = false;
+		boolean cz = false;
 		
-		return false;
+		//X component
+		Plane x1 = 	new Plane(getSide(Position.FRONT, Axis.Y).direction().crossProduct(getSide(Position.FRONT, Axis.Z).direction()), getSide(Position.FRONT, Axis.Y).getStart());
+		Plane x2 = 	new Plane(getSide(Position.BACK, Axis.Y).direction().crossProduct(getSide(Position.BACK, Axis.Z).direction()), getSide(Position.BACK, Axis.Y).getStart());
+		if(!x1.compare(p).equals(x2.compare(p))){cx = true;}
+		
+		//Y component
+		Plane y1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().crossProduct(getSide(Position.FRONT, Axis.Z).direction()), getSide(Position.FRONT, Axis.X).getStart());
+		Plane y2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().crossProduct(getSide(Position.BACK, Axis.Z).direction()), getSide(Position.BACK, Axis.X).getStart());
+		if(!y1.compare(p).equals(y2.compare(p))){cy = true;}
+		
+		//Z component
+		Plane z1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().crossProduct(getSide(Position.FRONT, Axis.Y).direction()), getSide(Position.FRONT, Axis.X).getStart());
+		Plane z2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().crossProduct(getSide(Position.BACK, Axis.Y).direction()), getSide(Position.BACK, Axis.X).getStart());
+		if(!z1.compare(p).equals(z2.compare(p))){cz = true;}
+		
+		return (cx&&cy&&cz);
 	}
 }
