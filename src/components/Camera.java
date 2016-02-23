@@ -43,7 +43,7 @@ public class Camera {
 				// set the color of the quad (R,G,B,A)
 				GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getTransparency());
 				
-				// draw quad
+				// draw point
 				GL11.glBegin(GL11.GL_POINT);
 				GL11.glVertex2d(i,j);
 				GL11.glEnd();

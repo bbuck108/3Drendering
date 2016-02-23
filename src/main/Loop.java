@@ -7,7 +7,9 @@ public class Loop {
 		while (!Display.isCloseRequested()) {
             
             // render OpenGL here
+			Start.camera.render();
              
+			//Update display
             Display.update();
         }
          
