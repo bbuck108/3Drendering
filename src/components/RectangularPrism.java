@@ -120,4 +120,7 @@ public class RectangularPrism {
 		
 		return (cx&&cy&&cz);
 	}
+	public Color getColor(){
+		return color;
+	}
 }
