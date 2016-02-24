@@ -9,4 +9,9 @@ public class Util {
 	public static double sq(double a) {
 		return a * a;
 	}
+	
+    public static boolean isNearZero(double x) {
+    	final double EPSILON = Double.MIN_NORMAL * 1000000;
+    	return x > -EPSILON && x < EPSILON;
+    }
 }
