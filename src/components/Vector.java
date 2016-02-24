@@ -2,6 +2,8 @@ package components;
 
 import static util.Util.*;
 
+import util.Util;
+
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
@@ -55,7 +57,7 @@ public class Vector {
 	
 	public double phi() {
 		//TODO actually do this
-		return 1.0;
+		return Math.sqrt(Util.sq(x) + Util.sq(y)) / z;
 	}
 	
 	/** Add one point to another */
