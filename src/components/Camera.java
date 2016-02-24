@@ -16,7 +16,7 @@ public class Camera {
 		point = p;
 		screen = s;
 		motion = v;
-		maxDistance = 5000;
+		maxDistance = 1;
 	}
 	public void render(){
 		for(int i = 0; i < screen.getX(); i++){
@@ -38,6 +38,7 @@ public class Camera {
 							break;
 						}
 					}
+					k++;
 				}
 				
 				// set the color of the quad (R,G,B,A)
