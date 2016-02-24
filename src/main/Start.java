@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.lwjgl.LWJGLException;
@@ -22,7 +23,7 @@ public class Start {
 		
 		//Add new objects here
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 300), Vector.createFromRectangular(0, 0, 0));
-		//new RectangularPrism(null, null, null, Vector.createFromRectangular(0, 0, 0), 1, Color.RED);
+		new RectangularPrism(Vector.createFromRectangular(0, 0, 400), 100, Vector.createFromRectangular(0, 0, 0), 1, Color.RED);
 		//
 		
 		try{

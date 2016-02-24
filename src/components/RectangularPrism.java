@@ -38,6 +38,10 @@ public class RectangularPrism {
 		Start.addToRenderList(this);
 	}
 	
+	public RectangularPrism(Vector pos, double size, Vector v, double m, Color c){
+		this(new Line(pos, pos.addWith(Vector.createFromRectangular(size, 0, 0))),new Line(pos, pos.addWith(Vector.createFromRectangular(0, size, 0))),new Line(pos, pos.addWith(Vector.createFromRectangular(0, 0, size))),v,m,c);
+	}
+	
 	/** Returns the volume of the prism*/
 	public double volume(){
 		return (length.length() * width.length() * height.length());

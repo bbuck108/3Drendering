@@ -16,11 +16,12 @@ public class Camera {
 		point = p;
 		screen = s;
 		motion = v;
-		maxDistance = 1;
+		maxDistance = 450;
 	}
 	public void render(){
 		for(int i = 0; i < screen.getX(); i++){
 			for(int j = 0; j < screen.getY(); j++){
+				System.out.println(i+" "+j);
 				double x = i - screen.getX()/2;
 				double y = j - screen.getY()/2;
 				Color color = Color.BLUE;
@@ -42,8 +43,8 @@ public class Camera {
 				}
 				
 				// set the color of the quad (R,G,B,A)
-				//GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getTransparency());
-				GL11.glColor3d(0.0d, 0.0d, 255.0d);
+				GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getTransparency());
+				//GL11.glColor3d(0.0d, 0.0d, 255.0d);
 				// draw point
 				GL11.glBegin(GL11.GL_QUADS);
 				GL11.glVertex2d(i,j);
