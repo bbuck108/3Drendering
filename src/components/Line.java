@@ -18,7 +18,7 @@ public class Line {
 		end = new Vector();
 	}
 	
-	/** Creates a Line based on two points	
+	/** Creates a Line based on two points
 	 * @param s the start of the vector
 	 * @param e the end of the vector */
 	public Line(Vector s, Vector e) {

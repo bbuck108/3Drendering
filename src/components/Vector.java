@@ -1,6 +1,6 @@
 package components;
 
-import static util.Util.sq;
+import static util.Util.*;
 
 public class Vector {
 	//----------Fields----------//
@@ -47,10 +47,12 @@ public class Vector {
 		return Math.sqrt(sq(x) + sq(y) + sq(z));
 	}
 	
+	/** finds the angle of the vector on the x-y plane from 0 to 2 PI
+	 * not that a zero vector will have angle 0 */
 	public double theta() {
-		//TODO actually do this
-		return 1.0;
+		return Math.atan2(y, x) + Math.PI;
 	}
+	
 	public double phi() {
 		//TODO actually do this
 		return 1.0;
