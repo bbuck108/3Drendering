@@ -16,7 +16,7 @@ public class Camera {
 		point = p;
 		screen = s;
 		motion = v;
-		maxDistance = 450;
+		maxDistance = 150;
 	}
 	public void render() {
 		for(int i = 0; i < screen.getX(); i++) {
@@ -29,9 +29,10 @@ public class Camera {
 				Vector angle = Vector.createFromRectangular(x, y, screen.getZ());
 				double theta = angle.theta();
 				double phi = angle.phi();
+				double r = angle.norm();
 				
 				for(int k = 0; k < maxDistance; k++) {
-					Vector check = Vector.createFromSpherical(k, theta, phi).addWith(point);
+					Vector check = Vector.createFromSpherical(k+r, theta, phi).addWith(point);
 					for(RectangularPrism object: Start.renderList) {
 						if(object.isPointInside(check)) {
 							color = object.getColor();
