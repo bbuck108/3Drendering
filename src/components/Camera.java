@@ -30,7 +30,7 @@ public class Camera {
 				case 600:
 					System.out.println("75%");
 					break;
-				case 800:
+				case 799:
 					System.out.println("99%");
 			}
 			for(int j = 0; j < screen.getY(); j++) {
