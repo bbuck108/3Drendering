@@ -11,13 +11,11 @@ import util.Position;
  * @author Benjamin Buck
  *
  */
-public class RectangularPrism {
+public class RectangularPrism extends PhysicalObject {
 	Line length;
 	Line width;
 	Line height;
-	Vector motion;
-	double mass;
-	Color color;
+	
 	
 	/**
 	 * Constructs a rectangular prism based on three vectors with one common point
@@ -103,7 +101,7 @@ public class RectangularPrism {
 		System.err.println("Invalid index");
 		return null;
 	}
-	public boolean isPointInside(Vector p) {
+	public boolean isIntersecting(Vector p) {
 		//Pretty sure that this code is 100% flawed....
 		boolean cx = false;
 		boolean cy = false;
@@ -131,13 +129,5 @@ public class RectangularPrism {
 		width = width.translateBy(p);
 		height = height.translateBy(p);
 	}
-	public void move(){
-		this.translateBy(motion);
-	}
-	public Color getColor() {
-		return color;
-	}
-	public Vector getMotion() {
-		return motion;
-	}
+	
 }

@@ -3,13 +3,13 @@ package main;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
-import components.RectangularPrism;
+import components.PhysicalObject;
 
 public class Loop {
 	public static void loop() {
 		while (!Display.isCloseRequested()) {
 			//Move
-			for(RectangularPrism t_1: Start.renderList){
+			for(PhysicalObject t_1: Start.renderList){
 				t_1.move();
 			}
 			

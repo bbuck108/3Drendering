@@ -46,8 +46,8 @@ public class Camera {
 				
 				for(int k = 0; k < maxDistance; k++) {
 					Vector check = Vector.createFromSpherical(k+r, theta, phi).addWith(point);
-					for(RectangularPrism object: Start.renderList) {
-						if(object.isPointInside(check)) {
+					for(PhysicalObject object: Start.renderList) {
+						if(object.isIntersecting(check)) {
 							color = object.getColor();
 							break;
 						}
