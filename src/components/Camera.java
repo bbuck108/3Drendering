@@ -20,8 +20,20 @@ public class Camera {
 	}
 	public void render() {
 		for(int i = 0; i < screen.getX(); i++) {
+			switch(i){
+				case 200:
+					System.out.println("25%");
+					break;
+				case 400:
+					System.out.println("50%");
+					break;
+				case 600:
+					System.out.println("75%");
+					break;
+				case 800:
+					System.out.println("99%");
+			}
 			for(int j = 0; j < screen.getY(); j++) {
-				System.out.println(i + " " + j);
 				double x = i - screen.getX()/2;
 				double y = j - screen.getY()/2;
 				Color color = Color.BLUE;
