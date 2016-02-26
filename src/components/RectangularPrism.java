@@ -28,7 +28,7 @@ public class RectangularPrism {
 	 * @param m Mass of the prism
 	 * @param c The color of the rectangle
 	 */
-	public RectangularPrism(Line l, Line w, Line h, Vector v, double m, Color c){
+	public RectangularPrism(Line l, Line w, Line h, Vector v, double m, Color c) {
 		length = l;
 		width = w;
 		height = h;
@@ -38,16 +38,16 @@ public class RectangularPrism {
 		Start.addToRenderList(this);
 	}
 	
-	public RectangularPrism(Vector pos, double size, Vector v, double m, Color c){
+	public RectangularPrism(Vector pos, double size, Vector v, double m, Color c) {
 		this(new Line(pos, pos.addWith(Vector.createFromRectangular(size, 0, 0))),new Line(pos, pos.addWith(Vector.createFromRectangular(0, size, 0))),new Line(pos, pos.addWith(Vector.createFromRectangular(0, 0, size))),v,m,c);
 	}
 	
 	/** Returns the volume of the prism*/
-	public double volume(){
+	public double volume() {
 		return (length.length() * width.length() * height.length());
 	}
 	/** Returns the surface area of the prism*/
-	public double surfaceArea(){
+	public double surfaceArea() {
 		double t_x = length.length();
 		double t_y = width.length();
 		double t_z = height.length();
@@ -55,8 +55,8 @@ public class RectangularPrism {
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
 	/**Returns the specified side of the prism*/
-	public Line getSide(Position p, Axis a){
-		if(p == Position.FRONT){
+	public Line getSide(Position p, Axis a) {
+		if(p == Position.FRONT) {
 			if(a == Axis.X){
 				return length;
 			}
@@ -67,7 +67,7 @@ public class RectangularPrism {
 				return height;
 			}
 		}
-		if(p == Position.BACK){
+		if(p == Position.BACK) {
 			if(a == Axis.X){
 				return length.translate(width.direction().addWith(height.direction()));
 			}
@@ -103,7 +103,7 @@ public class RectangularPrism {
 		System.err.println("Invalid index");
 		return null;
 	}
-	public boolean isPointInside(Vector p){
+	public boolean isPointInside(Vector p) {
 		//Pretty sure that this code is 100% flawed....
 		boolean cx = false;
 		boolean cy = false;
@@ -112,21 +112,21 @@ public class RectangularPrism {
 		//X component
 		Plane x1 = 	new Plane(getSide(Position.FRONT, Axis.Y).direction().crossProduct(getSide(Position.FRONT, Axis.Z).direction()), getSide(Position.FRONT, Axis.Y).getStart());
 		Plane x2 = 	new Plane(getSide(Position.BACK, Axis.Y).direction().crossProduct(getSide(Position.BACK, Axis.Z).direction()), getSide(Position.BACK, Axis.Y).getStart());
-		if(!x1.compare(p).equals(x2.compare(p))){cx = true;}
+		if(!x1.compare(p).equals(x2.compare(p))) cx = true;
 		
 		//Y component
 		Plane y1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().crossProduct(getSide(Position.FRONT, Axis.Z).direction()), getSide(Position.FRONT, Axis.X).getStart());
 		Plane y2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().crossProduct(getSide(Position.BACK, Axis.Z).direction()), getSide(Position.BACK, Axis.X).getStart());
-		if(!y1.compare(p).equals(y2.compare(p))){cy = true;}
+		if(!y1.compare(p).equals(y2.compare(p))) cy = true;
 		
 		//Z component
 		Plane z1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().crossProduct(getSide(Position.FRONT, Axis.Y).direction()), getSide(Position.FRONT, Axis.X).getStart());
 		Plane z2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().crossProduct(getSide(Position.BACK, Axis.Y).direction()), getSide(Position.BACK, Axis.X).getStart());
-		if(!z1.compare(p).equals(z2.compare(p))){cz = true;}
+		if(!z1.compare(p).equals(z2.compare(p))) cz = true;
 		
-		return (cx&&cy&&cz);
+		return (cx && cy && cz);
 	}
-	public Color getColor(){
+	public Color getColor() {
 		return color;
 	}
 }

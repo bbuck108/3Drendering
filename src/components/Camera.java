@@ -12,16 +12,16 @@ public class Camera {
 	Vector motion;
 	double maxDistance;
 	
-	public Camera(Vector p, Vector s, Vector v){
+	public Camera(Vector p, Vector s, Vector v) {
 		point = p;
 		screen = s;
 		motion = v;
 		maxDistance = 450;
 	}
-	public void render(){
-		for(int i = 0; i < screen.getX(); i++){
-			for(int j = 0; j < screen.getY(); j++){
-				System.out.println(i+" "+j);
+	public void render() {
+		for(int i = 0; i < screen.getX(); i++) {
+			for(int j = 0; j < screen.getY(); j++) {
+				System.out.println(i + " " + j);
 				double x = i - screen.getX()/2;
 				double y = j - screen.getY()/2;
 				Color color = Color.BLUE;
@@ -30,16 +30,14 @@ public class Camera {
 				double theta = angle.theta();
 				double phi = angle.phi();
 				
-				int k = 0;
-				while(k < maxDistance){
+				for(int k = 0; k < maxDistance; k++) {
 					Vector check = Vector.createFromSpherical(k, theta, phi).addWith(point);
-					for(RectangularPrism object: Start.renderList){
-						if(object.isPointInside(check)){
+					for(RectangularPrism object: Start.renderList) {
+						if(object.isPointInside(check)) {
 							color = object.getColor();
 							break;
 						}
 					}
-					k++;
 				}
 				
 				// set the color of the quad (R,G,B,A)
