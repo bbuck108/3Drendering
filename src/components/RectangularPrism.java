@@ -134,4 +134,7 @@ public class RectangularPrism {
 	public Color getColor() {
 		return color;
 	}
+	public Vector getMotion() {
+		return motion;
+	}
 }
