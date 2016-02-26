@@ -16,13 +16,25 @@ public class Camera {
 		point = p;
 		screen = s;
 		motion = v;
-		maxDistance = 450;
+		maxDistance = 150;
 	}
 	
 	public void render() {
 		for(int i = 0; i < screen.getX(); i++) {
+			switch(i){
+				case 200:
+					System.out.println("25%");
+					break;
+				case 400:
+					System.out.println("50%");
+					break;
+				case 600:
+					System.out.println("75%");
+					break;
+				case 799:
+					System.out.println("99%");
+			}
 			for(int j = 0; j < screen.getY(); j++) {
-				System.out.println(i + " " + j);
 				double x = i - screen.getX()/2;
 				double y = j - screen.getY()/2;
 				Color color = Color.BLUE;
@@ -30,9 +42,10 @@ public class Camera {
 				Vector angle = Vector.createFromRectangular(x, y, screen.getZ());
 				double theta = angle.theta();
 				double phi = angle.phi();
+				double r = angle.norm();
 				
 				for(int k = 0; k < maxDistance; k++) {
-					Vector check = Vector.createFromSpherical(k, theta, phi).addWith(point);
+					Vector check = Vector.createFromSpherical(k+r, theta, phi).addWith(point);
 					for(RectangularPrism object: Start.renderList) {
 						if(object.isPointInside(check)) {
 							color = object.getColor();

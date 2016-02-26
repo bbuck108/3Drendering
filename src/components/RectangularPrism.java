@@ -126,7 +126,15 @@ public class RectangularPrism {
 		
 		return (cx && cy && cz);
 	}
+	public void translateBy(Vector p){
+		length.translate(p);
+		width.translate(p);
+		height.translate(p);
+	}
 	public Color getColor() {
 		return color;
+	}
+	public Vector getMotion() {
+		return motion;
 	}
 }

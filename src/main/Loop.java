@@ -3,9 +3,17 @@ package main;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import components.RectangularPrism;
+
 public class Loop {
 	public static void loop() {
 		while (!Display.isCloseRequested()) {
+			//Move
+			for(RectangularPrism t_1: Start.renderList){
+				t_1.translateBy(t_1.getMotion());
+			}
+			
+			//
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 		
             // render OpenGL here
