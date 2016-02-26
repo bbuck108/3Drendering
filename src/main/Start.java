@@ -23,7 +23,7 @@ public class Start {
 		
 		//Add new objects here
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 300), Vector.createFromRectangular(0, 0, 0));
-		new RectangularPrism(Vector.createFromRectangular(0, 0, 300), 100, Vector.createFromRectangular(0, 0, 1000), 1, Color.RED);
+		new RectangularPrism(Vector.createFromRectangular(0, 0, 300), 100, Vector.createFromRectangular(0, 0, 30), 1, Color.RED);
 		//
 		
 		try{
