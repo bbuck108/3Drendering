@@ -18,6 +18,7 @@ public class Camera {
 		motion = v;
 		maxDistance = 450;
 	}
+	
 	public void render() {
 		for(int i = 0; i < screen.getX(); i++) {
 			for(int j = 0; j < screen.getY(); j++) {

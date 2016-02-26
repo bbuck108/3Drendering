@@ -72,6 +72,11 @@ public class Vector {
 		return addWith(v.negative());
 	}
 	
+	/** Computes some norm increase by a scalar */
+	public Vector scaleBy(double a) {
+		return createFromRectangular(x * a, y * a, z * a);
+	}
+	
 	/** computes the dot product (inner product type) with another vector */
 	public double dotProduct(Vector v) {
 		return x * v.x + y * v.y + z * v.z; 

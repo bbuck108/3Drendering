@@ -46,7 +46,7 @@ public class Line {
 	}
 	
 	/** Moves vector but does not change direction */
-	public Line translate(Vector v) {
+	public Line translateBy(Vector v) {
 		return new Line(start.addWith(v), end.addWith(v));
 	}
 	
@@ -58,6 +58,11 @@ public class Line {
 	/** Returns true if two lines are parallel */
 	public boolean isParallel(Line l) {
 		return direction().equals(l.direction());
+	}
+	
+	/** Enlarges or shrinks a line by some amount */
+	public Line scaleBy(double a) {
+		return new Line(start.scaleBy(a), end.scaleBy(a));
 	}
 	
 	//--------------Getter-Methods--------------//

@@ -69,35 +69,35 @@ public class RectangularPrism {
 		}
 		if(p == Position.BACK) {
 			if(a == Axis.X){
-				return length.translate(width.direction().addWith(height.direction()));
+				return length.translateBy(width.direction().addWith(height.direction()));
 			}
 			if(a == Axis.Y){
-				return width.translate(length.direction().addWith(height.direction()));
+				return width.translateBy(length.direction().addWith(height.direction()));
 			}
 			if(a == Axis.Z){
-				return height.translate(length.direction().addWith(height.direction()));
+				return height.translateBy(length.direction().addWith(height.direction()));
 			}
 		}
 		if(p == Position.RIGHT) {
 			if(a == Axis.X){
-				return length.translate(height.direction());
+				return length.translateBy(height.direction());
 			}
 			if(a == Axis.Y){
-				return width.translate(length.direction());
+				return width.translateBy(length.direction());
 			}
 			if(a == Axis.Z){
-				return height.translate(length.direction());
+				return height.translateBy(length.direction());
 			}
 		}
 		if(p == Position.LEFT) {
 			if(a == Axis.X){
-				return length.translate(width.direction());
+				return length.translateBy(width.direction());
 			}
 			if(a == Axis.Y){
-				return width.translate(height.direction());
+				return width.translateBy(height.direction());
 			}
 			if(a == Axis.Z){
-				return height.translate(width.direction());
+				return height.translateBy(width.direction());
 			}
 		}
 		System.err.println("Invalid index");
