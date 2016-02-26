@@ -5,9 +5,9 @@ import static util.Util.*;
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
-	public double x;
-	public double y;
-	public double z;
+	private double x;
+	private double y;
+	private double z;
 	
 	//------------Constructors------------//
 	private Vector(double x, double y, double z) {
@@ -94,6 +94,14 @@ public class Vector {
 	/** computes the distance between two vectors */
 	public double distanceWith(Vector v) {
 		return Math.sqrt(sq(x - v.x) + sq(y - v.y) + sq(z - v.z));
+	}
+	
+	/** computes angle with some other vector radians */
+	public double angleWith(Vector v) {
+		//Panic!!
+		//It's Scary
+		//Help!!!!!
+		return 1.0;
 	}
 	
 	//------------Getter-Methods-----//
