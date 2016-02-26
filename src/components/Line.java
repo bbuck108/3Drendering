@@ -12,7 +12,7 @@ public class Line {
 	private Vector end;
 	
 	//---------------Constructors-------------//
-	/** From 0,0,0 to 0,0,0, */
+	/** From 0, 0, 0 to 0, 0, 0 */
 	public Line() {
 		start = new Vector();
 		end = new Vector();

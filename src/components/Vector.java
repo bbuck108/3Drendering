@@ -5,9 +5,9 @@ import static util.Util.*;
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
-	private double x;
-	private double y;
-	private double z;
+	public double x;
+	public double y;
+	public double z;
 	
 	//------------Constructors------------//
 	private Vector(double x, double y, double z) {
@@ -67,7 +67,7 @@ public class Vector {
 		return createFromRectangular(-x, -y, -z);
 	}
 	
-	/** Subtracts two points with each other this - p */
+	/** Subtracts two points with each other this - v */
 	public Vector subtractWith(Vector v) {
 		return addWith(v.negative());
 	}
@@ -89,6 +89,11 @@ public class Vector {
 		final double j = z * v.x - v.z * x;
 		final double k = x * v.y - v.x * y;
 		return createFromRectangular(i, j, k);
+	}
+
+	/** computes the distance between two vectors */
+	public double distanceWith(Vector v) {
+		return Math.sqrt(sq(x - v.x) + sq(y - v.y) + sq(z - v.z));
 	}
 	
 	//------------Getter-Methods-----//
