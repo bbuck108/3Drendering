@@ -2,8 +2,6 @@ package components;
 
 import static util.Util.*;
 
-import util.Util;
-
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
@@ -35,11 +33,11 @@ public class Vector {
 	
 	/** Returns a vector based on spherical coordinates
 	 * @param theta on x-y plane (radians)
-	 * @param phi on z axis and vector it self */
+	 * @param phi from z axis and down */
 	public static Vector createFromSpherical(double r, double theta, double phi) {
-		final double x = r * Math.cos(phi) * Math.cos(theta);
-		final double y = r * Math.cos(phi) * Math.sin(theta);
-		final double z = r * Math.sin(phi);
+		final double x = r * Math.sin(phi) * Math.cos(theta);
+		final double y = r * Math.sin(phi) * Math.sin(theta);
+		final double z = r * Math.cos(phi);
 		return new Vector(x, y, z);
 	}
 	
@@ -56,8 +54,7 @@ public class Vector {
 	}
 	
 	public double phi() {
-		//TODO actually do this
-		return Math.sqrt(Util.sq(x) + Util.sq(y)) / z;
+		return Math.atan2(Math.sqrt(sq(x) + sq(y)), z);
 	}
 	
 	/** Add one point to another */
