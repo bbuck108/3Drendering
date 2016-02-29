@@ -5,9 +5,9 @@ import static util.Util.*;
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
-	private double x;
-	private double y;
-	private double z;
+	private final double x;
+	private final double y;
+	private final double z;
 	
 	//------------Constructors------------//
 	private Vector(double x, double y, double z) {
@@ -17,7 +17,11 @@ public class Vector {
 	}
 	
 	/** Default; 0 */
-	public Vector() {}
+	public Vector() {
+		x = 0;
+		y = 0;
+		z = 0;
+	}
 	
 	//-----------Pseudo-Constructors------------//
 	public static Vector createFromRectangular(double x, double y, double z) {
@@ -58,7 +62,7 @@ public class Vector {
 	}
 	
 	/** Add one point to another */
-	public Vector addWith(Vector v) {
+	public Vector plus(Vector v) {
 		return createFromRectangular(x + v.x, y + v.y, z + v.z);
 	}
 	
@@ -68,8 +72,8 @@ public class Vector {
 	}
 	
 	/** Subtracts two points with each other this - v */
-	public Vector subtractWith(Vector v) {
-		return addWith(v.negative());
+	public Vector minus(Vector v) {
+		return plus(v.negative());
 	}
 	
 	/** Computes some norm increase by a scalar */
@@ -78,13 +82,13 @@ public class Vector {
 	}
 	
 	/** computes the dot product (inner product type) with another vector */
-	public double dotProduct(Vector v) {
+	public double dot(Vector v) {
 		return x * v.x + y * v.y + z * v.z; 
 	}
 	
 	/** computes the cross product with another vector
 	 * oder of cross product -> this x v */
-	public Vector crossProduct(Vector v) {
+	public Vector cross(Vector v) {
 		final double i = y * v.z - v.y * z;
 		final double j = z * v.x - v.z * x;
 		final double k = x * v.y - v.x * y;

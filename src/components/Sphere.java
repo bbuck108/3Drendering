@@ -14,7 +14,7 @@ public class Sphere extends PhysicalObject{
 		this.color = color;
 	}
 	public void translateBy(Vector p){
-		center = center.addWith(p);
+		center = center.plus(p);
 	}
 	public boolean isIntersecting(Vector p){
 		return false;

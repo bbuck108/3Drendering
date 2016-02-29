@@ -45,7 +45,7 @@ public class Camera {
 				double r = angle.norm();
 				
 				for(int k = 0; k < maxDistance; k++) {
-					Vector check = Vector.createFromSpherical(k+r, theta, phi).addWith(point);
+					Vector check = Vector.createFromSpherical(k+r, theta, phi).plus(point);
 					for(PhysicalObject object: Start.renderList) {
 						if(object.isIntersecting(check)) {
 							color = object.getColor();
