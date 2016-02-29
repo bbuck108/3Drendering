@@ -14,14 +14,14 @@ public class Plane {
 	
 	/**Constructs a plane from a normal vector and a point on the plane*/
 	public Plane(Vector normal, Vector point) {
-		a = normal.getX();
-		b = normal.getY();
-		c = normal.getZ();
-		d = -1 * (a * point.getX() + b * point.getY() + c * point.getZ());
+		a = normal.x;
+		b = normal.y;
+		c = normal.z;
+		d = -1 * (a * point.x + b * point.y + c * point.z);
 	}
 	
 	public Inequality compare(Vector point) {
-		double t_1 = a * point.getX() + b * point.getY() + c * point.getZ() + d;
+		double t_1 = a * point.x + b * point.y + c * point.z + d;
 		if(t_1 == 0) return Inequality.EQUAL;
 		if(t_1 <= 0) return Inequality.LESS;
 		if(t_1 >= 0) return Inequality.GREATER;

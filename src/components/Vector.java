@@ -5,9 +5,9 @@ import static util.Util.*;
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
-	private final double x;
-	private final double y;
-	private final double z;
+	public final double x;
+	public final double y;
+	public final double z;
 	
 	//------------Constructors------------//
 	private Vector(double x, double y, double z) {
@@ -107,9 +107,4 @@ public class Vector {
 		//Help!!!!!
 		return 1.0;
 	}
-	
-	//------------Getter-Methods-----//
-	public double getX() {return x;}
-	public double getY() {return y;}
-	public double getZ() {return z;}
 }

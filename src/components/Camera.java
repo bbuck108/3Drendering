@@ -20,7 +20,7 @@ public class Camera {
 	}
 	
 	public void render() {
-		for(int i = 0; i < screen.getX(); i++) {
+		for(int i = 0; i < screen.x; i++) {
 			switch(i){
 				case 200:
 					System.out.println("25%");
@@ -34,12 +34,12 @@ public class Camera {
 				case 799:
 					System.out.println("99%");
 			}
-			for(int j = 0; j < screen.getY(); j++) {
-				double x = i - screen.getX()/2;
-				double y = j - screen.getY()/2;
+			for(int j = 0; j < screen.y; j++) {
+				double x = i - screen.x/2;
+				double y = j - screen.y/2;
 				Color color = Color.BLUE;
 				
-				Vector angle = Vector.createFromRectangular(x, y, screen.getZ());
+				Vector angle = Vector.createFromRectangular(x, y, screen.z);
 				double theta = angle.theta();
 				double phi = angle.phi();
 				double r = angle.norm();
