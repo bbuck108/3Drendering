@@ -5,9 +5,9 @@ import static util.Util.*;
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
-	public final double x;
-	public final double y;
-	public final double z;
+	public double x;
+	public double y;
+	public double z;
 	
 	//------------Constructors------------//
 	private Vector(double x, double y, double z) {
