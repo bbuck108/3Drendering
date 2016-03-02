@@ -102,9 +102,6 @@ public class Vector {
 	
 	/** computes angle with some other vector radians */
 	public double angleWith(Vector v) {
-		//Panic!!
-		//It's Scary
-		//Help!!!!!
-		return 1.0;
+		return Math.acos(dot(v) / norm() / v.norm());
 	}
 }
