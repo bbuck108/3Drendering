@@ -101,7 +101,7 @@ public class RectangularPrism extends PhysicalObject {
 		System.err.println("Invalid index");
 		return null;
 	}
-	public boolean isIntersecting(Vector p) {
+	public double isIntersecting(Vector p) {
 		//Pretty sure that this code is 100% flawed....
 		boolean cx = false;
 		boolean cy = false;
@@ -128,7 +128,8 @@ public class RectangularPrism extends PhysicalObject {
 				getSide(Position.BACK, Axis.X).getStart());
 		if(!z1.compare(p).equals(z2.compare(p))) cz = true;
 		
-		return (cx && cy && cz);
+		//return (cx && cy && cz);
+		return -1;
 	}
 	public void translateBy(Vector p) {
 		length = length.translateBy(p);

@@ -10,7 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 import components.Camera;
 import components.PhysicalObject;
-import components.RectangularPrism;
+import components.Ray;
+import components.Sphere;
 import components.Vector;
 
 public class Start {
@@ -24,7 +25,9 @@ public class Start {
 		
 		//Add new objects here
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 300), Vector.createFromRectangular(0, 0, 0));
-		new RectangularPrism(Vector.createFromRectangular(0, 0, 300), 100, Vector.createFromRectangular(0, 0, 50), 1, Color.RED);
+		//new RectangularPrism(Vector.createFromRectangular(0, 0, 300), 100, Vector.createFromRectangular(0, 0, 50), 1, Color.RED);
+		Sphere sphere = new Sphere(Vector.createFromRectangular(0, 0, 500), 100, Vector.createFromRectangular(0, 0, 0), 1, Color.RED);
+		System.out.println(sphere.isIntersecting(new Ray(new Vector(), Vector.createFromRectangular(0, 0, 1).theta(), Vector.createFromRectangular(0, 0, 1).phi())));
 		//
 		
 		try{

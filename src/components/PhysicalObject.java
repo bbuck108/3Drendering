@@ -12,9 +12,12 @@ public abstract class PhysicalObject {
 	public void translateBy(Vector p) {
 		
 	}
-	public boolean isIntersecting(Vector check) {
-		// TODO Auto-generated method stub
-		return false;
+	public double isIntersecting(Ray ray) {
+		// -1 implies no intersection
+		return -1;
+	}
+	public Vector getSurfaceNormal(Vector p){
+		return (new Vector());
 	}
 	public Color getColor() {
 		return color;

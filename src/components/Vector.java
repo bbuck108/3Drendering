@@ -104,4 +104,9 @@ public class Vector {
 	public double angleWith(Vector v) {
 		return Math.acos(dot(v) / norm() / v.norm());
 	}
+	
+	/**Gives a unit length vector*/
+	public Vector toUnit(){
+		return Vector.createFromSpherical(1, theta(), phi());
+	}
 }
