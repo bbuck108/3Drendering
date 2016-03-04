@@ -17,9 +17,17 @@ public class Sphere extends PhysicalObject{
 		this.color = color;
 		Start.addToRenderList(this);
 	}
+	public Sphere(Vector c, double r, Vector v, double m, Color color, boolean list){
+		center = c;
+		radius = r;
+		motion = v;
+		mass = m;
+		this.color = color;
+		if(list){Start.addToRenderList(this);}
+	}
 	@Override
 	public Sphere translateBy(Vector p){
-		return new Sphere(center.plus(p), radius, motion, mass, color);
+		return new Sphere(center.plus(p), radius, motion, mass, color, false);
 	}
 	public Vector getSurfaceNormal(Vector p){
 		return (new Segment(center, p)).direction();
@@ -40,8 +48,8 @@ public class Sphere extends PhysicalObject{
 		return r;
 	}
 	
-	public void editTo(Sphere s) {
-		center = s.center;
-		radius = s.radius;
+	public void editTo(PhysicalObject s) {
+		center = ((Sphere)s).center;
+		radius = ((Sphere)s).radius;
 	}
 }

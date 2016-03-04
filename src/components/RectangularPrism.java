@@ -48,6 +48,12 @@ public class RectangularPrism extends PhysicalObject {
 		height = h;
 		Start.addToRenderList(this);
 	}
+	public RectangularPrism(Segment l, Segment w, Segment h, boolean list) {
+		length = l;
+		width = w;
+		height = h;
+		if(list){Start.addToRenderList(this);}
+	}
 	
 	/** Returns the volume of the prism*/
 	public double volume() {
@@ -152,10 +158,10 @@ public class RectangularPrism extends PhysicalObject {
 		);
 	}
 	
-	public void editTo(RectangularPrism r) {
-		length = r.length;
-		width = r.width;
-		height = r.height;
+	public void editTo(PhysicalObject r) {
+		length = ((RectangularPrism)r).length;
+		width = ((RectangularPrism)r).width;
+		height = ((RectangularPrism)r).height;
 				
 	}
 }
