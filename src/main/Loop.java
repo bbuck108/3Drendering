@@ -18,7 +18,7 @@ public class Loop {
 		
             // render OpenGL here
 			Start.camera.render();
-			System.out.println("Done rendering");
+			//System.out.println("Done rendering");
              
 			//Update display
             Display.update();

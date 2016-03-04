@@ -23,9 +23,9 @@ public class Start {
 		renderList = new ArrayList<PhysicalObject>();
 		
 		//Add new objects here
-		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 300), Vector.createFromRectangular(0, 0, 0));
+		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		//new RectangularPrism(Vector.createFromRectangular(0, 0, 300), 100, Vector.createFromRectangular(0, 0, 50), 1, Color.RED);
-		new Sphere(Vector.createFromRectangular(0, 0, 400), 100, Vector.createFromRectangular(0, 0, 0), 1, Color.YELLOW);
+		new Sphere(Vector.createFromRectangular(0, 0, 1000), 100, Vector.createFromRectangular(0, 0, 50), 1, Color.YELLOW);
 		//
 		
 		try{

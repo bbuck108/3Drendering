@@ -18,24 +18,11 @@ public class Camera {
 		screen = s;
 		motion = v;
 		maxDistance = 150;
-		lightSource = Vector.createFromRectangular(400, 0, 0);
+		lightSource = Vector.createFromRectangular(1000, 0, 1000);
 	}
 	
 	public void render() {
 		for(int i = 0; i < screen.x; i++) {
-			switch(i){
-				case 200:
-					//System.out.println("25%");
-					break;
-				case 400:
-					//System.out.println("50%");
-					break;
-				case 600:
-					//System.out.println("75%");
-					break;
-				case 799:
-					//System.out.println("99%");
-			}
 			for(int j = 0; j < screen.y; j++) {
 				double x = i - screen.x/2;
 				double y = j - screen.y/2;
