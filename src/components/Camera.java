@@ -18,7 +18,7 @@ public class Camera {
 		screen = s;
 		motion = v;
 		maxDistance = 150;
-		lightSource = Vector.createFromRectangular(400, 400, 400);
+		lightSource = Vector.createFromRectangular(400, 0, 0);
 	}
 	
 	public void render() {
@@ -39,7 +39,7 @@ public class Camera {
 			for(int j = 0; j < screen.y; j++) {
 				double x = i - screen.x/2;
 				double y = j - screen.y/2;
-				Color color = Color.BLUE;
+				Color color = Color.BLACK;
 				
 				Vector angle = Vector.createFromRectangular(x, y, screen.z);
 				double theta = angle.theta();
@@ -59,18 +59,17 @@ public class Camera {
 				for(PhysicalObject object: Start.renderList) {
 					double distance = object.isIntersecting(ray);
 					if(distance != -1){
-						//System.out.println(distance);
-						Vector intersection = Vector.createFromSpherical(distance, theta, phi);
-						double shade = (new Segment(intersection, lightSource)).direction().toUnit().dot(object.getSurfaceNormal(intersection).toUnit());
+						Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(point);
+						double shade = Math.cos(object.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
 						if(shade < 0){shade = 0;}
-						shade = (0.2 + 0.8*shade);
+						shade = (0.1 + 0.9*shade);
 						color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
 					}
 				}
 				
 				// set the color of the quad (R,G,B,A)
-				GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getTransparency());
-				//GL11.glColor3d(0.0d, 0.0d, 255.0d);
+				GL11.glColor3f((color.getRed()/255.0f), color.getGreen()/255.0f, color.getBlue()/255.0f);
+				
 				// draw point
 				GL11.glBegin(GL11.GL_QUADS);
 				GL11.glVertex2d(i,j);
