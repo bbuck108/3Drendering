@@ -17,10 +17,10 @@ import components.Vector;
 public class Start {
 	public static ArrayList<PhysicalObject> renderList;
 	public static Camera camera;
-	public static void addToRenderList(PhysicalObject p_1){
+	public static void addToRenderList(PhysicalObject p_1) {
 		renderList.add(p_1);
 	}
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		renderList = new ArrayList<PhysicalObject>();
 		
 		//Add new objects here
