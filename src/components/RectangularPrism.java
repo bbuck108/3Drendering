@@ -152,4 +152,10 @@ public class RectangularPrism extends PhysicalObject {
 		);
 	}
 	
+	public void editTo(RectangularPrism r) {
+		length = r.length;
+		width = r.width;
+		height = r.height;
+				
+	}
 }

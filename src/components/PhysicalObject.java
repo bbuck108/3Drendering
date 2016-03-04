@@ -16,7 +16,7 @@ public class PhysicalObject {
 	}
 	
 	public void move() {
-		translateBy(motion);
+		editTo(translateBy(motion));
 	}
 	
 	public PhysicalObject translateBy(Vector v) { 
@@ -39,4 +39,6 @@ public class PhysicalObject {
 	public Vector getMotion() {
 		return motion;
 	}
+	
+	public void editTo(PhysicalObject p) {}
 }
