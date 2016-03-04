@@ -34,7 +34,7 @@ public class Sphere extends PhysicalObject{
 			r = -1; //-1 implies no intersection
 		}
 		else{
-			r = v - Math.sqrt(disc);
+			r = Math.sqrt(v) - Math.sqrt(disc);
 		}
 		return r;
 	}
