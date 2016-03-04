@@ -40,6 +40,15 @@ public class RectangularPrism extends PhysicalObject {
 		this(new Segment(pos, pos.plus(Vector.createFromRectangular(size, 0, 0))),new Segment(pos, pos.plus(Vector.createFromRectangular(0, size, 0))),new Segment(pos, pos.plus(Vector.createFromRectangular(0, 0, size))),v,m,c);
 	}
 	
+	/** Creates a rectangular prism based on three segments which all <b> must </b> share one origin point
+	 * default color, mass, and motion */
+	public RectangularPrism(Segment l, Segment w, Segment h) {
+		length = l;
+		width = w;
+		height = h;
+		Start.addToRenderList(this);
+	}
+	
 	/** Returns the volume of the prism*/
 	public double volume() {
 		return (length.length() * width.length() * height.length());
@@ -101,7 +110,9 @@ public class RectangularPrism extends PhysicalObject {
 		System.err.println("Invalid index");
 		return null;
 	}
-	public double isIntersecting(Vector p) {
+	
+	//Currently Not being used
+	/*public double isIntersecting(Vector p) {
 		//Pretty sure that this code is 100% flawed....
 		boolean cx = false;
 		boolean cy = false;
@@ -130,11 +141,15 @@ public class RectangularPrism extends PhysicalObject {
 		
 		//return (cx && cy && cz);
 		return -1;
-	}
-	public void translateBy(Vector p) {
-		length = length.translateBy(p);
-		width = width.translateBy(p);
-		height = height.translateBy(p);
+	}*/
+	
+	/* Moves a rectangular prism by some vector */
+	public RectangularPrism translateBy(Vector v) {
+		return new RectangularPrism(
+				length.translateBy(v),
+				width.translateBy(v),
+				height.translateBy(v)
+		);
 	}
 	
 }
