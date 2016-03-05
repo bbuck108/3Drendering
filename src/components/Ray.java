@@ -10,4 +10,7 @@ public class Ray {
 		this.theta  = theta;
 		this.phi    = phi;
 	}
+	public Vector getV(){
+		return Vector.createFromSpherical(1, theta, phi);
+	}
 }

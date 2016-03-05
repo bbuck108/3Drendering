@@ -14,4 +14,6 @@ public class Util {
     	final double EPSILON = Double.MIN_NORMAL * 1000000;
     	return x > -EPSILON && x < EPSILON;
     }
+    
+    public static boolean isNaN(double x){return x != x;}
 }
