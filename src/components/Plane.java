@@ -34,4 +34,7 @@ public class Plane {
 		double t = -1*(ray.origin.dot(n)+d)/(ray.getV().dot(n));
 		return ray.origin.plus(ray.getV().scaleBy(t));
 	}
+	public Vector getNormalVector(){
+		return Vector.createFromRectangular(a, b, c);
+	}
 }

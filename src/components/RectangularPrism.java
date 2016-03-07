@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import main.Start;
 import util.Axis;
+import util.Inequality;
 import util.Position;
 import util.Util;
 
@@ -233,6 +234,44 @@ public class RectangularPrism extends PhysicalObject {
 		r = Math.min(x1r, Math.min(x2r, Math.min(y1r, Math.min(y2r, Math.min(z1r, z2r))))); 
 		
 		return r;
+	}
+	
+	public Vector getSurfaceNormal(Vector p) {
+		//define planes
+		Plane x1 = 	new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
+				getSide(Position.FRONT, Axis.Y).getStart());
+		Plane x2 = 	new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
+				getSide(Position.BACK, Axis.Y).getStart());
+		Plane y1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
+				getSide(Position.FRONT, Axis.X).getStart());
+		Plane y2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
+				getSide(Position.BACK, Axis.X).getStart());
+		Plane z1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),
+				getSide(Position.FRONT, Axis.X).getStart());
+		Plane z2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),
+				getSide(Position.BACK, Axis.X).getStart());
+		
+		if(x1.compare(p)==Inequality.EQUAL){
+			return x1.getNormalVector();
+		}
+		if(x2.compare(p)==Inequality.EQUAL){
+			return x2.getNormalVector();
+		}
+		if(y1.compare(p)==Inequality.EQUAL){
+			return y1.getNormalVector();
+		}
+		if(y2.compare(p)==Inequality.EQUAL){
+			return y2.getNormalVector();
+		}
+		if(z1.compare(p)==Inequality.EQUAL){
+			return z1.getNormalVector();
+		}
+		if(z2.compare(p)==Inequality.EQUAL){
+			return z2.getNormalVector();
+		}
+		System.out.println("Problem.");
+		
+		return (new Vector());
 	}
 	
 	/* Moves a rectangular prism by some vector */

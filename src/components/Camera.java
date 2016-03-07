@@ -32,21 +32,11 @@ public class Camera {
 				double theta = angle.theta();
 				double phi = angle.phi();
 				Ray ray = new Ray(point, theta, phi);
-				//double r = angle.norm();
 				
-				/*for(int k = 0; k < maxDistance; k++) {
-					Vector check = Vector.createFromSpherical(k+r, theta, phi).plus(point);
-					for(PhysicalObject object: Start.renderList) {
-						if(object.isIntersecting(check)) {
-							color = object.getColor();
-							break;
-						}
-					}
-				}*/
 				for(PhysicalObject object: Start.renderList) {
 					double distance = object.isIntersecting(ray);
 					if(distance != -1){
-						System.out.println(distance);
+						//System.out.println(distance);
 						Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(point);
 						double shade = Math.cos(object.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
 						if(shade < 0){shade = 0;}
