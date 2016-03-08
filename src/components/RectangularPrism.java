@@ -289,6 +289,14 @@ public class RectangularPrism extends PhysicalObject {
 			false
 		);
 	}
+	public RectangularPrism rotateBy(Vector v) {
+		return new RectangularPrism(
+				new Segment(length.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),length.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
+				new Segment( width.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()), width.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
+				new Segment(height.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),height.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
+				false
+				);
+	}
 	
 	@Override
 	public void editTo(PhysicalObject r) {
