@@ -81,6 +81,10 @@ public class Vector {
 		return createFromRectangular(x * a, y * a, z * a);
 	}
 	
+	public Vector rotateBy(Vector v) {
+		return createFromSpherical(norm(), theta() + v.theta(), phi() + v.phi());
+	}
+	
 	/** computes the dot product (inner product type) with another vector */
 	public double dot(Vector v) {
 		return x * v.x + y * v.y + z * v.z; 

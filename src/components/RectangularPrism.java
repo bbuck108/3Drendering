@@ -37,8 +37,12 @@ public class RectangularPrism extends PhysicalObject {
 		Start.addToRenderList(this);
 	}
 	
+	/** Creates a rectangular prism which has orthogonal lines
+	 *  based on a start point and a a point which is a length, width, and height away from it */
 	public RectangularPrism(Vector pos, double size, Vector v, double m, Color c) {
-		this(new Segment(pos, pos.plus(Vector.createFromRectangular(size, 0, 0))),new Segment(pos, pos.plus(Vector.createFromRectangular(0, size, 0))),new Segment(pos, pos.plus(Vector.createFromRectangular(0, 0, size))),v,m,c);
+		this(new Segment(pos, pos.plus(Vector.createFromRectangular(size, 0, 0))),
+				new Segment(pos, pos.plus(Vector.createFromRectangular(0, size, 0))),
+				new Segment(pos, pos.plus(Vector.createFromRectangular(0, 0, size))), v, m, c);
 	}
 	
 	/** Creates a rectangular prism based on three segments which all <b> must </b> share one origin point
@@ -49,17 +53,19 @@ public class RectangularPrism extends PhysicalObject {
 		height = h;
 		Start.addToRenderList(this);
 	}
+	
 	public RectangularPrism(Segment l, Segment w, Segment h, boolean list) {
 		length = l;
 		width = w;
 		height = h;
-		if(list){Start.addToRenderList(this);}
+		if(list) Start.addToRenderList(this);
 	}
 	
 	/** Returns the volume of the prism*/
 	public double volume() {
 		return (length.length() * width.length() * height.length());
 	}
+	
 	/** Returns the surface area of the prism*/
 	public double surfaceArea() {
 		double t_x = length.length();
@@ -68,6 +74,7 @@ public class RectangularPrism extends PhysicalObject {
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
+	
 	/**Returns the specified side of the prism*/
 	public Segment getSide(Position p, Axis a) {
 		if(p == Position.FRONT) {
@@ -93,24 +100,24 @@ public class RectangularPrism extends PhysicalObject {
 			}
 		}
 		if(p == Position.RIGHT) {
-			if(a == Axis.X){
+			if(a == Axis.X) {
 				return length.translateBy(height.direction());
 			}
-			if(a == Axis.Y){
+			if(a == Axis.Y) {
 				return width.translateBy(length.direction());
 			}
-			if(a == Axis.Z){
+			if(a == Axis.Z) {
 				return height.translateBy(length.direction());
 			}
 		}
 		if(p == Position.LEFT) {
-			if(a == Axis.X){
+			if(a == Axis.X)  {
 				return length.translateBy(width.direction());
 			}
-			if(a == Axis.Y){
+			if(a == Axis.Y) {
 				return width.translateBy(height.direction());
 			}
-			if(a == Axis.Z){
+			if(a == Axis.Z) {
 				return height.translateBy(width.direction());
 			}
 		}
@@ -149,6 +156,10 @@ public class RectangularPrism extends PhysicalObject {
 		//return (cx && cy && cz);
 		return -1;
 	}*/
+	
+	
+	/** Computes if a ray intersects with the rectangular prism
+	 * @return the distance on the ray when it intersects if r = -1 the the ray does not intersect */
 	public double isIntersecting(Ray ray) {
 		double r = -1;
 		//define planes
@@ -235,6 +246,7 @@ public class RectangularPrism extends PhysicalObject {
 		return r;
 	}
 	
+	/* Computes an angle of a perpendicular line from the rectangular prism based on a vector */
 	public Vector getSurfaceNormal(Vector p) {
 		Vector c = (new Segment(getCenter(), p)).direction();
 		double thetaL = c.angleWith(length.direction());
@@ -245,22 +257,22 @@ public class RectangularPrism extends PhysicalObject {
 		double thetaH2 = c.angleWith(height.direction().negative());
 		double minTheta = Math.min(thetaL, Math.min(thetaW, Math.min(thetaH, Math.min(thetaL2, Math.min(thetaH, Math.min(thetaW2, thetaH2))))));
 		
-		if(minTheta == thetaL){
+		if(minTheta == thetaL) {
 			return length.direction();
 		}
-		if(minTheta == thetaW){
+		if(minTheta == thetaW) {
 			return width.direction();
 		}
-		if(minTheta == thetaH){
+		if(minTheta == thetaH) {
 			return height.direction();
 		}
-		if(minTheta == thetaL2){
+		if(minTheta == thetaL2) {
 			return length.direction().negative();
 		}
-		if(minTheta == thetaW2){
+		if(minTheta == thetaW2) {
 			return width.direction().negative();
 		}
-		if(minTheta == thetaH2){
+		if(minTheta == thetaH2) {
 			return height.direction().negative();
 		}
 		
@@ -268,7 +280,7 @@ public class RectangularPrism extends PhysicalObject {
 		return (new Vector());
 	}
 	
-	/* Moves a rectangular prism by some vector */
+	/* Returns a Moved rectangular prism by some vector */
 	public RectangularPrism translateBy(Vector v) {
 		return new RectangularPrism(
 			length.translateBy(v),
@@ -283,7 +295,7 @@ public class RectangularPrism extends PhysicalObject {
 		length = ((RectangularPrism)r).length;
 		width = ((RectangularPrism)r).width;
 		height = ((RectangularPrism)r).height;
-		super.editTo(r);
+		//super.editTo(r);
 	}
 	
 	public Vector getCenter(){
