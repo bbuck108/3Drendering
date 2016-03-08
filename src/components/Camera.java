@@ -10,15 +10,13 @@ public class Camera {
 	Vector point;
 	Vector screen;
 	Vector motion;
-	double maxDistance;
 	Vector lightSource;
 	
 	public Camera(Vector p, Vector s, Vector v) {
 		point = p;
 		screen = s;
 		motion = v;
-		maxDistance = 150;
-		lightSource = Vector.createFromRectangular(1000, 0, 1000);
+		lightSource = Vector.createFromRectangular(0, 0, 0);
 	}
 	
 	public void render() {
@@ -36,7 +34,6 @@ public class Camera {
 				for(PhysicalObject object: Start.renderList) {
 					double distance = object.isIntersecting(ray);
 					if(distance != -1){
-						//System.out.println(distance);
 						Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(point);
 						double shade = Math.cos(object.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
 						if(shade < 0){shade = 0;}

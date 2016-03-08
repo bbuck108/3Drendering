@@ -68,4 +68,5 @@ public class Segment {
 	//--------------Getter-Methods--------------//
 	public Vector getStart() { return start; }
 	public Vector getEnd() { return end; }
+	public Vector getMidpoint() { return end.minus(start).scaleBy(0.5).plus(start);}
 }
