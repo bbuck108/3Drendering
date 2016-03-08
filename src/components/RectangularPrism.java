@@ -238,9 +238,12 @@ public class RectangularPrism extends PhysicalObject {
 	public Vector getSurfaceNormal(Vector p) {
 		Vector c = (new Segment(this.getCenter(), p)).direction();
 		double thetaL = c.angleWith(length.direction());
+		double thetaL2 = c.angleWith(length.direction().negative());
 		double thetaW = c.angleWith(width.direction());
+		double thetaW2 = c.angleWith(width.direction().negative());
 		double thetaH = c.angleWith(height.direction());
-		double minTheta = Math.min(thetaL, Math.min(thetaW, thetaH));
+		double thetaH2 = c.angleWith(height.direction().negative());
+		double minTheta = Math.min(thetaL, Math.min(thetaW, Math.min(thetaH, Math.min(thetaL2, Math.min(thetaH, Math.min(thetaW2, thetaH2))))));
 		
 		if(minTheta == thetaL){
 			return length.direction();
@@ -250,6 +253,15 @@ public class RectangularPrism extends PhysicalObject {
 		}
 		if(minTheta == thetaH){
 			return height.direction();
+		}
+		if(minTheta == thetaL2){
+			return length.direction().negative();
+		}
+		if(minTheta == thetaW2){
+			return width.direction().negative();
+		}
+		if(minTheta == thetaH2){
+			return height.direction().negative();
 		}
 		
 		System.out.println("Problem with reflection.");
