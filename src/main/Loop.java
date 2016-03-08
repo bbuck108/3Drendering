@@ -13,7 +13,8 @@ public class Loop {
 				t_1.move();
 			}
 			
-			//
+			// I have no idea what this does...
+			// When this is causing a problem I'm sorry
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 		
             // render OpenGL here

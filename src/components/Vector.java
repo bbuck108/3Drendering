@@ -2,6 +2,10 @@ package components;
 
 import static util.Util.*;
 
+/** 
+ *A three dimensional point 
+ * @author Connor Lehmacher
+ */
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
@@ -10,7 +14,7 @@ public class Vector {
 	public double z;
 	
 	//------------Constructors------------//
-	private Vector(double x, double y, double z) {
+	protected Vector(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -81,6 +85,7 @@ public class Vector {
 		return createFromRectangular(x * a, y * a, z * a);
 	}
 	
+	/** Rotates the vector by the angle of another vector */
 	public Vector rotateBy(Vector v) {
 		return createFromSpherical(norm(), theta() + v.theta(), phi() + v.phi());
 	}
@@ -110,7 +115,13 @@ public class Vector {
 	}
 	
 	/**Gives a unit length vector*/
-	public Vector toUnit(){
+	public Vector toUnit() {
 		return Vector.createFromSpherical(1, theta(), phi());
+	}
+	
+	/** Print the vector as a concatenation of its x y and z parts
+	 * and adds a new line */
+	public void println() {
+		System.out.println(x + " " + y + " " + z);
 	}
 }
