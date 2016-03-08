@@ -9,12 +9,6 @@ public class PhysicalObject {
 	
 	public PhysicalObject() {}
 	
-	public PhysicalObject(PhysicalObject p) {
-		motion = p.motion;
-		mass = p.mass;
-		color = p.color;
-	}
-	
 	public void move() {
 		editTo(translateBy(motion));
 	}
@@ -40,5 +34,9 @@ public class PhysicalObject {
 		return motion;
 	}
 	
-	public void editTo(PhysicalObject p) {}
+	public void editTo(PhysicalObject p) {
+		motion = p.motion;
+		mass = p.mass;
+		color = p.color;		
+	}
 }

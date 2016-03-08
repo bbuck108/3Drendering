@@ -224,19 +224,19 @@ public class RectangularPrism extends PhysicalObject {
 		
 		//Calculate r
 		double max = Math.max(x1r, Math.max(x2r, Math.max(y1r, Math.max(y2r, Math.max(z1r, z2r)))));
-		if(x1r == -1){x1r = max;}
-		if(x2r == -1){x2r = max;}
-		if(y1r == -1){y1r = max;}
-		if(y2r == -1){y2r = max;}
-		if(z1r == -1){z1r = max;}
-		if(z2r == -1){z2r = max;}
+		if(x1r == -1) x1r = max;
+		if(x2r == -1) x2r = max;
+		if(y1r == -1) y1r = max;
+		if(y2r == -1) y2r = max;
+		if(z1r == -1) z1r = max;
+		if(z2r == -1) z2r = max;
 		r = Math.min(x1r, Math.min(x2r, Math.min(y1r, Math.min(y2r, Math.min(z1r, z2r))))); 
 		
 		return r;
 	}
 	
 	public Vector getSurfaceNormal(Vector p) {
-		Vector c = (new Segment(this.getCenter(), p)).direction();
+		Vector c = (new Segment(getCenter(), p)).direction();
 		double thetaL = c.angleWith(length.direction());
 		double thetaW = c.angleWith(width.direction());
 		double thetaH = c.angleWith(height.direction());
@@ -252,25 +252,26 @@ public class RectangularPrism extends PhysicalObject {
 			return height.direction();
 		}
 		
-		System.out.println("Problem with reflection.");
+		System.err.println("Problem with reflection.");
 		return (new Vector());
 	}
 	
 	/* Moves a rectangular prism by some vector */
 	public RectangularPrism translateBy(Vector v) {
 		return new RectangularPrism(
-				length.translateBy(v),
-				width.translateBy(v),
-				height.translateBy(v),
-				false
+			length.translateBy(v),
+			width.translateBy(v),
+			height.translateBy(v),
+			false
 		);
 	}
 	
+	@Override
 	public void editTo(PhysicalObject r) {
 		length = ((RectangularPrism)r).length;
 		width = ((RectangularPrism)r).width;
 		height = ((RectangularPrism)r).height;
-				
+		super.editTo(r);
 	}
 	
 	public Vector getCenter(){
