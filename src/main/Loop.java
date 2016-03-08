@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import components.PhysicalObject;
+import components.Vector;
 
 public class Loop {
 	public static void loop() {
@@ -12,6 +13,7 @@ public class Loop {
 			for(PhysicalObject t_1: Start.renderList){
 				t_1.move();
 			}
+			
 			
 			// I have no idea what this does...
 			// When this is causing a problem I'm sorry
@@ -23,6 +25,7 @@ public class Loop {
              
 			//Update display
             Display.update();
+            Start.x.editTo(Start.x.rotateBy(Vector.createFromSpherical(1, Math.PI/4, Math.PI/4)));
         }
          
         Display.destroy();

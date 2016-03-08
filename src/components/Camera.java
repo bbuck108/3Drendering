@@ -16,7 +16,7 @@ public class Camera {
 		point = p;
 		screen = s;
 		motion = v;
-		lightSource = Vector.createFromRectangular(800, 0, 800);
+		lightSource = Vector.createFromRectangular(1000, 0, 0);
 	}
 	
 	public void render() {
