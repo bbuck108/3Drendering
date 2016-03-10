@@ -4,7 +4,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import components.PhysicalObject;
-import components.Vector;
 
 public class Loop {
 	public static void loop() {
