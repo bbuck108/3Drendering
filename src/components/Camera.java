@@ -32,10 +32,11 @@ public class Camera {
 				Ray ray = new Ray(point, theta, phi);
 				
 				for(PhysicalObject object: Start.renderList) {
-					double distance = object.isIntersecting(ray);
+					Shape shape = object.getShape();
+					double distance = shape.isIntersecting(ray);
 					if(distance != -1){
 						Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(point);
-						double shade = Math.cos(object.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
+						double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
 						if(shade < 0){shade = 0;}
 						shade = (0.1 + 0.9*shade);
 						color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
