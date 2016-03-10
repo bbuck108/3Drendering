@@ -7,9 +7,9 @@ package components;
 public class Segment {
 	//-----------------Fields----------------//
 	/** Initial location */
-	private Vector start;
+	final private Vector start;
 	/** Final location, defines direction */
-	private Vector end;
+	final private Vector end;
 	
 	//---------------Constructors-------------//
 	/** From 0, 0, 0 to 0, 0, 0 */
@@ -39,6 +39,12 @@ public class Segment {
 		end = Vector.createFromSpherical(l, theta, phi).plus(p);
 	}
 	
+	//-------------Pseudo-Constructors---------//
+	/**Creates a segment based on a start location a direction (vector quantity) */
+	public static Segment createFromDirection(Vector start, Vector direction) {
+		return new Segment(start, start.plus(direction));
+	}
+	
 	//----------------Methods----------------//
 	/** Computes the length from start to end */
 	public double length() {
@@ -50,9 +56,30 @@ public class Segment {
 		return new Segment(start.plus(v), end.plus(v));
 	}
 	
+	/** Rotates a segment over the x, y, and z axis relative to the start */
+	public Segment rotateBy(Rotation r) {
+		return createFromDirection(start, new Vector(rotation().addWith(r), length()));
+	}
+	
+	/** Rotates a segment by a rotation from some point v */
+	public Segment rotateAround(Rotation r, Vector v) {
+		return new Segment();
+	}
+	
 	/** Finds the direction of the line as a vector */
 	public Vector direction() {
 		return end.minus(start);
+	}
+	
+	/** Finds the rotation (3 Numbers) of a line */
+	public Rotation rotation() {
+		final double relX = direction().x;
+		final double relY = direction().y;
+		final double relZ = direction().z;
+		final double xRot = Math.atan2(relZ, relY);
+		final double yRot = Math.atan2(relX, relZ);
+		final double zRot = Math.atan2(relY, relX);
+		return new Rotation(xRot, yRot, zRot);
 	}
 	
 	/** Returns true if two lines are parallel */

@@ -20,7 +20,7 @@ public class Util {
 
     /** returns a Rotation from a rotation which may be outside the standard range
      * @return a rotation in the range of 0 to 2 Pi */
-	public Rotation reduceRotation(Rotation r) {
+	public static Rotation reduceRotation(Rotation r) {
 		double x = r.x;
 		double y = r.y;
 		double z = r.z;

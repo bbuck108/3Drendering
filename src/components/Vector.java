@@ -27,6 +27,13 @@ public class Vector {
 		z = 0;
 	}
 	
+	/** Makes a vector from a Rotation and a magnitude */
+	public Vector(Rotation r, double norm) {
+		x = norm * Math.cos(r.z) * Math.sin(r.y);
+		y = norm * Math.sin(r.z) * Math.sin(r.x);
+		z = norm * Math.cos(r.y) * Math.cos(r.x);
+	}
+	
 	//-----------Pseudo-Constructors------------//
 	public static Vector createFromRectangular(double x, double y, double z) {
 		return new Vector(x, y, z);
