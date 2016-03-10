@@ -2,31 +2,59 @@ package components;
 
 import java.awt.Color;
 
-public abstract class PhysicalObject {
-	Vector motion;
-	double mass;
-	Color color;
+/*
+ * @Authi
+ */	
+public class PhysicalObject {
+	//-------------------Fields-------------//
+	/** the velocity of the object */
+	private Vector velocity;
+	private double mass;
+	private Color color;
+	/** This must contain an extended Class of Shape */
+	private Shape shape;
 	
-	public void move() {
-		editTo(translateBy(motion));
+	//--------Constructors-------------//
+	/** Default Constructor (sets mass to 1) */
+	public PhysicalObject() {
+		mass = 1;
 	}
 	
-	//Javadoc Here!!!!!!
-	/** */
-	public abstract PhysicalObject translateBy(Vector v);
+	/** Sets the shape and sets mass to 1 */
+	public PhysicalObject(Shape s) {
+		shape = s;
+		mass = 1;
+	}
 	
-	public abstract double isIntersecting(Ray ray);
+	public PhysicalObject(Vector motion, double mass, Color c, Shape s) {
+		this.velocity = motion;
+		this.mass = mass;
+		color = c;
+		shape = s;
+	}
 	
-	public abstract Vector getSurfaceNormal(Vector v);
+	public void move() {
+		shape = shape.translateBy(velocity);
+	}
+	
+	//JavaDoc Here!!!!!!
+	
+
+	
+	public Vector getVelocity() {
+		return velocity;
+	}
+	
+	public double getMass() {
+		return mass;
+	}
 	
 	public Color getColor() {
 		return color;
 	}
 	
-	public Vector getMotion() {
-		return motion;
+	public Shape getShape() {
+		return shape;
 	}
-	
-	//Get rid of this
-	public abstract void editTo(PhysicalObject p);
+
 }
