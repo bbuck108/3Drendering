@@ -13,53 +13,27 @@ import util.Util;
  *
  */
 public class RectangularPrism extends Shape {
-	Segment length;
-	Segment width;
-	Segment height;
+	Vector size;
+	Rotation rotation;
 	
-	
-	/**
-	 * Constructs a rectangular prism based on three vectors with one common point
-	 * @param l A vector specifying the object's length
-	 * @param w A vector specifying the object's width
-	 * @param h A vector specifying the object's height
-	 * @param v A vector specifying the object's initial velocity
-	 * @param m Mass of the prism
-	 * @param c The color of the rectangle
-	 */
-	public RectangularPrism(Segment l, Segment w, Segment h, Vector v, double m, Color c) {
-		length = l;
-		width = w;
-		height = h;
+	public RectangularPrism(Vector c, Vector s, Rotation r) {
+		super(c);
+		size = s;
+		rotation = r;
 	}
-	
-	/** Creates a rectangular prism which has orthogonal lines
-	 *  based on a start point and a a point which is a length, width, and height away from it */
-	public RectangularPrism(Vector pos, double size, Vector v, double m, Color c) {
-		this(new Segment(pos, pos.plus(Vector.createFromRectangular(size, 0, 0))),
-				new Segment(pos, pos.plus(Vector.createFromRectangular(0, size, 0))),
-				new Segment(pos, pos.plus(Vector.createFromRectangular(0, 0, size))), v, m, c);
-	}
-	
-	/** Creates a rectangular prism based on three segments which all <b> must </b> share one origin point
-	 * default color, mass, and motion */
-	public RectangularPrism(Segment l, Segment w, Segment h) {
-		length = l;
-		width = w;
-		height = h;
-	}
+
 	
 	
 	/** Returns the volume of the prism*/
 	public double volume() {
-		return (length.length() * width.length() * height.length());
+		return (getSide(Position.FRONT, Axis.X).length() * getSide(Position.FRONT, Axis.Y).length() * getSide(Position.FRONT, Axis.Z).length());
 	}
 	
 	/** Returns the surface area of the prism*/
 	public double surfaceArea() {
-		double t_x = length.length();
-		double t_y = width.length();
-		double t_z = height.length();
+		double t_x = getSide(Position.FRONT, Axis.X).length();
+		double t_y = getSide(Position.FRONT, Axis.Y).length();
+		double t_z = getSide(Position.FRONT, Axis.Z).length();
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
@@ -205,55 +179,35 @@ public class RectangularPrism extends Shape {
 	
 	/* Computes an angle of a perpendicular line from the rectangular prism based on a vector */
 	public Vector getSurfaceNormal(Vector p) {
-		Vector c = (new Segment(getCenter(), p)).direction();
-		double thetaL = c.angleWith(length.direction());
-		double thetaL2 = c.angleWith(length.direction().negative());
-		double thetaW = c.angleWith(width.direction());
-		double thetaW2 = c.angleWith(width.direction().negative());
-		double thetaH = c.angleWith(height.direction());
-		double thetaH2 = c.angleWith(height.direction().negative());
+		Vector c = (new Segment(location, p)).direction();
+		double thetaL = c.angleWith(getSide(Position.FRONT, Axis.X).direction());
+		double thetaL2 = c.angleWith(getSide(Position.FRONT, Axis.X).direction().negative());
+		double thetaW = c.angleWith(getSide(Position.FRONT, Axis.Y).direction());
+		double thetaW2 = c.angleWith(getSide(Position.FRONT, Axis.Y).direction().negative());
+		double thetaH = c.angleWith(getSide(Position.FRONT, Axis.Z).direction());
+		double thetaH2 = c.angleWith(getSide(Position.FRONT, Axis.Z).direction().negative());
 		double minTheta = Math.min(thetaL, Math.min(thetaW, Math.min(thetaH, Math.min(thetaL2, Math.min(thetaH, Math.min(thetaW2, thetaH2))))));
 		
 		if(minTheta == thetaL) {
-			return length.direction();
+			return getSide(Position.FRONT, Axis.X).direction();
 		}
 		if(minTheta == thetaW) {
-			return width.direction();
+			return getSide(Position.FRONT, Axis.Y).direction();
 		}
 		if(minTheta == thetaH) {
-			return height.direction();
+			return getSide(Position.FRONT, Axis.Z).direction();
 		}
 		if(minTheta == thetaL2) {
-			return length.direction().negative();
+			return getSide(Position.FRONT, Axis.X).direction().negative();
 		}
 		if(minTheta == thetaW2) {
-			return width.direction().negative();
+			return getSide(Position.FRONT, Axis.Y).direction().negative();
 		}
 		if(minTheta == thetaH2) {
-			return height.direction().negative();
+			return getSide(Position.FRONT, Axis.Z).direction().negative();
 		}
 		
 		System.err.println("Problem with reflection.");
 		return (new Vector());
-	}
-	
-	/* Returns a Moved rectangular prism by some vector */
-	public RectangularPrism translateBy(Vector v) {
-		return new RectangularPrism(
-			length.translateBy(v),
-			width.translateBy(v),
-			height.translateBy(v)
-		);
-	}
-	public RectangularPrism rotateBy(Vector v) {
-		return new RectangularPrism(
-				new Segment(length.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),length.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
-				new Segment( width.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()), width.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
-				new Segment(height.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),height.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter()))
-				);
-	}
-	
-	public Vector getCenter(){
-		return length.getMidpoint().plus(width.direction().scaleBy(0.5)).plus(height.direction().scaleBy(0.5));
 	}
 }
