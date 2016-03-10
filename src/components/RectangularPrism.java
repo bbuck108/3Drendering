@@ -1,8 +1,5 @@
 package components;
 
-import java.awt.Color;
-
-import main.Start;
 import util.Axis;
 import util.Position;
 import util.Util;
@@ -26,62 +23,70 @@ public class RectangularPrism extends Shape {
 	
 	/** Returns the volume of the prism*/
 	public double volume() {
-		return (getSide(Position.FRONT, Axis.X).length() * getSide(Position.FRONT, Axis.Y).length() * getSide(Position.FRONT, Axis.Z).length());
+		return (size.x * size.y * size.z);
 	}
 	
 	/** Returns the surface area of the prism*/
 	public double surfaceArea() {
-		double t_x = getSide(Position.FRONT, Axis.X).length();
-		double t_y = getSide(Position.FRONT, Axis.Y).length();
-		double t_z = getSide(Position.FRONT, Axis.Z).length();
+		double t_x = size.x;
+		double t_y = size.y;
+		double t_z = size.z;
 		
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
 	
 	/**Returns the specified side of the prism*/
 	public Segment getSide(Position p, Axis a) {
+		Vector p_1 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_2 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_3 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_4 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_5 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_6 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_7 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_8 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
 		if(p == Position.FRONT) {
 			if(a == Axis.X){
-				return length;
+				return new Segment(p_8, p_4);
 			}
 			if(a == Axis.Y){
-				return width;
+				return new Segment(p_8, p_6);
 			}
 			if(a == Axis.Z){
-				return height;
+				return new Segment(p_8, p_7);
 			}
 		}
 		if(p == Position.BACK) {
 			if(a == Axis.X){
-				return length.translateBy(width.direction().plus(height.direction()));
+				return new Segment(p_5, p_1);
 			}
 			if(a == Axis.Y){
-				return width.translateBy(length.direction().plus(height.direction()));
+				return new Segment(p_3, p_1);
 			}
 			if(a == Axis.Z){
-				return height.translateBy(length.direction().plus(height.direction()));
+				return new Segment(p_2, p_1);
 			}
 		}
 		if(p == Position.RIGHT) {
 			if(a == Axis.X) {
-				return length.translateBy(height.direction());
+				return new Segment(p_7, p_3);
 			}
 			if(a == Axis.Y) {
-				return width.translateBy(length.direction());
+				return new Segment(p_4, p_3);
 			}
 			if(a == Axis.Z) {
-				return height.translateBy(length.direction());
+				return new Segment(p_4, p_2);
 			}
 		}
 		if(p == Position.LEFT) {
 			if(a == Axis.X)  {
-				return length.translateBy(width.direction());
+				return new Segment(p_6, p_2);
 			}
 			if(a == Axis.Y) {
-				return width.translateBy(height.direction());
+				return new Segment(p_7, p_5);
 			}
 			if(a == Axis.Z) {
-				return height.translateBy(width.direction());
+				return new Segment(p_6, p_5);
 			}
 		}
 		System.err.println("Invalid index");
