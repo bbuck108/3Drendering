@@ -34,9 +34,15 @@ public class Segment {
 	
 	/** Creates a Line based on a point and a length and a direction
 	 * @param l the length */
-	public Segment(Vector p, double l, double theta, double phi) {
-		start = p;
-		end = Vector.createFromSpherical(l, theta, phi).plus(p);
+	public Segment(Vector v, double l, double theta, double phi) {
+		start = v;
+		end = Vector.createFromSpherical(l, theta, phi).plus(v);
+	}
+	
+	/** Creates a Line based on a start vector, a length, and a rotation */
+	public Segment(Vector v, double l, Rotation r) {
+		start = v;
+		end = new Vector(r, l).plus(v);
 	}
 	
 	//-------------Pseudo-Constructors---------//
@@ -58,7 +64,7 @@ public class Segment {
 	
 	/** Rotates a segment over the x, y, and z axis relative to the start */
 	public Segment rotateBy(Rotation r) {
-		return createFromDirection(start, new Vector(rotation().addWith(r), length()));
+		return createFromDirection(start, new Vector(rotation().plus(r), length()));
 	}
 	
 	/** Rotates a segment by a rotation from some point v */

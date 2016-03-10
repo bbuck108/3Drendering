@@ -13,7 +13,7 @@ public class Rotation extends Vector{
 		super(x, y, z);
 	}
 	
-	public Rotation addWith(Rotation r) {
+	public Rotation plus(Rotation r) {
 		return Util.reduceRotation((Rotation)super.plus((Vector)r));
 	}
 }
