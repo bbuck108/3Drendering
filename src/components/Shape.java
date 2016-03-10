@@ -8,5 +8,14 @@ public abstract class Shape {
 	}
 	public abstract double isIntersecting(Ray ray);
 	public abstract Vector getSurfaceNormal(Vector p);
-	public abstract Shape translateBy(Vector p);
+	public Shape translateBy(Vector p){
+		try {
+			Shape obj = (Shape) this.clone();
+			obj.location = this.location.plus(p);
+			return obj;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	};
 }
