@@ -9,9 +9,9 @@ import static util.Util.*;
 public class Vector {
 	//----------Fields----------//
 	// Basic Information   
-	public double x;
-	public double y;
-	public double z;
+	public final double x;
+	public final double y;
+	public final double z;
 	
 	//------------Constructors------------//
 	protected Vector(double x, double y, double z) {
