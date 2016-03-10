@@ -17,7 +17,6 @@ public class Sphere extends Shape{
 		double v = EO.dot(V);
 		double disc = Util.sq(radius) - (Util.sq(EO.norm())-v);
 		double r;
-		//System.out.println(disc);
 		if(disc < 0) {
 			r = -1; //-1 implies no intersection
 		}
