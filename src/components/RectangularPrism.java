@@ -12,7 +12,7 @@ import util.Util;
  * @author Benjamin Buck
  *
  */
-public class RectangularPrism extends PhysicalObject {
+public class RectangularPrism extends Shape {
 	Segment length;
 	Segment width;
 	Segment height;
@@ -31,10 +31,6 @@ public class RectangularPrism extends PhysicalObject {
 		length = l;
 		width = w;
 		height = h;
-		motion = v;
-		mass = m;
-		color = c;
-		Start.addToRenderList(this);
 	}
 	
 	/** Creates a rectangular prism which has orthogonal lines
@@ -51,15 +47,8 @@ public class RectangularPrism extends PhysicalObject {
 		length = l;
 		width = w;
 		height = h;
-		Start.addToRenderList(this);
 	}
 	
-	public RectangularPrism(Segment l, Segment w, Segment h, boolean list) {
-		length = l;
-		width = w;
-		height = h;
-		if(list) Start.addToRenderList(this);
-	}
 	
 	/** Returns the volume of the prism*/
 	public double volume() {
@@ -124,38 +113,6 @@ public class RectangularPrism extends PhysicalObject {
 		System.err.println("Invalid index");
 		return null;
 	}
-	
-	//Currently Not being used
-	/*public double isIntersecting(Vector p) {
-		//Pretty sure that this code is 100% flawed....
-		boolean cx = false;
-		boolean cy = false;
-		boolean cz = false;
-		
-		//X component
-		Plane x1 = 	new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
-				getSide(Position.FRONT, Axis.Y).getStart());
-		Plane x2 = 	new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
-				getSide(Position.BACK, Axis.Y).getStart());
-		if(!x1.compare(p).equals(x2.compare(p))) cx = true;
-		
-		//Y component
-		Plane y1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
-				getSide(Position.FRONT, Axis.X).getStart());
-		Plane y2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
-				getSide(Position.BACK, Axis.X).getStart());
-		if(!y1.compare(p).equals(y2.compare(p))) cy = true;
-		
-		//Z component
-		Plane z1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),
-				getSide(Position.FRONT, Axis.X).getStart());
-		Plane z2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),
-				getSide(Position.BACK, Axis.X).getStart());
-		if(!z1.compare(p).equals(z2.compare(p))) cz = true;
-		
-		//return (cx && cy && cz);
-		return -1;
-	}*/
 	
 	
 	/** Computes if a ray intersects with the rectangular prism
@@ -285,25 +242,15 @@ public class RectangularPrism extends PhysicalObject {
 		return new RectangularPrism(
 			length.translateBy(v),
 			width.translateBy(v),
-			height.translateBy(v),
-			false
+			height.translateBy(v)
 		);
 	}
 	public RectangularPrism rotateBy(Vector v) {
 		return new RectangularPrism(
 				new Segment(length.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),length.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
 				new Segment( width.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()), width.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
-				new Segment(height.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),height.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter())),
-				false
+				new Segment(height.getStart().minus(getCenter()).rotateBy(v).plus(getCenter()),height.getEnd().minus(getCenter()).rotateBy(v).plus(getCenter()))
 				);
-	}
-	
-	@Override
-	public void editTo(PhysicalObject r) {
-		length = ((RectangularPrism)r).length;
-		width = ((RectangularPrism)r).width;
-		height = ((RectangularPrism)r).height;
-		//super.editTo(r);
 	}
 	
 	public Vector getCenter(){

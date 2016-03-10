@@ -25,7 +25,6 @@ public class Loop {
              
 			//Update display
             Display.update();
-            Start.x.editTo(Start.x.rotateBy(Vector.createFromSpherical(1, Math.PI/4, Math.PI/4)));
         }
          
         Display.destroy();
