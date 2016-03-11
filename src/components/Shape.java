@@ -1,6 +1,6 @@
 package components;
 
-public abstract class Shape {
+public abstract class Shape implements Cloneable {
 	Vector location;
 	
 	public Shape(Vector c) {

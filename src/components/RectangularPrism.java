@@ -2,7 +2,6 @@ package components;
 
 import util.Axis;
 import util.Position;
-import util.Util;
 
 /**
  * A rectangular prism
@@ -115,7 +114,7 @@ public class RectangularPrism extends Shape {
 		//X component
 		Vector x1i = x1.intersection(ray);
 		double x1r = -1;
-		if((!Util.isNaN(x1i.x))&&(!Util.isNaN(x1i.y))&&(!Util.isNaN(x1i.z))){
+		if((Double.isFinite(x1i.x))&&(Double.isFinite(x1i.y))&&(Double.isFinite(x1i.z))){
 			if((!y1.compare(x1i).equals(y2.compare(x1i)))&&(!z1.compare(x1i).equals(z2.compare(x1i)))){
 				x1r = (new Segment(ray.origin, x1i)).direction().norm();
 				if(x1r < 0){x1r = -1;}
@@ -124,7 +123,7 @@ public class RectangularPrism extends Shape {
 		
 		Vector x2i = x2.intersection(ray);
 		double x2r = -1;
-		if((!Util.isNaN(x2i.x))&&(!Util.isNaN(x2i.y))&&(!Util.isNaN(x2i.z))){
+		if((Double.isFinite(x2i.x))&&(Double.isFinite(x2i.y))&&(Double.isFinite(x2i.z))){
 			if((!y1.compare(x2i).equals(y2.compare(x2i)))&&(!z1.compare(x2i).equals(z2.compare(x2i)))){
 				x2r = (new Segment(ray.origin, x2i)).direction().norm();
 				if(x2r < 0){x2r = -1;}
@@ -134,7 +133,7 @@ public class RectangularPrism extends Shape {
 		//Y component
 		Vector y1i = y1.intersection(ray);
 		double y1r = -1;
-		if((!Util.isNaN(y1i.x))&&(!Util.isNaN(y1i.y))&&(!Util.isNaN(y1i.z))){
+		if((Double.isFinite(y1i.x))&&(Double.isFinite(y1i.y))&&(Double.isFinite(y1i.z))){
 			if((!x1.compare(y1i).equals(x2.compare(y1i)))&&(!z1.compare(y1i).equals(z2.compare(y1i)))){
 				y1r = (new Segment(ray.origin, y1i)).direction().norm();
 				if(y1r < 0){y1r = -1;}
@@ -143,7 +142,7 @@ public class RectangularPrism extends Shape {
 		
 		Vector y2i = y2.intersection(ray);
 		double y2r = -1;
-		if((!Util.isNaN(y2i.x))&&(!Util.isNaN(y2i.y))&&(!Util.isNaN(y2i.z))){
+		if((Double.isFinite(y2i.x))&&(Double.isFinite(y2i.y))&&(Double.isFinite(y2i.z))){
 			if((!x1.compare(y2i).equals(x2.compare(y2i)))&&(!z1.compare(y2i).equals(z2.compare(y2i)))){
 				y2r = (new Segment(ray.origin, y2i)).direction().norm();
 				if(y2r < 0){y2r = -1;}
@@ -153,7 +152,7 @@ public class RectangularPrism extends Shape {
 		//Z component
 		Vector z1i = z1.intersection(ray);
 		double z1r = -1;
-		if((!Util.isNaN(z1i.x))&&(!Util.isNaN(z1i.y))&&(!Util.isNaN(z1i.z))){
+		if((Double.isFinite(z1i.x))&&(Double.isFinite(z1i.y))&&(Double.isFinite(z1i.z))){
 			if((!x1.compare(z1i).equals(x2.compare(z1i)))&&(!y1.compare(z1i).equals(y2.compare(z1i)))){
 				z1r = (new Segment(ray.origin, z1i)).direction().norm();
 				if(z1r < 0){z1r = -1;}
@@ -162,7 +161,7 @@ public class RectangularPrism extends Shape {
 		
 		Vector z2i = z2.intersection(ray);
 		double z2r = -1;
-		if((!Util.isNaN(z2i.x))&&(!Util.isNaN(z2i.y))&&(!Util.isNaN(z2i.z))){
+		if((Double.isFinite(z2i.x))&&(Double.isFinite(z2i.y))&&(Double.isFinite(z2i.z))){
 			if((!x1.compare(z2i).equals(x2.compare(z2i)))&&(!y1.compare(z2i).equals(y2.compare(z2i)))){
 				z2r = (new Segment(ray.origin, z2i)).direction().norm();
 				if(z2r < 0){z2r = -1;}

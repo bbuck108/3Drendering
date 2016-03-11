@@ -38,6 +38,4 @@ public class Util {
 	
 	/** Pi times two */
 	final static double TAU = Math.PI * 2;
-	
-    public static boolean isNaN(double x) {return x != x;}
 }
