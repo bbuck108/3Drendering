@@ -1,5 +1,9 @@
 package components;
 
+/**
+ * Some 3 dimensional shape for example cube, sphere, rectangular prism etc.
+ * @author Connor Lehmacher and Benjamin Buck
+ */
 public abstract class Shape implements Cloneable {
 	/** The location of a shape <b> must </b> be at the center of mass for uniform density */
 	Vector location;
