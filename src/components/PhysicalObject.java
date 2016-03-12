@@ -33,13 +33,11 @@ public class PhysicalObject {
 		shape = s;
 	}
 	
+	/** Redefines the location of the shape within physical object */
 	public void move() {
 		shape = shape.translateBy(velocity);
 	}
 	
-	//JavaDoc Here!!!!!!
-	
-
 	
 	public Vector getVelocity() {
 		return velocity;
