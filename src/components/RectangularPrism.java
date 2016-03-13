@@ -214,4 +214,8 @@ public class RectangularPrism extends Shape {
 		System.err.println("Problem with reflection.");
 		return (new Vector());
 	}
+	
+	public Shape translateBy(Vector v) {
+		return new RectangularPrism(location.plus(v), size, rotation);
+	}
 }

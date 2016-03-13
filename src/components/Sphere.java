@@ -32,7 +32,7 @@ public class Sphere extends Shape{
 	}
 	
 	@Override
-	public Sphere translateBy(Vector p) {
+	public Shape translateBy(Vector p) {
 		return new Sphere(location.plus(p), radius);
 	}	
 }
