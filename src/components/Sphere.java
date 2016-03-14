@@ -1,5 +1,7 @@
 package components;
 
+import org.json.JSONObject;
+
 import util.Util;
 
 public class Sphere extends Shape{
@@ -15,6 +17,14 @@ public class Sphere extends Shape{
 		radius = r;
 	}
 	
+	public Sphere(JSONObject jsonObject) {
+		super(Vector.createFromRectangular(
+				jsonObject.getJSONArray("location").getDouble(0),
+				jsonObject.getJSONArray("location").getDouble(1),
+				jsonObject.getJSONArray("location").getDouble(2)));
+		radius = jsonObject.getDouble("radius");
+	}
+
 	@Override
 	public double isIntersecting(Ray ray) {
 		Vector EO = (new Segment(ray.origin, location)).direction();

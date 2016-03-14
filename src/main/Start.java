@@ -1,8 +1,12 @@
 package main;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
+
+import org.json.JSONArray;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -11,13 +15,15 @@ import org.lwjgl.opengl.GL11;
 import components.Camera;
 import components.PhysicalObject;
 import components.RectangularPrism;
-import components.Rotation;
+import components.Sphere;
 import components.Vector;
+import file.ParseFile;
 
 public class Start {
 	public static ArrayList<PhysicalObject> renderList;
 	public static Camera camera;
 	static RectangularPrism x;
+	static File input;
 	
 	public static void addToRenderList(PhysicalObject p_1) {
 		renderList.add(p_1);
@@ -26,17 +32,18 @@ public class Start {
 	public static void main(String[] args) {
 		renderList = new ArrayList<PhysicalObject>();
 		
-		//Add new objects here
+		JFileChooser window = new JFileChooser();
+		window.showOpenDialog(window);
+		input = window.getSelectedFile();
+		JSONArray set = new JSONArray(ParseFile.parseFile(input.getPath()));
+		for(int i = 0; i<set.length();i++){
+			System.out.println(0);
+			new PhysicalObject(set.getJSONObject(i));
+		}
+		
+		//
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		//
-		//addToRenderList(new PhysicalObject(Vector.createFromRectangular(0, 0, 50), 1, Color.YELLOW, new Sphere(Vector.createFromRectangular(0, 0, 1000), 100)));
-		addToRenderList(new PhysicalObject(
-				Vector.createFromRectangular(0, 0, 0),
-				1, Color.RED, 
-				new RectangularPrism(Vector.createFromRectangular(0, 0, 1000),
-						Vector.createFromRectangular(100, 100, 100),
-						new Rotation(0, 0, 0))
-				));
 		
 		
 		//Builds the screen
@@ -73,7 +80,7 @@ public class Start {
 		
             // render OpenGL here
 			camera.render();
-			System.out.println("Done rendering");
+			//System.out.println("Done rendering");
              
 			//Update display
             Display.update();

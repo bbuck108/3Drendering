@@ -2,6 +2,10 @@ package components;
 
 import java.awt.Color;
 
+import org.json.JSONObject;
+
+import main.Start;
+
 /*
  * @Authi
  */	
@@ -36,6 +40,26 @@ public class PhysicalObject {
 		shape = s;
 	}
 	
+	public PhysicalObject(JSONObject jsonObject) {
+		velocity = Vector.createFromRectangular(
+				jsonObject.getJSONArray("velocity").getDouble(0),
+				jsonObject.getJSONArray("velocity").getDouble(1),
+				jsonObject.getJSONArray("velocity").getDouble(2));
+		mass = jsonObject.getDouble("mass");
+		color = new Color(
+				jsonObject.getJSONArray("color").getInt(0),
+				jsonObject.getJSONArray("color").getInt(1),
+				jsonObject.getJSONArray("color").getInt(2));
+		switch (jsonObject.getJSONObject("shape").getString("type")){
+			case "Sphere":
+				shape = new Sphere(jsonObject.getJSONObject("shape"));
+				break;
+			case "RectangularPrism":
+				break;
+		}
+		Start.addToRenderList(this);
+	}
+
 	/** Redefines the location of the shape within physical object */
 	public void move() {
 		shape = shape.translateBy(velocity);
