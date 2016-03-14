@@ -1,6 +1,7 @@
 package components;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
@@ -24,7 +25,9 @@ public class Camera {
 			for(int j = 0; j < screen.y; j++) {
 				double x = i - screen.x/2;
 				double y = j - screen.y/2;
-				Color color = Color.BLACK;
+				Color color;
+				double maxDistance = 0;
+				ArrayList<double[]> intersections = new ArrayList<double[]>();
 				
 				Vector angle = Vector.createFromRectangular(x, y, screen.z);
 				double theta = angle.theta();
@@ -41,6 +44,17 @@ public class Camera {
 						if(shade < 0){shade = 0;}
 						shade = (0.1 + 0.9*shade);
 						color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
+						double[] pair = {distance, color.getRGB()};
+						intersections.add(pair);
+						maxDistance = Math.max(distance, maxDistance);
+					}
+				}
+				double minDistance = maxDistance;
+				color = Color.BLACK;
+				for(double[] pair : intersections){
+					if(pair[0]<=minDistance){
+						minDistance = pair[0];
+						color = new Color((int) pair[1]);
 					}
 				}
 				
