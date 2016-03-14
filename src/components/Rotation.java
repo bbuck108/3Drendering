@@ -25,4 +25,10 @@ public class Rotation extends Vector{
 	public Rotation plus(Rotation r) {
 		return Util.reduceRotation(new Rotation(super.plus((Vector)r)));
 	}
+	
+	public Rotation negative() {
+		return new Rotation(TAU - x, TAU - y, TAU - z);
+	}
+	
+	final static double TAU = 2 * Math.PI;
 }

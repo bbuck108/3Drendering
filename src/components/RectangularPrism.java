@@ -36,14 +36,24 @@ public class RectangularPrism extends Shape {
 	
 	/**Returns the specified side of the prism*/
 	public Segment getSide(Position p, Axis a) {
-		Vector p_1 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_2 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_3 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_4 = (new Segment(location, location.plus(Vector.createFromRectangular( size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_5 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_6 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_7 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_8 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		//Defines the points on the rectangular prism
+		Vector p_1 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_2 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_3 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_4 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_5 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_6 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_7 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		Vector p_8 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		
 		if(p == Position.FRONT) {
 			if(a == Axis.X){
 				return new Segment(p_8, p_4);

@@ -30,8 +30,9 @@ public class Vector {
 	/** Makes a vector from a Rotation and a magnitude 
 	 * may be causing issues */
 	public Vector(Rotation r, double norm) {
-		x = norm * Math.cos(r.z) * Math.sin(r.y);
-		y = norm * Math.sin(r.z) * Math.sin(r.x);
+		r = r.negative();
+		x = norm * Math.sin(r.z) * Math.sin(r.y);
+		y = norm * Math.cos(r.z) * Math.sin(r.x);
 		z = norm * Math.cos(r.y) * Math.cos(r.x);
 	}
 	

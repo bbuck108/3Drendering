@@ -34,6 +34,7 @@ public class Camera {
 				for(PhysicalObject object: Start.renderList) {
 					Shape shape = object.getShape();
 					double distance = shape.isIntersecting(ray);
+					
 					if(distance != -1){
 						Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(point);
 						double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
