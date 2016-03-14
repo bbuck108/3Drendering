@@ -18,12 +18,15 @@ public class PhysicalObject {
 	/** Default Constructor (sets mass to 1) */
 	public PhysicalObject() {
 		mass = 1;
+		color = Color.RED;
+		velocity = new Vector();
+		shape = null;
 	}
 	
 	/** Sets the shape and sets mass to 1 */
 	public PhysicalObject(Shape s) {
+		this();
 		shape = s;
-		mass = 1;
 	}
 	
 	public PhysicalObject(Vector motion, double mass, Color c, Shape s) {

@@ -3,9 +3,14 @@ package components;
 import util.Util;
 
 public class Sphere extends Shape{
-	double radius;
+	final double radius;
 	
-	public Sphere(Vector c, double r){
+	public Sphere() {
+		super();
+		radius = 0;
+	}
+	
+	public Sphere(Vector c, double r) {
 		super(c);
 		radius = r;
 	}

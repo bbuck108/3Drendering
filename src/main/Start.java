@@ -30,13 +30,13 @@ public class Start {
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		//
 		//addToRenderList(new PhysicalObject(Vector.createFromRectangular(0, 0, 50), 1, Color.YELLOW, new Sphere(Vector.createFromRectangular(0, 0, 1000), 100)));
-		addToRenderList(new PhysicalObject(Vector.createFromRectangular(0, 0, 0),
+		addToRenderList(new PhysicalObject(
+				Vector.createFromRectangular(0, 0, 0),
 				1, Color.RED, 
 				new RectangularPrism(Vector.createFromRectangular(0, 0, 1000),
 						Vector.createFromRectangular(100, 100, 100),
 						new Rotation(0, 0, 0))
 				));
-		//
 		
 		
 		//Builds the screen
@@ -63,17 +63,16 @@ public class Start {
 	public static void loop() {
 		while (!Display.isCloseRequested()) {
 			//Move
-			for(PhysicalObject t_1: Start.renderList){
+			for(PhysicalObject t_1: renderList){
 				t_1.move();
 			}
 			
 			
 			// I have no idea what this does...
-			// When this is causing a problem I'm sorry
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 		
             // render OpenGL here
-			Start.camera.render();
+			camera.render();
 			System.out.println("Done rendering");
              
 			//Update display
