@@ -34,10 +34,15 @@ public class PhysicalObject {
 	}
 	
 	public PhysicalObject(Vector motion, double mass, Color c, Shape s) {
+		this(s);
 		this.velocity = motion;
 		this.mass = mass;
 		color = c;
-		shape = s;
+	}
+	
+	public PhysicalObject(Vector motion, double mass, Color c, Shape s, boolean r) {
+		this(motion, mass, c, s);
+		Start.addToRenderList(this);
 	}
 	
 	public PhysicalObject(JSONObject jsonObject) {
