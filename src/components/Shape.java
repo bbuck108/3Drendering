@@ -2,7 +2,7 @@ package components;
 
 /**
  * Some 3 dimensional shape for example cube, sphere, rectangular prism etc.
- * @author Connor Lehmacher and Benjamin Buck
+ * @author Benjamin Buck and Connor Lehmacher
  */
 public abstract class Shape {
 	/** The location of a shape <b> must </b> be at the center of mass for uniform density */

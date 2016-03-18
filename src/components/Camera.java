@@ -7,6 +7,11 @@ import org.lwjgl.opengl.GL11;
 
 import main.Start;
 
+/** A collection of data and methods used to render the scene.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
 public class Camera {
 	Vector point;
 	Vector screen;

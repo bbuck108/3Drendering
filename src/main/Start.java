@@ -17,6 +17,12 @@ import components.RectangularPrism;
 import components.Vector;
 import file.ParseFile;
 
+/** The main class in the application.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
+
 public class Start {
 	public static ArrayList<PhysicalObject> renderList;
 	public static Camera camera;
@@ -42,21 +48,37 @@ public class Start {
 	 * "radius"   : number larger than 0<br>
 	 * <br>
 	 * For a RectangularPrism,<br>
-	 * this isn't implemented yet...<br>
+	 * "type"     : "Sphere"<br>
+	 * "location" : [x,y,z]<br>
+	 * "size"     : [x,y,z]<br>
+	 * "rotation" : [x,y,z]<br>
 	 * <br>
 	 * Basic Example:<br>
-	 * <span style="text-indent: 0px;">[</span><br>
-	 * <span style="text-indent: 5px;">		{</span><br>
-	 * <span style="text-indent:10px;">			"velocity" : [0,0,50],</span><br>
-	 * <span style="text-indent:10px;">			"mass"     : 1,</span><br>
-	 * <span style="text-indent:10px;">			"color"    : [255,255,0],</span><br>
-	 * <span style="text-indent:10px;">			"shape"    : {</span><br>
-	 * <span style="text-indent:15px;">							"type" : "Sphere",</span><br>
-	 * <span style="text-indent:15px;">							"location" : [0, 0, 1000],</span><br>
-	 * <span style="text-indent:15px;">							"radius"   : 100</span><br>
-	 * <span style="text-indent:10px;">						}</span><br>
-	 * <span style="text-indent: 5px;">		}</span><br>
-	 * <span style="text-indent: 0px;">	]</span><br>
+	 * <pre>
+*[
+*	{
+*		"velocity" : [0,0,50],
+*		"mass"     : 1,
+*		"color"    : [255,255,0],
+*		"shape"    : {
+*						"type" : "Sphere",
+*						"location" : [0, 0, 1000],
+*						"radius"   : 100
+*					}
+*	},
+*	{
+*		"velocity" : [0,50,0],
+*		"mass"     : 1,
+*		"color"    : [255,0,0],
+*		"shape"    : {
+*						"type" : "RectangularPrism",
+*						"location" : [0, 200, 1500],
+*						"size" : [100, 100, 100],
+*						"rotation" : [0, 0, 0]
+*					}
+*	}
+*] 
+	 *</pre><br>
 	 */
 	public static void openSceneFile(){
 		//File chooser dialog
@@ -93,7 +115,7 @@ public class Start {
 		renderList = new ArrayList<PhysicalObject>();
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		
-		openSceneFile();
+		Start.
 		
 		buildScreen();
 		

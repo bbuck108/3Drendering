@@ -3,8 +3,8 @@ package util;
 import components.Rotation;
 
 /**
- * other utility functions
- * @author Connor Lehmacher
+ * Other utility functions.
+ * @author Benjamin Buck and Connor Lehmacher
  */
 public class Util {
 	//-----------Static-Methods--------//

@@ -2,9 +2,10 @@ package components;
 
 import util.Inequality;
 
-/** 
- * Defines a plane in 3D space
- * @author Benjamin Buck
+/** Defines a plane 3D space
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
  */
 public class Plane {
 	double a;

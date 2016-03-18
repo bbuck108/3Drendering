@@ -4,6 +4,11 @@ import org.json.JSONObject;
 
 import util.Util;
 
+/** Defines a sphere in 3D space.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
 public class Sphere extends Shape{
 	final double radius;
 	

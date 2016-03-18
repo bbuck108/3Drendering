@@ -4,6 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/** Handles file inputs.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
 public class ParseFile {
 	public static String parseFile(String p_1){
 		String output = "";

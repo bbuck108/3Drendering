@@ -2,7 +2,7 @@ package components;
 
 /**
  * A line with a direction
- * @author Connor Lehmacher
+ * @author Benjamin Buck and Connor Lehmacher
  */
 public class Segment {
 	//-----------------Fields----------------//

@@ -4,7 +4,7 @@ import util.Util;
 
 /**
  * A vector which contains three angles in radians about the axis
- * @author Connor Lehmacher
+ * @author Benjamin Buck and Connor Lehmacher
  * used to rotate complex shapes when a theta and phi is not complete
  * x rotation is about the x-axis (in y,z plane) starting from the positive z-axis going counterclockwise
  * y rotation is about the y-axis (in x,z plane) starting from the positive z-axis going counterclockwise

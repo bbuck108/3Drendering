@@ -4,7 +4,7 @@ import static util.Util.*;
 
 /** 
  *A three dimensional point 
- * @author Connor Lehmacher
+ * @author Benjamin Buck and Connor Lehmacher
  */
 public class Vector {
 	//----------Fields----------//

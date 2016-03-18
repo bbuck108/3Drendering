@@ -5,9 +5,9 @@ import org.json.JSONObject;
 import util.Axis;
 import util.Position;
 
-/**
- * A rectangular prism
- * @author Benjamin Buck
+/** Defines a rectangular prism in 3D space.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
  *
  */
 public class RectangularPrism extends Shape {

@@ -1,5 +1,10 @@
 package components;
 
+/** Defines a ray in 3D space.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
 public class Ray {
 	Vector origin;
 	double theta;

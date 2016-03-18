@@ -6,9 +6,11 @@ import org.json.JSONObject;
 
 import main.Start;
 
-/*
- * @Authi
- */	
+/** Defines an object located in 3D space.
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
 public class PhysicalObject {
 	//-------------------Fields-------------//
 	/** the velocity of the object */
