@@ -60,6 +60,7 @@ public class PhysicalObject {
 				shape = new Sphere(jsonObject.getJSONObject("shape"));
 				break;
 			case "RectangularPrism":
+				shape = new RectangularPrism(jsonObject.getJSONObject("shape"));
 				break;
 		}
 		Start.addToRenderList(this);

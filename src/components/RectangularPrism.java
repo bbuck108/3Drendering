@@ -1,5 +1,7 @@
 package components;
 
+import org.json.JSONObject;
+
 import util.Axis;
 import util.Position;
 
@@ -18,6 +20,20 @@ public class RectangularPrism extends Shape {
 		rotation = r;
 	}
 
+	public RectangularPrism(JSONObject jsonObject) {
+		super(Vector.createFromRectangular(
+				jsonObject.getJSONArray("location").getDouble(0),
+				jsonObject.getJSONArray("location").getDouble(1),
+				jsonObject.getJSONArray("location").getDouble(2)));
+		size = Vector.createFromRectangular(
+				jsonObject.getJSONArray("size").getDouble(0),
+				jsonObject.getJSONArray("size").getDouble(1),
+				jsonObject.getJSONArray("size").getDouble(2));
+		rotation = new Rotation(
+				jsonObject.getJSONArray("rotation").getDouble(0),
+				jsonObject.getJSONArray("rotation").getDouble(1),
+				jsonObject.getJSONArray("rotation").getDouble(2));
+	}
 	
 	
 	/** Returns the volume of the prism*/
