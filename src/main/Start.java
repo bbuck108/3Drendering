@@ -67,7 +67,6 @@ public class Start {
 		//Create objects from file
 		JSONArray set = new JSONArray(ParseFile.parseFile(input.getPath()));
 		for(int i = 0; i<set.length();i++){
-			System.out.println(0);
 			new PhysicalObject(set.getJSONObject(i));
 		}
 	}
