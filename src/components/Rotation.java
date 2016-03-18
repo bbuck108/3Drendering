@@ -1,7 +1,5 @@
 package components;
 
-import util.Util;
-
 /**
  * A vector which contains three angles in radians about the axis
  * @author Benjamin Buck and Connor Lehmacher
@@ -21,9 +19,27 @@ public class Rotation extends Vector{
 		this(v.x, v.y, v.z);
 	}
 	
-	
 	public Rotation plus(Rotation r) {
-		return Util.reduceRotation(new Rotation(super.plus((Vector)r)));
+		return (new Rotation(super.plus((Vector)r))).reduce();
+	}
+	
+
+    /** returns a Rotation from a rotation which may be outside the standard range
+     * @return a rotation in the range of 0 to 2 Pi */
+	public Rotation reduce() {
+		double x = this.x;
+		double y = this.y;
+		double z = this.z;
+		if(x < 0 || y < 0 || z < 0) {
+			x += TAU;
+			y += TAU;
+			z += TAU;
+			reduce();
+		}
+		x %= TAU;
+		y %= TAU;
+		z %= TAU;
+		return new Rotation(x, y, z);
 	}
 	
 	public Rotation negative() {
