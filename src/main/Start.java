@@ -71,12 +71,7 @@ public class Start {
 		}
 	}
 	
-	public static void main(String[] args) {
-		renderList = new ArrayList<PhysicalObject>();
-		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
-		
-		openSceneFile();
-		
+	public static void buildScreen(){
 		//Builds the screen
 		try{
 			Display.setDisplayMode(new DisplayMode(800,600));
@@ -86,12 +81,21 @@ public class Start {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		
+			
 		//I have no idea what this does
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, 800, 0, 600, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	}
+	
+	public static void main(String[] args) {
+		renderList = new ArrayList<PhysicalObject>();
+		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
+		
+		openSceneFile();
+		
+		buildScreen();
 		
 		//Begins the game loop
 		loop();
