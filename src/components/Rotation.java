@@ -23,6 +23,15 @@ public class Rotation extends Vector{
 		return (new Rotation(super.plus((Vector)r))).reduce();
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
     /** returns a Rotation from a rotation which may be outside the standard range
      * @return a rotation in the range of 0 to 2 Pi */
