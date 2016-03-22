@@ -50,71 +50,122 @@ public class RectangularPrism extends Shape {
 		return (2*t_x*t_y + 2*t_x*t_z + 2*t_y*t_z);
 	}
 	
+	public Vector getPoint(int index){
+		if(index == 1){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 2){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 3){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 4){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 5){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 6){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 7){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		if(index == 8){
+			return (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		}
+		System.err.println("Invalid point index");
+		return new Vector();
+	}
 	/**Returns the specified side of the prism*/
 	public Segment getSide(Position p, Axis a) {
-		//Defines the points on the rectangular prism
-		Vector p_1 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_2 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_3 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_4 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_5 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_6 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_7 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		Vector p_8 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		
 		if(p == Position.FRONT) {
 			if(a == Axis.X){
-				return new Segment(p_8, p_4);
+				return new Segment(getPoint(8), getPoint(4));
 			}
 			if(a == Axis.Y){
-				return new Segment(p_8, p_6);
+				return new Segment(getPoint(8), getPoint(6));
 			}
 			if(a == Axis.Z){
-				return new Segment(p_8, p_7);
+				return new Segment(getPoint(8), getPoint(7));
 			}
 		}
 		if(p == Position.BACK) {
 			if(a == Axis.X){
-				return new Segment(p_5, p_1);
+				return new Segment(getPoint(5), getPoint(1));
 			}
 			if(a == Axis.Y){
-				return new Segment(p_3, p_1);
+				return new Segment(getPoint(3), getPoint(1));
 			}
 			if(a == Axis.Z){
-				return new Segment(p_2, p_1);
+				return new Segment(getPoint(2), getPoint(1));
 			}
 		}
 		if(p == Position.RIGHT) {
 			if(a == Axis.X) {
-				return new Segment(p_7, p_3);
+				return new Segment(getPoint(7), getPoint(3));
 			}
 			if(a == Axis.Y) {
-				return new Segment(p_4, p_3);
+				return new Segment(getPoint(4), getPoint(3));
 			}
 			if(a == Axis.Z) {
-				return new Segment(p_4, p_2);
+				return new Segment(getPoint(4), getPoint(2));
 			}
 		}
 		if(p == Position.LEFT) {
 			if(a == Axis.X)  {
-				return new Segment(p_6, p_2);
+				return new Segment(getPoint(6), getPoint(2));
 			}
 			if(a == Axis.Y) {
-				return new Segment(p_7, p_5);
+				return new Segment(getPoint(7), getPoint(5));
 			}
 			if(a == Axis.Z) {
-				return new Segment(p_6, p_5);
+				return new Segment(getPoint(6), getPoint(5));
 			}
 		}
-		System.err.println("Invalid index");
+		System.err.println("Invalid side index");
+		return null;
+	}
+	
+	public Plane getPlane(Position p, Axis a){
+		if(p == Position.FRONT){
+			if(a == Axis.X){
+				return new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
+						getSide(Position.FRONT, Axis.Y).getStart());
+			}
+			if(a == Axis.Y){
+				return new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
+						getSide(Position.FRONT, Axis.X).getStart());
+			}
+			if(a == Axis.Z){
+				return new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),
+						getSide(Position.FRONT, Axis.X).getStart());
+			}
+		}
+		if(p == Position.BACK){
+			if(a == Axis.X){
+				return new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
+						getSide(Position.BACK, Axis.Y).getStart());
+			}
+			if(a == Axis.Y){
+				return new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
+						getSide(Position.BACK, Axis.X).getStart());
+			}
+			if(a == Axis.Z){
+				return new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),
+						getSide(Position.BACK, Axis.X).getStart());
+			}
+		}
+		System.err.println("Invalid plane index");
 		return null;
 	}
 	
@@ -124,18 +175,12 @@ public class RectangularPrism extends Shape {
 	public double isIntersecting(Ray ray) {
 		double r = -1;
 		//define planes
-		Plane x1 = 	new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
-				getSide(Position.FRONT, Axis.Y).getStart());
-		Plane x2 = 	new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
-				getSide(Position.BACK, Axis.Y).getStart());
-		Plane y1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
-				getSide(Position.FRONT, Axis.X).getStart());
-		Plane y2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
-				getSide(Position.BACK, Axis.X).getStart());
-		Plane z1 = 	new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),
-				getSide(Position.FRONT, Axis.X).getStart());
-		Plane z2 = 	new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),
-				getSide(Position.BACK, Axis.X).getStart());
+		Plane x1 = getPlane(Position.FRONT, Axis.X);
+		Plane x2 = getPlane( Position.BACK, Axis.X);
+		Plane y1 = getPlane(Position.FRONT, Axis.Y);
+		Plane y2 = getPlane( Position.BACK, Axis.Y);
+		Plane z1 = getPlane(Position.FRONT, Axis.Z);
+		Plane z2 = getPlane( Position.BACK, Axis.Z);
 		
 		//X component
 		Vector x1i = x1.intersection(ray);
