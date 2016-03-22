@@ -115,7 +115,7 @@ public class Start {
 		renderList = new ArrayList<PhysicalObject>();
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		
-		Start.
+		openSceneFile();
 		
 		buildScreen();
 		
