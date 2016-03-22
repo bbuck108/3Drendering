@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 
 import components.Camera;
 import components.PhysicalObject;
-import components.RectangularPrism;
 import components.Vector;
 import file.ParseFile;
 
@@ -26,7 +25,6 @@ import file.ParseFile;
 public class Start {
 	public static ArrayList<PhysicalObject> renderList;
 	public static Camera camera;
-	static RectangularPrism x;
 	static File input;
 	
 	public static void addToRenderList(PhysicalObject p_1) {
@@ -115,7 +113,7 @@ public class Start {
 		renderList = new ArrayList<PhysicalObject>();
 		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		
-		Start.
+		openSceneFile();
 		
 		buildScreen();
 		
