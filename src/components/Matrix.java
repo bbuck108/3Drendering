@@ -3,7 +3,7 @@ package components;
 import java.util.ArrayList;
 
 /**
- * Currently only 3 by 3 matrices!!!!!!!
+ * General n by m matrix
  * @author Connor Lehmacher and Benjamin Buck
  */
 public class Matrix {
@@ -12,7 +12,7 @@ public class Matrix {
 	
 	/** Creates a Matrix with some amount of rows and columns */
 	public Matrix(int rows, int columns) {
-		for(int i = 1 ; i <= rows ; i++) {
+		for(int i = 0 ; i < rows ; i++) {
 			data.add(new ArrayList<Double>(columns));
 		}
 	}
@@ -37,16 +37,39 @@ public class Matrix {
 		return data.get(0).size();
 	}
 	
-	// Implemt plus, minus, scalar times, inverse, determinate, more stuff
+	// Implement plus, minus, scalar times, inverse, determinate, more stuff
+	//Here...
 	
 	/** Computes a Matrix times a matrix
 	 * returns null if invalid multiplication */
 	public Matrix times(Matrix m) {
 		if(columns() == m.rows()) {
-			//implemnt this!! TODO
-			return null;
+			Matrix answer = new Matrix(rows(), m.columns());
+			double tmpValue = 0;
+			int r = rows();
+			int mc = m.columns();
+			int c = columns();
+			for(int i = 0 ; i < r ; i++) {
+				for(int j = 0 ; j < mc ; j++){
+					for(int k = 0 ; k < c ; k ++){
+						tmpValue += (get(i, k) * m.get(k, j));
+					}
+					answer.set(i, j, tmpValue);
+					tmpValue = 0;
+				}
+			}
+			return answer;
 		}
 		else return null;
 	}
 	
+	
+	public void print() {
+		for(int i = 0 ; i < rows() ; i ++){
+			for(int j  = 0 ; j < columns() ; j++){
+				System.out.print(get(i, j) + " ");
+			}
+			System.out.print('\n');
+		}
+	}
 }
