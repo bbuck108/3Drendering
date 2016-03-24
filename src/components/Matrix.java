@@ -13,8 +13,16 @@ public class Matrix {
 	/** Creates a Matrix with some amount of rows and columns */
 	public Matrix(int rows, int columns) {
 		for(int i = 0 ; i < rows ; i++) {
-			data.add(new ArrayList<Double>(columns));
+			ArrayList<Double> tmp = new ArrayList<Double>();
+			for(int j = 0 ; j < columns ; j++) {
+				tmp.add(0.0);
+			}
+			data.add(tmp);
 		}
+	}
+	
+	public Matrix() {
+		data.add(new ArrayList<Double>(1));
 	}
 	
 	/** Sets a value in a matrix */
