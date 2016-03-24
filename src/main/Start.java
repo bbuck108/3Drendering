@@ -15,6 +15,7 @@ import components.Camera;
 import components.PhysicalObject;
 import components.Vector;
 import file.ParseFile;
+import gui.ResolutionSelection;
 
 /** The main class in the application.
  * 
@@ -26,6 +27,9 @@ public class Start {
 	public static ArrayList<PhysicalObject> renderList;
 	public static Camera camera;
 	static File input;
+	public static DisplayMode[] modes;
+	public static int height;
+	public static int width;
 	
 	public static void addToRenderList(PhysicalObject p_1) {
 		renderList.add(p_1);
@@ -91,10 +95,17 @@ public class Start {
 		}
 	}
 	
+	
 	public static void buildScreen(){
 		//Builds the screen
 		try{
-			Display.setDisplayMode(new DisplayMode(800,600));
+			modes = Display.getAvailableDisplayModes();
+			DisplayMode dm = (new ResolutionSelection()).getDisplayMode();
+			
+			height = dm.getHeight();
+			width = dm.getWidth();
+			
+			Display.setDisplayMode(dm);
 			Display.setFullscreen(true);
 			Display.create();
 		} catch (LWJGLException e){
@@ -105,17 +116,22 @@ public class Start {
 		//I have no idea what this does
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, 800, 0, 600, 1, -1);
+		GL11.glOrtho(0, width, 0, height, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 	
 	public static void main(String[] args) {
 		renderList = new ArrayList<PhysicalObject>();
-		camera = new Camera(Vector.createFromRectangular(0, 0, 0), Vector.createFromRectangular(800, 600, 600), Vector.createFromRectangular(0, 0, 0));
 		
 		openSceneFile();
 		
 		buildScreen();
+
+		
+		camera = new Camera(
+				Vector.createFromRectangular(0, 0, 0),
+				Vector.createFromRectangular(width, height, 600),
+				Vector.createFromRectangular(0, 0, 0));
 		
 		//Begins the game loop
 		loop();
