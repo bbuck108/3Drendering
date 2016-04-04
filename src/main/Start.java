@@ -106,7 +106,7 @@ public class Start {
 			width = dm.getWidth();
 			
 			Display.setDisplayMode(dm);
-			Display.setFullscreen(true);
+			Display.setFullscreen(false);
 			Display.create();
 		} catch (LWJGLException e){
 			e.printStackTrace();

@@ -109,8 +109,8 @@ public class Vector {
 	public Vector rotateBy2(Rotation r) {
 		Matrix value = new Matrix(3, 1);
 		value = r.xRotationMatrix().times(toMatrix());
-		value = r.yRotationMatrix().times(toMatrix());
 		value = r.zRotationMatrix().times(toMatrix());
+		value = r.yRotationMatrix().times(toMatrix());
 		return new Vector(value);
 	}
 	

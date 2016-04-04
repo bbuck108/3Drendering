@@ -61,12 +61,6 @@ public class Segment {
 		return createFromDirection(start, direction().rotateBy2(r));
 	}
 	
-	/** Rotates a segment by a rotation from some point v */
-	public Segment rotateAround(Rotation r, Vector v) {
-		//TODO
-		return new Segment();
-	}
-	
 	/** Finds the direction of the line as a vector */
 	public Vector direction() {
 		return end.minus(start);
