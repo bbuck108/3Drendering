@@ -12,27 +12,25 @@ import util.Position;
  */
 public class RectangularPrism extends Shape {
 	Vector size;
-	Rotation rotation;
 	
 	public RectangularPrism(Vector c, Vector s, Rotation r) {
-		super(c);
+		super(c,r);
 		size = s;
-		rotation = r;
 	}
 
 	public RectangularPrism(JSONObject jsonObject) {
 		super(Vector.createFromRectangular(
 				jsonObject.getJSONArray("location").getDouble(0),
 				jsonObject.getJSONArray("location").getDouble(1),
-				jsonObject.getJSONArray("location").getDouble(2)));
+				jsonObject.getJSONArray("location").getDouble(2)),
+				new Rotation(
+						jsonObject.getJSONArray("rotation").getDouble(0),
+						jsonObject.getJSONArray("rotation").getDouble(1),
+						jsonObject.getJSONArray("rotation").getDouble(2)));
 		size = Vector.createFromRectangular(
 				jsonObject.getJSONArray("size").getDouble(0),
 				jsonObject.getJSONArray("size").getDouble(1),
 				jsonObject.getJSONArray("size").getDouble(2));
-		rotation = new Rotation(
-				jsonObject.getJSONArray("rotation").getDouble(0),
-				jsonObject.getJSONArray("rotation").getDouble(1),
-				jsonObject.getJSONArray("rotation").getDouble(2));
 	}
 	
 	
@@ -288,5 +286,9 @@ public class RectangularPrism extends Shape {
 	
 	public Shape translateBy(Vector v) {
 		return new RectangularPrism(location.plus(v), size, rotation);
+	}
+	
+	public Shape rotateBy(Rotation r) {
+		return new RectangularPrism(location, size, rotation.plus(r));
 	}
 }

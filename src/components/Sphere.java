@@ -18,7 +18,12 @@ public class Sphere extends Shape{
 	}
 	
 	public Sphere(Vector c, double r) {
-		super(c);
+		super(c, new Rotation(0,0,0));
+		radius = r;
+	}
+	
+	public Sphere(Vector c, double r, Rotation rotation) {
+		super(c, rotation);
 		radius = r;
 	}
 	
@@ -26,7 +31,8 @@ public class Sphere extends Shape{
 		super(Vector.createFromRectangular(
 				jsonObject.getJSONArray("location").getDouble(0),
 				jsonObject.getJSONArray("location").getDouble(1),
-				jsonObject.getJSONArray("location").getDouble(2)));
+				jsonObject.getJSONArray("location").getDouble(2)),
+				new Rotation(0,0,0));
 		radius = jsonObject.getDouble("radius");
 	}
 
@@ -54,5 +60,10 @@ public class Sphere extends Shape{
 	@Override
 	public Shape translateBy(Vector p) {
 		return new Sphere(location.plus(p), radius);
+	}
+
+	@Override
+	public Shape rotateBy(Rotation r) {
+		return new Sphere(location, radius, rotation.plus(r));
 	}	
 }
