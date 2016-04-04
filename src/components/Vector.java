@@ -27,13 +27,19 @@ public class Vector {
 		z = 0;
 	}
 	
-	/** Makes a vector from a Rotation and a magnitude 
-	 * may be causing issues */
-	public Vector(Rotation r, double norm) {
-		r = r.negative();
-		x = norm * Math.sin(r.z) * Math.sin(r.y);
-		y = norm * Math.cos(r.z) * Math.sin(r.x);
-		z = norm * Math.cos(r.y) * Math.cos(r.x);
+	/** Creates a matrix from a 3 by 1 matrix */
+	public Vector(Matrix m) {
+		if(m.rows() == 3 && m.columns() == 1) {
+			x = m.get(0, 0);
+			y = m.get(1, 0);
+			z = m.get(2, 0);
+		}
+		else{
+			System.err.println("Bad Matrix");
+			x = 0;
+			y = 0;
+			z = 0;
+		}
 	}
 	
 	//-----------Pseudo-Constructors------------//
@@ -99,6 +105,15 @@ public class Vector {
 		return createFromSpherical(norm(), theta() + v.theta(), phi() + v.phi());
 	}
 	
+	/** Rotate the vector by a three dimension rotation */
+	public Vector rotateBy2(Rotation r) {
+		Matrix value = new Matrix(3, 1);
+		value = r.xRotationMatrix().times(toMatrix());
+		value = r.yRotationMatrix().times(toMatrix());
+		value = r.zRotationMatrix().times(toMatrix());
+		return new Vector(value);
+	}
+	
 	/** computes the dot product (inner product type) with another vector */
 	public double dot(Vector v) {
 		return x * v.x + y * v.y + z * v.z; 
@@ -126,6 +141,15 @@ public class Vector {
 	/**Gives a unit length vector*/
 	public Vector toUnit() {
 		return Vector.createFromSpherical(1, theta(), phi());
+	}
+	
+	/** Creates a 3 x 1 matrix from the vector */
+	public Matrix toMatrix(){
+		Matrix value = new Matrix(3, 1);
+		value.set(0, 0, x);
+		value.set(1, 0, y);
+		value.set(2, 0, z);
+		return value;
 	}
 	
 	/** Print the vector as a concatenation of its x y and z parts
