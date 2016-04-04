@@ -50,7 +50,7 @@ public class ResolutionSelection {
 	}
 	
 	public DisplayMode getDisplayMode(){
-		while(!go){System.out.println("Wait");}
+		while(!go){System.out.print("");}
 		return dm;
 	}
 }
