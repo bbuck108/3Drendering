@@ -26,7 +26,8 @@ public class Rotation extends Vector{
 		return (new Rotation(super.plus((Vector)r))).reduce();
 	}
 	
-	public Matrix xRotationMatrix(){
+	/** Legit Stuff!!! */
+	public Matrix xRotationMatrix() {
 		Matrix value = new Matrix(3, 3);
 		value.set(0, 0, 1);
 		value.set(0, 1, 0);
@@ -40,7 +41,7 @@ public class Rotation extends Vector{
 		return value;
 	}
 	
-	public Matrix yRotationMatrix(){
+	public Matrix yRotationMatrix() {
 		Matrix value = new Matrix(3, 3);
 		value.set(0, 0, cos(y));
 		value.set(0, 1, 0);
@@ -54,7 +55,7 @@ public class Rotation extends Vector{
 		return value;
 	}
 	
-	public Matrix zRotationMatrix(){
+	public Matrix zRotationMatrix() {
 		Matrix value = new Matrix(3, 3);
 		value.set(0, 0, cos(z));
 		value.set(0, 1, -sin(z));
