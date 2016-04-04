@@ -7,16 +7,19 @@ package components;
 public abstract class Shape {
 	/** The location of a shape <b> must </b> be at the center of mass for uniform density */
 	final Vector location;
+	final Rotation rotation;
 	
 	/** Default constructor center at 0, 0, 0
 	 * is important for Physical Object functionality*/
 	public Shape() {
 		location = new Vector();
+		rotation = new Rotation();
 	}
 	
-	/** Creates a shape with a center at c */
-	public Shape(Vector c) {
+	/** Creates a shape with a center at c and a rotation r*/
+	public Shape(Vector c, Rotation r) {
 		location = c;
+		rotation = r;
 	}
 	
 	/** Computes the length along a ray where it intersects with this shape */
@@ -27,4 +30,7 @@ public abstract class Shape {
 	
 	/** Moves the center of a shape by some vector amount v */
 	public abstract Shape translateBy(Vector v);
+	
+	/**Rotates the object by some Rotation r*/
+	public abstract Shape rotateBy(Rotation r);
 }

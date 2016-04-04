@@ -106,7 +106,7 @@ public class Start {
 			width = dm.getWidth();
 			
 			Display.setDisplayMode(dm);
-			Display.setFullscreen(true);
+			Display.setFullscreen(false);
 			Display.create();
 		} catch (LWJGLException e){
 			e.printStackTrace();
@@ -151,7 +151,7 @@ public class Start {
 		
             // render OpenGL here
 			camera.render();
-			//System.out.println("Done rendering");
+			System.out.println("Done rendering");
              
 			//Update display
             Display.update();

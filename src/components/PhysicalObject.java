@@ -15,6 +15,7 @@ public class PhysicalObject {
 	//-------------------Fields-------------//
 	/** the velocity of the object */
 	private Vector velocity;
+	private Rotation rotationalVelocity;
 	private double mass;
 	private Color color;
 	/** This must contain an extended Class of Shape */
@@ -26,6 +27,7 @@ public class PhysicalObject {
 		mass = 1;
 		color = Color.RED;
 		velocity = new Vector();
+		rotationalVelocity = new Rotation();
 		shape = null;
 	}
 	
@@ -35,15 +37,16 @@ public class PhysicalObject {
 		shape = s;
 	}
 	
-	public PhysicalObject(Vector motion, double mass, Color c, Shape s) {
-		this(s);
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s) {
+		this();
 		this.velocity = motion;
+		this.rotationalVelocity = rotation;
 		this.mass = mass;
 		color = c;
 	}
 	
-	public PhysicalObject(Vector motion, double mass, Color c, Shape s, boolean r) {
-		this(motion, mass, c, s);
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, boolean r) {
+		this(motion, rotation, mass, c, s);
 		Start.addToRenderList(this);
 	}
 	
@@ -52,6 +55,10 @@ public class PhysicalObject {
 				jsonObject.getJSONArray("velocity").getDouble(0),
 				jsonObject.getJSONArray("velocity").getDouble(1),
 				jsonObject.getJSONArray("velocity").getDouble(2));
+		rotationalVelocity = new Rotation(
+				jsonObject.getJSONArray("rotationalVelocity").getDouble(0),
+				jsonObject.getJSONArray("rotationalVelocity").getDouble(1),
+				jsonObject.getJSONArray("rotationalVelocity").getDouble(2));
 		mass = jsonObject.getDouble("mass");
 		color = new Color(
 				jsonObject.getJSONArray("color").getInt(0),
@@ -70,7 +77,7 @@ public class PhysicalObject {
 
 	/** Redefines the location of the shape within physical object */
 	public void move() {
-		shape = shape.translateBy(velocity);
+		shape = shape.translateBy(velocity).rotateBy(rotationalVelocity);
 	}
 	
 	
