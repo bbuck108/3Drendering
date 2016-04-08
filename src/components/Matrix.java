@@ -45,11 +45,31 @@ public class Matrix {
 		return data.get(0).size();
 	}
 	
+	/** Computes the sum of to matrices */
+	public Matrix plus(Matrix m) {
+		if(rows() == m.rows() && columns() == m.columns()) {
+			Matrix answer = new Matrix(rows(), columns());
+			int r = rows();
+			int c = columns();
+			for(int i = 0 ; i < r ; i++) {
+				for(int j = 0 ; j < c ; j++){
+					answer.set(i, j, get(i, j) + m.get(i, j));
+				}
+			}
+			return answer;
+		}
+		else{
+			System.err.println("Invalid Dimentions");
+			return null;
+		}
+	}
+	
 	// Implement plus, minus, scalar times, inverse, determinate, more stuff
 	//Here...
 	
 	/** Computes a Matrix times a matrix
-	 * returns null if invalid multiplication */
+	 * returns null if invalid multiplication 
+	 * this first in order then m*/
 	public Matrix times(Matrix m) {
 		if(columns() == m.rows()) {
 			Matrix answer = new Matrix(rows(), m.columns());
@@ -68,7 +88,10 @@ public class Matrix {
 			}
 			return answer;
 		}
-		else return null;
+		else{
+			System.err.println("Invalid Dimentions");
+			return null;
+		}
 	}
 	
 	

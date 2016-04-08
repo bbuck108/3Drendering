@@ -24,7 +24,7 @@ import gui.ResolutionSelection;
  */
 
 public class Start {
-	public static ArrayList<PhysicalObject> renderList;
+	public static ArrayList<PhysicalObject> renderList = new ArrayList<PhysicalObject>();
 	public static Camera camera;
 	static File input;
 	public static DisplayMode[] modes;
@@ -120,23 +120,6 @@ public class Start {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 	
-	public static void main(String[] args) {
-		renderList = new ArrayList<PhysicalObject>();
-		
-		openSceneFile();
-		
-		buildScreen();
-
-		
-		camera = new Camera(
-				Vector.createFromRectangular(0, 0, 0),
-				Vector.createFromRectangular(width, height, 600),
-				Vector.createFromRectangular(0, 0, 0));
-		
-		//Begins the game loop
-		loop();
-	}
-	
 	public static void loop() {
 		//Loop until the exit button is pressed
 		while (!Display.isCloseRequested()) {
@@ -159,5 +142,20 @@ public class Start {
         
 		//Exit the window
         Display.destroy();
+	}
+	
+	public static void main(String[] args) {
+		openSceneFile();
+		
+		buildScreen();
+
+		
+		camera = new Camera(
+				Vector.createFromRectangular(0, 0, 0),
+				Vector.createFromRectangular(width, height, 600),
+				Vector.createFromRectangular(0, 0, 0));
+		
+		//Begins the game loop
+		loop();
 	}
 }

@@ -13,7 +13,7 @@ import main.Start;
  */
 public class PhysicalObject {
 	//-------------------Fields-------------//
-	/** the velocity of the object */
+	/** the linear velocity of the object */
 	private Vector velocity;
 	private Rotation rotationalVelocity;
 	private double mass;

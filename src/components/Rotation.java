@@ -26,7 +26,8 @@ public class Rotation extends Vector{
 		return (new Rotation(super.plus((Vector)r))).reduce();
 	}
 	
-	public Matrix xRotationMatrix(){
+	/** computes the Rotation Matrix over the x axis */
+	public Matrix xRotationMatrix() {
 		Matrix value = new Matrix(3, 3);
 		value.set(0, 0, 1);
 		value.set(0, 1, 0);
@@ -40,7 +41,8 @@ public class Rotation extends Vector{
 		return value;
 	}
 	
-	public Matrix yRotationMatrix(){
+	/** computes the Rotation Matrix over the y axis */
+	public Matrix yRotationMatrix() {
 		Matrix value = new Matrix(3, 3);
 		value.set(0, 0, cos(y));
 		value.set(0, 1, 0);
@@ -54,7 +56,8 @@ public class Rotation extends Vector{
 		return value;
 	}
 	
-	public Matrix zRotationMatrix(){
+	/** computes the Rotation Matrix over the Z axis */
+	public Matrix zRotationMatrix() {
 		Matrix value = new Matrix(3, 3);
 		value.set(0, 0, cos(z));
 		value.set(0, 1, -sin(z));
@@ -66,6 +69,11 @@ public class Rotation extends Vector{
 		value.set(2, 1, 0);
 		value.set(2, 2, 1);
 		return value;
+	}
+	
+	/** computes the full rotation matrix in the order x,y,z */
+	public Matrix fullRotationMatrix() {
+		return xRotationMatrix().times(yRotationMatrix().times(zRotationMatrix()));
 	}
 	
     /** returns a Rotation from a rotation which may be outside the standard range
