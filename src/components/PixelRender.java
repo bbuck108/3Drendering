@@ -6,6 +6,12 @@ import java.util.concurrent.RecursiveTask;
 
 import main.Start;
 
+
+/** A task compatible with ForkJoinPools that renders one pixel and returns the color
+ * 
+ * @author Benjamin Buck and Connor Lehmacher
+ *
+ */
 public class PixelRender extends RecursiveTask<double[]>{
 	/**
 	 * 
