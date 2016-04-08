@@ -2,17 +2,16 @@ package components;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.concurrent.ForkJoinPool;
 
 import org.lwjgl.opengl.GL11;
-
-import main.Start;
 
 /** A collection of data and methods used to render the scene.
  * 
  * @author Benjamin Buck and Connor Lehmacher
  *
  */
-public class Camera {
+public class Camera{
 	Vector point;
 	Vector screen;
 	Vector motion;
@@ -26,54 +25,30 @@ public class Camera {
 	}
 	
 	public void render() {
+		ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+		ArrayList<PixelRender> pixelGroup = new ArrayList<PixelRender>();
 		for(int i = 0; i < screen.x; i++) {
 			for(int j = 0; j < screen.y; j++) {
-				double x = i - screen.x/2;
-				double y = j - screen.y/2;
-				Color color;
-				double maxDistance = 0;
-				ArrayList<double[]> intersections = new ArrayList<double[]>();
-				
-				Vector angle = Vector.createFromRectangular(x, y, screen.z);
-				double theta = angle.theta();
-				double phi = angle.phi();
-				Ray ray = new Ray(point, theta, phi);
-				
-				for(PhysicalObject object: Start.renderList) {
-					Shape shape = object.getShape();
-					double distance = shape.isIntersecting(ray);
-					
-					if(distance != -1){
-						Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(point);
-						double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, lightSource)).direction()));
-						if(shade < 0){shade = 0;}
-						shade = (0.1 + 0.9*shade);
-						color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
-						double[] pair = {distance, color.getRGB()};
-						intersections.add(pair);
-						maxDistance = Math.max(distance, maxDistance);
-					}
-				}
-				double minDistance = maxDistance;
-				color = Color.BLACK;
-				for(double[] pair : intersections){
-					if(pair[0]<=minDistance){
-						minDistance = pair[0];
-						color = new Color((int) pair[1]);
-					}
-				}
-				
-				// set the color of the quad (R,G,B,A)
-				GL11.glColor3f((color.getRed()/255.0f), color.getGreen()/255.0f, color.getBlue()/255.0f);
-				
-				// draw point
-				GL11.glBegin(GL11.GL_QUADS);
-				GL11.glVertex2d(i,j);
-				GL11.glVertex2d(i+1,j);
-				GL11.glVertex2d(i+1,j+1);
-				GL11.glVertex2d(i,j+1);
-				GL11.glEnd();
+				pixelGroup.add(new PixelRender(i,j,this));
+				pool.execute(pixelGroup.get(pixelGroup.size()-1));
 			}
+		}
+		for(PixelRender t_1: pixelGroup) {
+			double[] data = t_1.join();
+			int i = (int)data[0];
+			int j = (int)data[1];
+			Color color = new Color((int) data[2]);
+				
+			// set the color of the quad (R,G,B,A)
+			GL11.glColor3f((color.getRed()/255.0f), color.getGreen()/255.0f, color.getBlue()/255.0f);
+			
+			// draw point
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glVertex2d(i,j);
+			GL11.glVertex2d(i+1,j);
+			GL11.glVertex2d(i+1,j+1);
+			GL11.glVertex2d(i,j+1);
+			GL11.glEnd();
 		}
 	}
 }
