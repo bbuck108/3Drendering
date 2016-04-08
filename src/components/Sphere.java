@@ -38,6 +38,7 @@ public class Sphere extends Shape{
 
 	@Override
 	public double isIntersecting(Ray ray) {
+		long time = System.nanoTime();
 		Vector EO = (new Segment(ray.origin, location)).direction();
 		Vector V  = Vector.createFromSpherical(EO.norm(), ray.theta, ray.phi);
 		double v = EO.dot(V);
@@ -49,6 +50,7 @@ public class Sphere extends Shape{
 		else{
 			r = Math.sqrt(v) - Math.sqrt(disc);
 		}
+		//System.out.println(System.nanoTime()-time);
 		return r;
 	}
 	

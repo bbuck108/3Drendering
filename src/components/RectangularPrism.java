@@ -171,6 +171,7 @@ public class RectangularPrism extends Shape {
 	/** Computes if a ray intersects with the rectangular prism
 	 * @return the distance on the ray when it intersects if r = -1 the the ray does not intersect */
 	public double isIntersecting(Ray ray) {
+		long time = System.nanoTime();
 		double r = -1;
 		//define planes
 		Plane x1 = getPlane(Position.FRONT, Axis.X);
@@ -247,11 +248,13 @@ public class RectangularPrism extends Shape {
 		if(z2r == -1) z2r = max;
 		r = Math.min(x1r, Math.min(x2r, Math.min(y1r, Math.min(y2r, Math.min(z1r, z2r))))); 
 		
+		//System.out.println(System.nanoTime()-time);
 		return r;
 	}
 	
-	/* Computes an angle of a perpendicular line from the rectangular prism based on a vector */
+	/** Computes an angle of a perpendicular line from the rectangular prism based on a vector */
 	public Vector getSurfaceNormal(Vector p) {
+		long time = System.nanoTime();
 		Vector c = (new Segment(location, p)).direction();
 		double thetaL = c.angleWith(getSide(Position.FRONT, Axis.X).direction());
 		double thetaL2 = c.angleWith(getSide(Position.FRONT, Axis.X).direction().negative());
