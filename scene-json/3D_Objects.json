@@ -1,0 +1,25 @@
+[
+	{
+		"velocity" : [0,0,50],
+		"rotationalVelocity" : [0,0,0],
+		"mass"     : 1,
+		"color"    : [255,255,0],
+		"shape"    : {
+						"type" : "Sphere",
+						"location" : [0, 0, 1000],
+						"radius"   : 100
+					}
+	},
+	{
+		"velocity" : [0,50,0],
+		"rotationalVelocity" : [0.3927,0.3927,0.3927],
+		"mass"     : 1,
+		"color"    : [255,0,0],
+		"shape"    : {
+						"type" : "RectangularPrism",
+						"location" : [0, 200, 1500],
+						"size" : [100, 100, 100],
+						"rotation" : [0, 0, 0]
+					}
+	}
+]
