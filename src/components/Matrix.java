@@ -2,6 +2,8 @@ package components;
 
 import java.util.ArrayList;
 
+import static util.Util.power;
+
 /**
  * General n by m matrix
  * @author Connor Lehmacher and Benjamin Buck
@@ -59,7 +61,7 @@ public class Matrix {
 			return answer;
 		}
 		else{
-			System.err.println("Invalid Dimentions");
+			System.err.println("Invalid dimensions");
 			return null;
 		}
 	}
@@ -89,13 +91,43 @@ public class Matrix {
 			return answer;
 		}
 		else{
-			System.err.println("Invalid Dimentions");
+			System.err.println("Invalid dimensions");
 			return null;
 		}
 	}
 	
+	/** multiplies a matrix times a scaler */
+	public Matrix times(double x) {
+		Matrix answer = new Matrix(rows(), columns());
+		int r = rows();
+		int c = columns();
+		for(int i = 0 ; i < r ; i++) {
+			for(int j = 0 ; j < c ; j++) {
+				answer.set(i, j, get(i, j) * x);
+			}
+		}
+		return answer;
+	}
 	
-	public void print() {
+	/** computes the determinate of a n by n matrix */
+	public double determinate() {
+		double det = 0;
+		if(rows() == columns()) {
+			int r = rows();
+			for(int i = 0 ; i < r ; i++) {
+				
+			}
+			return det;
+		}
+		else{
+			System.err.println("Invalid dimensions"
+					+ '\n'
+					+ "determinate can only be found on n by n matricies");
+			return 0.0;
+		}
+	}
+	
+	public void println() {
 		for(int i = 0 ; i < rows() ; i ++){
 			for(int j  = 0 ; j < columns() ; j++){
 				System.out.print(get(i, j) + " ");
