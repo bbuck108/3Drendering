@@ -22,15 +22,6 @@ public class PixelRender extends RecursiveTask<double[]>{
 		this.parent = parent;
 	}
 	
-	
-	
-	public void run() {
-		
-		
-		
-	}
-
-
 	@Override
 	protected double[] compute() {
 		double x = i - parent.screen.x/2;
@@ -51,7 +42,7 @@ public class PixelRender extends RecursiveTask<double[]>{
 				Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(parent.point);
 				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, parent.lightSource)).direction()));
 				if(shade < 0){shade = 0;}
-				shade = (0.1 + 0.9*shade);
+				shade = (0.2 + 0.8*shade);
 				color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
 				double[] pair = {distance, color.getRGB()};
 				intersections.add(pair);
