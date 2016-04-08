@@ -13,6 +13,38 @@ import util.Position;
 public class RectangularPrism extends Shape {
 	Vector size;
 	
+	private Vector point_1;
+	private Vector point_2;
+	private Vector point_3;
+	private Vector point_4;
+	private Vector point_5;
+	private Vector point_6;
+	private Vector point_7;
+	private Vector point_8;
+	private boolean pointsDefined = false;
+	
+	private Segment side_FRONT_X;
+	private Segment side_FRONT_Y;
+	private Segment side_FRONT_Z;
+	private Segment side_BACK_X;
+	private Segment side_BACK_Y;
+	private Segment side_BACK_Z;
+	private Segment side_LEFT_X;
+	private Segment side_LEFT_Y;
+	private Segment side_LEFT_Z;
+	private Segment side_RIGHT_X;
+	private Segment side_RIGHT_Y;
+	private Segment side_RIGHT_Z;
+	private boolean sidesDefined = false;
+	
+	private Plane plane_FRONT_X;
+	private Plane plane_FRONT_Y;
+	private Plane plane_FRONT_Z;
+	private Plane plane_BACK_X;
+	private Plane plane_BACK_Y;
+	private Plane plane_BACK_Z;
+	private boolean planesDefined = false;
+	
 	public RectangularPrism(Vector c, Vector s, Rotation r) {
 		super(c,r);
 		size = s;
@@ -49,119 +81,95 @@ public class RectangularPrism extends Shape {
 	}
 	
 	public Vector getPoint(int index){
-		if(index == 1){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 2){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 3){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 4){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 5){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 6){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 7){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		}
-		if(index == 8){
-			return (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		}
+		if(!pointsDefined) calculatePoints();
+		if(index == 1) return point_1;
+		if(index == 2) return point_2;
+		if(index == 3) return point_3;
+		if(index == 4) return point_4;
+		if(index == 5) return point_5;
+		if(index == 6) return point_6;
+		if(index == 7) return point_7;
+		if(index == 8) return point_8;
 		System.err.println("Invalid point index");
 		return new Vector();
 	}
+	
+	public void calculatePoints(){
+		point_1 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_2 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_3 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_4 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_5 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_6 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_7 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_8 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		pointsDefined = true;
+	}
+	
+	public void calculateSides() {
+		side_FRONT_X = new Segment(getPoint(8), getPoint(4));
+		side_FRONT_Y = new Segment(getPoint(8), getPoint(6));
+		side_FRONT_Z = new Segment(getPoint(8), getPoint(7));
+		side_BACK_X  = new Segment(getPoint(5), getPoint(1));
+		side_BACK_Y  = new Segment(getPoint(3), getPoint(1));
+		side_BACK_Z  = new Segment(getPoint(2), getPoint(1));
+		side_RIGHT_X = new Segment(getPoint(7), getPoint(3));
+		side_RIGHT_Y = new Segment(getPoint(4), getPoint(3));
+		side_RIGHT_Z = new Segment(getPoint(4), getPoint(2));
+		side_LEFT_X  = new Segment(getPoint(6), getPoint(2));
+		side_LEFT_Y  = new Segment(getPoint(7), getPoint(5));
+		side_LEFT_Z  = new Segment(getPoint(6), getPoint(5));
+		sidesDefined = true;
+	}
+	
 	/**Returns the specified side of the prism*/
 	public Segment getSide(Position p, Axis a) {
+		if(!sidesDefined) calculateSides();
 		if(p == Position.FRONT) {
-			if(a == Axis.X){
-				return new Segment(getPoint(8), getPoint(4));
-			}
-			if(a == Axis.Y){
-				return new Segment(getPoint(8), getPoint(6));
-			}
-			if(a == Axis.Z){
-				return new Segment(getPoint(8), getPoint(7));
-			}
+			if(a == Axis.X) return side_FRONT_X;
+			if(a == Axis.Y) return side_FRONT_Y;
+			if(a == Axis.Z) return side_FRONT_Z;
 		}
 		if(p == Position.BACK) {
-			if(a == Axis.X){
-				return new Segment(getPoint(5), getPoint(1));
-			}
-			if(a == Axis.Y){
-				return new Segment(getPoint(3), getPoint(1));
-			}
-			if(a == Axis.Z){
-				return new Segment(getPoint(2), getPoint(1));
-			}
+			if(a == Axis.X) return side_BACK_X;
+			if(a == Axis.Y) return side_BACK_Y;
+			if(a == Axis.Z) return side_BACK_Z;
 		}
 		if(p == Position.RIGHT) {
-			if(a == Axis.X) {
-				return new Segment(getPoint(7), getPoint(3));
-			}
-			if(a == Axis.Y) {
-				return new Segment(getPoint(4), getPoint(3));
-			}
-			if(a == Axis.Z) {
-				return new Segment(getPoint(4), getPoint(2));
-			}
+			if(a == Axis.X) return side_RIGHT_X;
+			if(a == Axis.Y) return side_RIGHT_Y;
+			if(a == Axis.Z) return side_RIGHT_Z;
 		}
 		if(p == Position.LEFT) {
-			if(a == Axis.X)  {
-				return new Segment(getPoint(6), getPoint(2));
-			}
-			if(a == Axis.Y) {
-				return new Segment(getPoint(7), getPoint(5));
-			}
-			if(a == Axis.Z) {
-				return new Segment(getPoint(6), getPoint(5));
-			}
+			if(a == Axis.X) return side_LEFT_X;
+			if(a == Axis.Y) return side_LEFT_Y;
+			if(a == Axis.Z) return side_LEFT_Z;
 		}
 		System.err.println("Invalid side index");
 		return null;
 	}
 	
+	public void calculatePlanes(){
+		plane_FRONT_X = new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),getSide(Position.FRONT, Axis.Y).getStart());
+		plane_FRONT_Y = new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),getSide(Position.FRONT, Axis.X).getStart());
+		plane_FRONT_Z = new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),getSide(Position.FRONT, Axis.X).getStart());
+		plane_BACK_X = new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),getSide(Position.BACK, Axis.Y).getStart());
+		plane_BACK_Y = new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),getSide(Position.BACK, Axis.X).getStart());
+		plane_BACK_Z = new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),getSide(Position.BACK, Axis.X).getStart());
+		planesDefined = true;
+	}
+	
 	public Plane getPlane(Position p, Axis a){
+		if(!planesDefined) calculatePlanes();
 		if(p == Position.FRONT){
-			if(a == Axis.X){
-				return new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
-						getSide(Position.FRONT, Axis.Y).getStart());
-			}
-			if(a == Axis.Y){
-				return new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
-						getSide(Position.FRONT, Axis.X).getStart());
-			}
-			if(a == Axis.Z){
-				return new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),
-						getSide(Position.FRONT, Axis.X).getStart());
-			}
+			if(a == Axis.X) return plane_FRONT_X;
+			if(a == Axis.Y) return plane_FRONT_Y;
+			if(a == Axis.Z) return plane_FRONT_Z;
 		}
 		if(p == Position.BACK){
-			if(a == Axis.X){
-				return new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
-						getSide(Position.BACK, Axis.Y).getStart());
-			}
-			if(a == Axis.Y){
-				return new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
-						getSide(Position.BACK, Axis.X).getStart());
-			}
-			if(a == Axis.Z){
-				return new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),
-						getSide(Position.BACK, Axis.X).getStart());
-			}
+			if(a == Axis.X) return plane_BACK_X;
+			if(a == Axis.Y) return plane_BACK_Y;
+			if(a == Axis.Z) return plane_BACK_Z;
 		}
 		System.err.println("Invalid plane index");
 		return null;
