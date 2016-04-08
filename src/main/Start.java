@@ -134,7 +134,7 @@ public class Start {
 		
             // render OpenGL here
 			camera.render();
-			System.out.println("Done rendering");
+			//System.out.println("Done rendering");
              
 			//Update display
             Display.update();
