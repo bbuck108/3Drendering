@@ -47,6 +47,49 @@ public class Matrix {
 		return data.get(0).size();
 	}
 	
+	/** Computes the combination of two matrices next to each other merged */
+	public Matrix combineWith(Matrix m) {
+		if(rows() == m.rows()) {
+			Matrix answer = new Matrix(rows(), columns() + m.columns());
+			int r = rows();
+			int c = columns();
+			int mc = m.columns();
+			for(int i = 0 ; i < r ; i++) {
+				for(int j = 0 ; j < c ; j++) {
+					answer.set(i, j, get(i, j));
+				}
+				for(int j = c ; j < mc ; j++) {
+					answer.set(i, j, m.get(i, j - c));
+				}
+			}
+			return answer;
+		}
+		else{
+			System.err.println("row numbers not equal");
+			return null;
+		}
+	}
+	
+	/** Computes a small matrix based on the entire matrix */
+	public Matrix subMatrix(int rowStart, int columnStart, int rowEnd, int columnEnd) {
+		if(0 <= rowStart && rowStart <= rowEnd && 0 <= columnStart && columnStart <= columnEnd 
+				&& 0 <= rowEnd && rowEnd < rows() && 0 <= columnEnd && columnEnd < columns()) {
+			Matrix answer = new Matrix(rowEnd - rowStart + 1, columnEnd - columnStart + 1);
+			for(int i = rowStart ; i < rowEnd + 1 ; i++) {
+				for(int j = columnStart ; j < columnEnd + 1 ; j++) {
+					final int currentNewRow = i - rowStart;
+					final int currentNewColumn = j - columnStart;
+					answer.set(currentNewRow, currentNewColumn, get(i, j));
+				}
+			}
+			return answer;
+		}
+		else{
+			System.err.println("Bad range");
+			return null;
+		}
+	}
+	
 	/** Computes the sum of to matrices */
 	public Matrix plus(Matrix m) {
 		if(rows() == m.rows() && columns() == m.columns()) {
@@ -115,7 +158,7 @@ public class Matrix {
 		if(rows() == columns()) {
 			int r = rows();
 			for(int i = 0 ; i < r ; i++) {
-				
+				//TODO
 			}
 			return det;
 		}
