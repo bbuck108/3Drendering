@@ -95,14 +95,22 @@ public class RectangularPrism extends Shape {
 	}
 	
 	public void calculatePoints(){
-		point_1 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_2 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		point_3 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_4 = (new Segment(location, location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		point_5 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_6 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		point_7 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_8 = (new Segment(location, location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_1 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_2 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_3 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_4 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_5 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_6 = (new Segment(location, 
+				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_7 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_8 = (new Segment(location,
+				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
 		pointsDefined = true;
 	}
 	
@@ -150,12 +158,18 @@ public class RectangularPrism extends Shape {
 	}
 	
 	public void calculatePlanes(){
-		plane_FRONT_X = new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),getSide(Position.FRONT, Axis.Y).getStart());
-		plane_FRONT_Y = new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),getSide(Position.FRONT, Axis.X).getStart());
-		plane_FRONT_Z = new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),getSide(Position.FRONT, Axis.X).getStart());
-		plane_BACK_X = new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),getSide(Position.BACK, Axis.Y).getStart());
-		plane_BACK_Y = new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),getSide(Position.BACK, Axis.X).getStart());
-		plane_BACK_Z = new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),getSide(Position.BACK, Axis.X).getStart());
+		plane_FRONT_X = new Plane(getSide(Position.FRONT, Axis.Y).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
+				getSide(Position.FRONT, Axis.Y).getStart());
+		plane_FRONT_Y = new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Z).direction()),
+				getSide(Position.FRONT, Axis.X).getStart());
+		plane_FRONT_Z = new Plane(getSide(Position.FRONT, Axis.X).direction().cross(getSide(Position.FRONT, Axis.Y).direction()),
+				getSide(Position.FRONT, Axis.X).getStart());
+		plane_BACK_X = new Plane(getSide(Position.BACK, Axis.Y).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
+				getSide(Position.BACK, Axis.Y).getStart());
+		plane_BACK_Y = new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Z).direction()),
+				getSide(Position.BACK, Axis.X).getStart());
+		plane_BACK_Z = new Plane(getSide(Position.BACK, Axis.X).direction().cross(getSide(Position.BACK, Axis.Y).direction()),
+				getSide(Position.BACK, Axis.X).getStart());
 		planesDefined = true;
 	}
 	
