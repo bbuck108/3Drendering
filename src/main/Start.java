@@ -128,7 +128,6 @@ public class Start {
 				t_1.move();
 			}
 			
-			
 			// I have no idea what this does...
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 		
@@ -149,7 +148,7 @@ public class Start {
 		
 		buildScreen();
 
-		
+
 		camera = new Camera(
 				Vector.createFromRectangular(0, 0, 0),
 				Vector.createFromRectangular(width, height, 600),
