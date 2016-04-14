@@ -16,11 +16,13 @@ public class Camera{
 	Vector screen;
 	Vector motion;
 	Vector lightSource;
+	Rotation rotation;
 	
 	public Camera(Vector p, Vector s, Vector v) {
 		point = p;
 		screen = s;
 		motion = v;
+		rotation = new Rotation(0,0,0);
 		lightSource = Vector.createFromRectangular(1000, 0, 0);
 	}
 	

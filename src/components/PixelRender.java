@@ -36,6 +36,7 @@ public class PixelRender extends RecursiveTask<double[]>{
 		ArrayList<double[]> intersections = new ArrayList<double[]>();
 		
 		Vector angle = Vector.createFromRectangular(x, y, parent.screen.z);
+		angle = angle.rotateBy2(parent.rotation);
 		double theta = angle.theta();
 		double phi = angle.phi();
 		Ray ray = new Ray(parent.point, theta, phi);
