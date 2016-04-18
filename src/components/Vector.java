@@ -51,8 +51,8 @@ public class Vector {
 	
 	/** Returns a vector based on a vertical cylindrical system (radians) */
 	public static Vector createFromCylindrical(double r, double theta, double z) {
-		final double x = r * Math.cos(theta);
-		final double y = r * Math.sin(theta);
+		final double x = r * cos(theta);
+		final double y = r * sin(theta);
 		return new Vector(x, y, z);
 	}
 	
@@ -60,9 +60,10 @@ public class Vector {
 	 * @param theta on x-y plane (radians)
 	 * @param phi from z axis and down */
 	public static Vector createFromSpherical(double r, double theta, double phi) {
-		final double x = r * Math.sin(phi) * Math.cos(theta);
-		final double y = r * Math.sin(phi) * Math.sin(theta);
-		final double z = r * Math.cos(phi);
+		final double sp = sin(phi);
+		final double x = r * sp * cos(theta);
+		final double y = r * sp * sin(theta);
+		final double z = r * cos(phi);
 		return new Vector(x, y, z);
 	}
 	
