@@ -32,8 +32,9 @@ public class Plane {
 	}
 	public Vector intersection(Ray ray){
 		Vector n = Vector.createFromRectangular(a, b, c);
-		double t = -1*(ray.origin.dot(n)+d)/(ray.getV().dot(n));
-		return ray.origin.plus(ray.getV().scaleBy(t));
+		Vector v = ray.getV();
+		double t = -1*(ray.origin.dot(n)+d)/(v.dot(n));
+		return ray.origin.plus(v.scaleBy(t));
 	}
 	public Vector getNormalVector(){
 		return Vector.createFromRectangular(a, b, c);
