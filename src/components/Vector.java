@@ -1,5 +1,7 @@
 package components;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static util.Util.*;
 
 /** 
@@ -107,7 +109,12 @@ public class Vector {
 	
 	/** Rotate the vector by a three dimension rotation */
 	public Vector rotateBy2(Rotation r) {
-		return new Vector(r.fullRotationMatrix().times(toMatrix()));
+		double sx = sin(r.x), cx = cos(r.x), sy = sin(r.y), cy = cos(r.y), sz = sin(r.z), cz = cos(r.z);
+		return createFromRectangular(x * cy * cz - y * cy * sz + z * sy,
+				x * (cx * sz + sx * sy * cz) + y * (cx * cz - sx * sy * sz) - z * (sx * cy),
+				x * (sx * sz - cx * sy * cz) + y * (cx * sy * sz + sx * cz) + z * (cx * cy));
+		//Old code still works but slow
+		//return new Vector(r.fullRotationMatrix().times(toMatrix()));
 	}
 	
 	/** computes the dot product (inner product type) with another vector */
