@@ -60,9 +60,9 @@ public class Vector {
 	 * @param theta on x-y plane (radians)
 	 * @param phi from z axis and down */
 	public static Vector createFromSpherical(double r, double theta, double phi) {
-		final double sp = sin(phi);
-		final double x = r * sp * cos(theta);
-		final double y = r * sp * sin(theta);
+		final double rsp = r * sin(phi);
+		final double x = rsp * cos(theta);
+		final double y = rsp * sin(theta);
 		final double z = r * cos(phi);
 		return new Vector(x, y, z);
 	}
