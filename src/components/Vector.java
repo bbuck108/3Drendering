@@ -2,7 +2,7 @@ package components;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import static util.Util.*;
+import static util.Util.sq;
 
 /** 
  *A three dimensional point 
@@ -85,7 +85,7 @@ public class Vector {
 	
 	/** Add one point to another */
 	public Vector plus(Vector v) {
-		return createFromRectangular(x + v.x, y + v.y, z + v.z);
+		return new Vector(x + v.x, y + v.y, z + v.z);
 	}
 	
 	/** Finds the Point which is in the same line but negatively with the same norm value */
@@ -100,7 +100,7 @@ public class Vector {
 	
 	/** Computes some norm increase by a scalar */
 	public Vector scaleBy(double a) {
-		return createFromRectangular(x * a, y * a, z * a);
+		return new Vector(x * a, y * a, z * a);
 	}
 	
 	/** Rotates the vector by the angle of another vector */
@@ -129,7 +129,7 @@ public class Vector {
 		final double i = y * v.z - v.y * z;
 		final double j = z * v.x - v.z * x;
 		final double k = x * v.y - v.x * y;
-		return createFromRectangular(i, j, k);
+		return new Vector(i, j, k);
 	}
 
 	/** computes the distance between two vectors */
