@@ -35,7 +35,7 @@ public class Camera{
 				pool.execute(pixelGroup.get(pixelGroup.size()-1));
 			}
 		}
-		for(PixelRender t_1: pixelGroup) {
+		pixelGroup.forEach(t_1 -> {
 			double[] data = t_1.join();
 			int i = (int)data[0];
 			int j = (int)data[1];
@@ -51,6 +51,6 @@ public class Camera{
 			GL11.glVertex2d(i+1,j+1);
 			GL11.glVertex2d(i,j+1);
 			GL11.glEnd();
-		}
+		});
 	}
 }
