@@ -71,9 +71,21 @@ public class Rotation extends Vector{
 		return value;
 	}
 	
-	/** computes the full rotation matrix in the order x,y,z */
+	/** computes the full rotation matrix in the order x,y,z
+	 * faster ??? */
 	public Matrix fullRotationMatrix() {
-		return xRotationMatrix().times(yRotationMatrix().times(zRotationMatrix()));
+		double sx = sin(x), cx = cos(x), sy = sin(y), cy = cos(y), sz = sin(z), cz = cos(z);
+		Matrix value = new Matrix(3, 3);
+		value.set(0, 0, cy * cz);
+		value.set(0, 1, -cy * sz);
+		value.set(0, 2, sy);
+		value.set(1, 0, cx * sz + sx * sy * cz);
+		value.set(1, 1, cx * cz - sx * sy * sz);
+		value.set(1, 2, -sx * cy);
+		value.set(2, 0, sx * sz - cx * sy * cz);
+		value.set(2, 1, cx * sy * sz + sx * cz);
+		value.set(2, 2, cx * cy);
+		return value;
 	}
 	
     /** returns a Rotation from a rotation which may be outside the standard range

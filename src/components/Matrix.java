@@ -23,20 +23,34 @@ public class Matrix {
 		}
 	}
 	
+	
+	/** one by one matrix --May be broken-- */
 	public Matrix() {
 		data.add(new ArrayList<Double>(1));
 	}
 	
 	/** Sets a value in a matrix */
 	public void set(int row, int column, double value) {
-		ArrayList<Double> newRow = data.get(row);
-		newRow.set(column, value);
-		data.set(row, newRow);
+		if(row >= 0 && column >= 0 && row < rows() && column < columns()) {
+			ArrayList<Double> newRow = data.get(row);
+			newRow.set(column, value);
+			data.set(row, newRow);
+		}
+		else{
+			System.err.println(row + " " + column + " are not in the correct bounds");
+		}
+		
 	}
 	
 	/** Gets a value from a matrix */
 	public double get(int row, int column) {
-		return data.get(row).get(column);
+		if(row >= 0 && column >= 0 && row < rows() && column < columns()) {
+			return data.get(row).get(column);
+		}
+		else{
+			System.err.println(row + " " + column + " are not in the correct bounds");
+			return(0.0);
+		}
 	}
 	
 	public int rows() {
@@ -55,11 +69,13 @@ public class Matrix {
 			int c = columns();
 			int mc = m.columns();
 			for(int i = 0 ; i < r ; i++) {
-				for(int j = 0 ; j < c ; j++) {
-					answer.set(i, j, get(i, j));
-				}
-				for(int j = c ; j < mc ; j++) {
-					answer.set(i, j, m.get(i, j - c));
+				for(int j = 0 ; j < (c + mc) ; j++) {
+					if(j < c) {
+						answer.set(i, j, get(i, j));
+					}
+					else{
+						answer.set(i, j, m.get(i, j - c));
+					}
 				}
 			}
 			return answer;
@@ -153,13 +169,26 @@ public class Matrix {
 	}
 	
 	/** computes the determinate of a n by n matrix */
-	public double determinate() {
-		double det = 0;
+	public double determinant() {
 		if(rows() == columns()) {
-			int r = rows();
-			for(int i = 0 ; i < r ; i++) {
-				//TODO
+			//2 by 2 Matrix
+			if(rows() == 2) {
+				return get(0, 0) * get(1, 1) - get(0, 1) *  get(1, 0);
 			}
+			//1 by 1 matrix
+			if(rows() == 1) {
+				return get(0, 0);
+			}
+			//bigger by bigger matrix
+			int r  = rows();
+			int rless1 = r - 1;
+			double det = 0;
+			det += get(0, 0) * subMatrix(1, 1, rless1, rless1).determinant();
+			for(int i = 1 ; i < rless1 ; i++) {
+				det += power(-1, i) * get(0, i) * 
+						subMatrix(1, 0, rless1, i - 1).combineWith(subMatrix(1, i + 1, rless1, rless1)).determinant();
+			}
+			det += power(-1, rless1) * get(0, rless1) * subMatrix(1, 0, rless1, rless1 - 1).determinant();
 			return det;
 		}
 		else{
