@@ -12,7 +12,6 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import components.Camera;
-import components.Matrix;
 import components.PhysicalObject;
 import components.Vector;
 import file.ParseFile;
