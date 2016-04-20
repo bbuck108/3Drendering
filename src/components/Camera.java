@@ -27,7 +27,7 @@ public class Camera{
 	}
 	
 	public void render() {
-		ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+		ForkJoinPool pool = new ForkJoinPool(2*Runtime.getRuntime().availableProcessors());
 		ArrayList<PixelRender> pixelGroup = new ArrayList<PixelRender>();
 		for(int i = 0; i < screen.x; i++) {
 			for(int j = 0; j < screen.y; j++) {
