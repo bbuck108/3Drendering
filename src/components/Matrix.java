@@ -192,11 +192,23 @@ public class Matrix {
 			return det;
 		}
 		else{
-			System.err.println("Invalid dimensions"
-					+ '\n'
-					+ "determinate can only be found on n by n matricies");
+			System.err.println("Invalid dimensions" + '\n'
+					+ "determinate can only be found on n by n matricies" + '\n'
+					+ "You put a" + rows() + " " + columns());
 			return 0.0;
 		}
+	}
+	
+	public Matrix tanspose() {
+		Matrix answer = new Matrix(columns(), rows());
+		final int nr = columns();
+		final int nc = rows();
+		for(int i = 0 ; i < nr ; i++) {
+			for(int j = 0 ; j < nc ; j++) {
+				answer.set(i, j, get(j, i));
+			}
+		}
+		return answer;
 	}
 	
 	public void println() {
