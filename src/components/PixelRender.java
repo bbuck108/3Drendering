@@ -20,34 +20,27 @@ public class PixelRender extends RecursiveTask<double[]>{
 	int i;
 	int j;
 	Color color;
-	Camera parent;
+	Ray ray;
 	
-	public PixelRender(int x, int y, Camera parent){
-		i = x;
-		j = y;
-		this.parent = parent;
+	public PixelRender(int i, int j, Ray ray){
+		this.i = i;
+		this.j = j;
+		this.ray = ray;
 	}
 	
 	@Override
 	protected double[] compute() {
-		double x = i - parent.screen.x/2;
-		double y = j - parent.screen.y/2;
-		double maxDistance = 0;
 		ArrayList<double[]> intersections = new ArrayList<double[]>();
+		double maxDistance = 0;
 		
-		Vector angle = Vector.createFromRectangular(x, y, parent.screen.z);
-		angle = angle.rotateBy2(parent.rotation);
-		double theta = angle.theta();
-		double phi = angle.phi();
-		Ray ray = new Ray(parent.point, theta, phi);
 		
 		for(PhysicalObject object: Start.renderList) {
 			Shape shape = object.getShape();
 			double distance = shape.isIntersecting(ray);
 			
 			if(distance != -1){
-				Vector intersection = Vector.createFromSpherical(distance, theta, phi).plus(parent.point);
-				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, parent.lightSource)).direction()));
+				Vector intersection = Vector.createFromSpherical(distance, ray.theta, ray.phi).plus(ray.origin);
+				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, Start.lightSource.location)).direction()));
 				if(shade < 0){shade = 0;}
 				shade = (0.2 + 0.8*shade);
 				color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));

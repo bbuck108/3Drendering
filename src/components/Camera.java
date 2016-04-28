@@ -15,7 +15,6 @@ public class Camera{
 	Vector point;
 	Vector screen;
 	Vector motion;
-	Vector lightSource;
 	Rotation rotation;
 	
 	public Camera(Vector p, Vector s, Vector v) {
@@ -23,7 +22,6 @@ public class Camera{
 		screen = s;
 		motion = v;
 		rotation = new Rotation(0,0,0);
-		lightSource = Vector.createFromRectangular(1000, 0, 0);
 	}
 	
 	public void render() {
@@ -31,7 +29,16 @@ public class Camera{
 		ArrayList<PixelRender> pixelGroup = new ArrayList<PixelRender>();
 		for(int i = 0; i < screen.x; i++) {
 			for(int j = 0; j < screen.y; j++) {
-				pixelGroup.add(new PixelRender(i,j,this));
+				double x = i - screen.x/2;
+				double y = j - screen.y/2;
+				
+				Vector angle = Vector.createFromRectangular(x, y, screen.z);
+				angle = angle.rotateBy2(rotation);
+				double theta = angle.theta();
+				double phi = angle.phi();
+				Ray ray = new Ray(point, theta, phi);
+				
+				pixelGroup.add(new PixelRender(i,j,ray));
 				pool.execute(pixelGroup.get(pixelGroup.size()-1));
 			}
 		}
