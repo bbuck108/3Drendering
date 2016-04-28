@@ -1,4 +1,4 @@
-package components;
+package component;
 
 import util.Inequality;
 
@@ -33,8 +33,8 @@ public class Plane {
 	public Vector intersection(Ray ray){
 		Vector n = Vector.createFromRectangular(a, b, c);
 		Vector v = ray.getV();
-		double t = -1*(ray.origin.dot(n)+d)/(v.dot(n));
-		return ray.origin.plus(v.scaleBy(t));
+		double t = -1*(ray.getOrigin().dot(n)+d)/(v.dot(n));
+		return ray.getOrigin().plus(v.scaleBy(t));
 	}
 	public Vector getNormalVector(){
 		return Vector.createFromRectangular(a, b, c);

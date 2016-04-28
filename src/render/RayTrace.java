@@ -1,10 +1,15 @@
-package components;
+package render;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.RecursiveTask;
 
+import component.Ray;
+import component.Segment;
+import component.Vector;
 import main.Start;
+import object.PhysicalObject;
+import shape.Shape;
 
 
 /** A task compatible with ForkJoinPools that renders one pixel and returns the color
@@ -12,7 +17,7 @@ import main.Start;
  * @author Benjamin Buck and Connor Lehmacher
  *
  */
-public class PixelRender extends RecursiveTask<double[]>{
+public class RayTrace extends RecursiveTask<double[]>{
 	/**
 	 * 
 	 */
@@ -22,7 +27,7 @@ public class PixelRender extends RecursiveTask<double[]>{
 	Color color;
 	Ray ray;
 	
-	public PixelRender(int i, int j, Ray ray){
+	public RayTrace(int i, int j, Ray ray){
 		this.i = i;
 		this.j = j;
 		this.ray = ray;
@@ -39,7 +44,7 @@ public class PixelRender extends RecursiveTask<double[]>{
 			double distance = shape.isIntersecting(ray);
 			
 			if(distance != -1){
-				Vector intersection = Vector.createFromSpherical(distance, ray.theta, ray.phi).plus(ray.origin);
+				Vector intersection = Vector.createFromSpherical(distance, ray.getTheta(), ray.getPhi()).plus(ray.getOrigin());
 				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, Start.lightSource.location)).direction()));
 				if(shade < 0){shade = 0;}
 				shade = (0.2 + 0.8*shade);

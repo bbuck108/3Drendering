@@ -1,4 +1,6 @@
-package components;
+package render;
+
+import component.Vector;
 
 public class LightSource {
 	Vector location;

@@ -11,12 +11,12 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-import components.Camera;
-import components.LightSource;
-import components.PhysicalObject;
-import components.Vector;
+import component.Vector;
 import file.ParseFile;
 import gui.ResolutionSelection;
+import object.PhysicalObject;
+import render.Camera;
+import render.LightSource;
 
 /** The main class in the application.
  * 
