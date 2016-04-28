@@ -1,7 +1,12 @@
-package components;
+package shape;
 
 import org.json.JSONObject;
 
+import component.Plane;
+import component.Ray;
+import component.Rotation;
+import component.Segment;
+import component.Vector;
 import util.Axis;
 import util.Position;
 
@@ -239,21 +244,21 @@ public class RectangularPrism extends Shape {
 		
 		//Choose most forward planes
 		Plane x;
-		if(new Segment(getCenter(Position.FRONT, Axis.X),ray.origin).direction().norm() < new Segment(getCenter(Position.BACK, Axis.X),ray.origin).direction().norm()){
+		if(new Segment(getCenter(Position.FRONT, Axis.X),ray.getOrigin()).direction().norm() < new Segment(getCenter(Position.BACK, Axis.X),ray.getOrigin()).direction().norm()){
 			x = getPlane(Position.FRONT, Axis.X);
 		}else{
 			x = getPlane(Position.BACK, Axis.X);
 		}
 		
 		Plane y;
-		if(new Segment(getCenter(Position.FRONT, Axis.Y),ray.origin).direction().norm() < new Segment(getCenter(Position.BACK, Axis.Y),ray.origin).direction().norm()){
+		if(new Segment(getCenter(Position.FRONT, Axis.Y),ray.getOrigin()).direction().norm() < new Segment(getCenter(Position.BACK, Axis.Y),ray.getOrigin()).direction().norm()){
 			y = getPlane(Position.FRONT, Axis.Y);
 		}else{
 			y = getPlane(Position.BACK, Axis.Y);
 		}
 		
 		Plane z;
-		if(new Segment(getCenter(Position.FRONT, Axis.Z),ray.origin).direction().norm() < new Segment(getCenter(Position.BACK, Axis.Z),ray.origin).direction().norm()){
+		if(new Segment(getCenter(Position.FRONT, Axis.Z),ray.getOrigin()).direction().norm() < new Segment(getCenter(Position.BACK, Axis.Z),ray.getOrigin()).direction().norm()){
 			z = getPlane(Position.FRONT, Axis.Z);
 		}else{
 			z = getPlane(Position.BACK, Axis.Z);
@@ -264,7 +269,7 @@ public class RectangularPrism extends Shape {
 		double xr = -1;
 		if((Double.isFinite(xi.x))&&(Double.isFinite(xi.y))&&(Double.isFinite(xi.z))){
 			if((!y1.compare(xi).equals(y2.compare(xi)))&&(!z1.compare(xi).equals(z2.compare(xi)))){
-				xr = (new Segment(ray.origin, xi)).direction().norm();
+				xr = (new Segment(ray.getOrigin(), xi)).direction().norm();
 				if(xr < 0){xr = -1;}
 			}
 		}
@@ -274,7 +279,7 @@ public class RectangularPrism extends Shape {
 		double yr = -1;
 		if((Double.isFinite(yi.x))&&(Double.isFinite(yi.y))&&(Double.isFinite(yi.z))){
 			if((!x1.compare(yi).equals(x2.compare(yi)))&&(!z1.compare(yi).equals(z2.compare(yi)))){
-				yr = (new Segment(ray.origin, yi)).direction().norm();
+				yr = (new Segment(ray.getOrigin(), yi)).direction().norm();
 				if(yr < 0){yr = -1;}
 			}
 		}
@@ -284,7 +289,7 @@ public class RectangularPrism extends Shape {
 		double zr = -1;
 		if((Double.isFinite(zi.x))&&(Double.isFinite(zi.y))&&(Double.isFinite(zi.z))){
 			if((!x1.compare(zi).equals(x2.compare(zi)))&&(!y1.compare(zi).equals(y2.compare(zi)))){
-				zr = (new Segment(ray.origin, zi)).direction().norm();
+				zr = (new Segment(ray.getOrigin(), zi)).direction().norm();
 				if(zr < 0){zr = -1;}
 			}
 		}

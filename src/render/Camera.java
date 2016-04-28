@@ -1,10 +1,14 @@
-package components;
+package render;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ForkJoinPool;
 
 import org.lwjgl.opengl.GL11;
+
+import component.Ray;
+import component.Rotation;
+import component.Vector;
 
 /** A collection of data and methods used to render the scene.
  * 
@@ -26,7 +30,7 @@ public class Camera{
 	
 	public void render() {
 		ForkJoinPool pool = new ForkJoinPool(2*Runtime.getRuntime().availableProcessors());
-		ArrayList<PixelRender> pixelGroup = new ArrayList<PixelRender>();
+		ArrayList<RayTrace> pixelGroup = new ArrayList<RayTrace>();
 		for(int i = 0; i < screen.x; i++) {
 			for(int j = 0; j < screen.y; j++) {
 				double x = i - screen.x/2;
@@ -38,7 +42,7 @@ public class Camera{
 				double phi = angle.phi();
 				Ray ray = new Ray(point, theta, phi);
 				
-				pixelGroup.add(new PixelRender(i,j,ray));
+				pixelGroup.add(new RayTrace(i,j,ray));
 				pool.execute(pixelGroup.get(pixelGroup.size()-1));
 			}
 		}

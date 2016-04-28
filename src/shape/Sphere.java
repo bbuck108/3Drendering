@@ -1,7 +1,11 @@
-package components;
+package shape;
 
 import org.json.JSONObject;
 
+import component.Ray;
+import component.Rotation;
+import component.Segment;
+import component.Vector;
 import util.Util;
 
 /** Defines a sphere in 3D space.
@@ -38,8 +42,8 @@ public class Sphere extends Shape{
 
 	@Override
 	public double isIntersecting(Ray ray) {
-		Vector EO = (new Segment(ray.origin, location)).direction();
-		Vector V  = Vector.createFromSpherical(EO.norm(), ray.theta, ray.phi);
+		Vector EO = (new Segment(ray.getOrigin(), location)).direction();
+		Vector V  = Vector.createFromSpherical(EO.norm(), ray.getTheta(), ray.getPhi());
 		double v = EO.dot(V);
 		double disc = Util.sq(radius) - (Util.sq(EO.norm())-v);
 		double r;

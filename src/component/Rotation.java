@@ -1,4 +1,4 @@
-package components;
+package component;
 
 import static java.lang.Math.sin;
 import static java.lang.Math.cos;

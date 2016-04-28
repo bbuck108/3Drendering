@@ -1,4 +1,8 @@
-package components;
+package shape;
+
+import component.Ray;
+import component.Rotation;
+import component.Vector;
 
 /**
  * Some 3 dimensional shape for example cube, sphere, rectangular prism etc.

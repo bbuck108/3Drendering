@@ -1,10 +1,15 @@
-package components;
+package object;
 
 import java.awt.Color;
 
 import org.json.JSONObject;
 
+import component.Rotation;
+import component.Vector;
 import main.Start;
+import shape.RectangularPrism;
+import shape.Shape;
+import shape.Sphere;
 
 /** Defines an object located in 3D space.
  * 
