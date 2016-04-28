@@ -45,6 +45,14 @@ public class RectangularPrism extends Shape {
 	private Plane plane_BACK_Z;
 	private boolean planesDefined = false;
 	
+	private Vector center_FRONT_X;
+	private Vector center_FRONT_Y;
+	private Vector center_FRONT_Z;
+	private Vector center_BACK_X;
+	private Vector center_BACK_Y;
+	private Vector center_BACK_Z;
+	private boolean centersDefined;
+	
 	public RectangularPrism(Vector c, Vector s, Rotation r) {
 		super(c,r);
 		size = s;
@@ -189,6 +197,33 @@ public class RectangularPrism extends Shape {
 		return null;
 	}
 	
+	public void calculateCenters(){
+		center_FRONT_X = (new Segment(getPoint(8),getPoint(5))).getMidpoint();
+		center_FRONT_Y = (new Segment(getPoint(8),getPoint(3))).getMidpoint();
+		center_FRONT_Z = (new Segment(getPoint(8),getPoint(2))).getMidpoint();
+		center_BACK_X  = (new Segment(getPoint(1),getPoint(4))).getMidpoint();
+		center_BACK_Y  = (new Segment(getPoint(1),getPoint(6))).getMidpoint();
+		center_BACK_Z  = (new Segment(getPoint(1),getPoint(7))).getMidpoint();
+		
+		centersDefined = true;
+	}
+	
+	public Vector getCenter(Position p, Axis a){
+		if(!centersDefined) calculateCenters();
+		if(p == Position.FRONT){
+			if(a == Axis.X) return center_FRONT_X;
+			if(a == Axis.Y) return center_FRONT_Y;
+			if(a == Axis.Z) return center_FRONT_Z;
+		}
+		if(p == Position.BACK){
+			if(a == Axis.X) return center_BACK_X;
+			if(a == Axis.Y) return center_BACK_Y;
+			if(a == Axis.Z) return center_BACK_Z;
+		}
+		System.err.println("Invalid plane index");
+		return null;
+	}
+	
 	
 	/** Computes if a ray intersects with the rectangular prism
 	 * @return the distance on the ray when it intersects if r = -1 the the ray does not intersect */
@@ -202,72 +237,65 @@ public class RectangularPrism extends Shape {
 		Plane z1 = getPlane(Position.FRONT, Axis.Z);
 		Plane z2 = getPlane( Position.BACK, Axis.Z);
 		
-		//X component
-		Vector x1i = x1.intersection(ray);
-		double x1r = -1;
-		if((Double.isFinite(x1i.x))&&(Double.isFinite(x1i.y))&&(Double.isFinite(x1i.z))){
-			if((!y1.compare(x1i).equals(y2.compare(x1i)))&&(!z1.compare(x1i).equals(z2.compare(x1i)))){
-				x1r = (new Segment(ray.origin, x1i)).direction().norm();
-				if(x1r < 0){x1r = -1;}
-			}
+		//Choose most forward planes
+		Plane x;
+		if(new Segment(getCenter(Position.FRONT, Axis.X),ray.origin).direction().norm() < new Segment(getCenter(Position.BACK, Axis.X),ray.origin).direction().norm()){
+			x = getPlane(Position.FRONT, Axis.X);
+		}else{
+			x = getPlane(Position.BACK, Axis.X);
 		}
 		
-		Vector x2i = x2.intersection(ray);
-		double x2r = -1;
-		if((Double.isFinite(x2i.x))&&(Double.isFinite(x2i.y))&&(Double.isFinite(x2i.z))){
-			if((!y1.compare(x2i).equals(y2.compare(x2i)))&&(!z1.compare(x2i).equals(z2.compare(x2i)))){
-				x2r = (new Segment(ray.origin, x2i)).direction().norm();
-				if(x2r < 0){x2r = -1;}
+		Plane y;
+		if(new Segment(getCenter(Position.FRONT, Axis.Y),ray.origin).direction().norm() < new Segment(getCenter(Position.BACK, Axis.Y),ray.origin).direction().norm()){
+			y = getPlane(Position.FRONT, Axis.Y);
+		}else{
+			y = getPlane(Position.BACK, Axis.Y);
+		}
+		
+		Plane z;
+		if(new Segment(getCenter(Position.FRONT, Axis.Z),ray.origin).direction().norm() < new Segment(getCenter(Position.BACK, Axis.Z),ray.origin).direction().norm()){
+			z = getPlane(Position.FRONT, Axis.Z);
+		}else{
+			z = getPlane(Position.BACK, Axis.Z);
+		}
+		
+		//X component
+		Vector xi = x.intersection(ray);
+		double xr = -1;
+		if((Double.isFinite(xi.x))&&(Double.isFinite(xi.y))&&(Double.isFinite(xi.z))){
+			if((!y1.compare(xi).equals(y2.compare(xi)))&&(!z1.compare(xi).equals(z2.compare(xi)))){
+				xr = (new Segment(ray.origin, xi)).direction().norm();
+				if(xr < 0){xr = -1;}
 			}
 		}
 		
 		//Y component
-		Vector y1i = y1.intersection(ray);
-		double y1r = -1;
-		if((Double.isFinite(y1i.x))&&(Double.isFinite(y1i.y))&&(Double.isFinite(y1i.z))){
-			if((!x1.compare(y1i).equals(x2.compare(y1i)))&&(!z1.compare(y1i).equals(z2.compare(y1i)))){
-				y1r = (new Segment(ray.origin, y1i)).direction().norm();
-				if(y1r < 0){y1r = -1;}
-			}
-		}
-		
-		Vector y2i = y2.intersection(ray);
-		double y2r = -1;
-		if((Double.isFinite(y2i.x))&&(Double.isFinite(y2i.y))&&(Double.isFinite(y2i.z))){
-			if((!x1.compare(y2i).equals(x2.compare(y2i)))&&(!z1.compare(y2i).equals(z2.compare(y2i)))){
-				y2r = (new Segment(ray.origin, y2i)).direction().norm();
-				if(y2r < 0){y2r = -1;}
+		Vector yi = y.intersection(ray);
+		double yr = -1;
+		if((Double.isFinite(yi.x))&&(Double.isFinite(yi.y))&&(Double.isFinite(yi.z))){
+			if((!x1.compare(yi).equals(x2.compare(yi)))&&(!z1.compare(yi).equals(z2.compare(yi)))){
+				yr = (new Segment(ray.origin, yi)).direction().norm();
+				if(yr < 0){yr = -1;}
 			}
 		}
 		
 		//Z component
-		Vector z1i = z1.intersection(ray);
-		double z1r = -1;
-		if((Double.isFinite(z1i.x))&&(Double.isFinite(z1i.y))&&(Double.isFinite(z1i.z))){
-			if((!x1.compare(z1i).equals(x2.compare(z1i)))&&(!y1.compare(z1i).equals(y2.compare(z1i)))){
-				z1r = (new Segment(ray.origin, z1i)).direction().norm();
-				if(z1r < 0){z1r = -1;}
+		Vector zi = z.intersection(ray);
+		double zr = -1;
+		if((Double.isFinite(zi.x))&&(Double.isFinite(zi.y))&&(Double.isFinite(zi.z))){
+			if((!x1.compare(zi).equals(x2.compare(zi)))&&(!y1.compare(zi).equals(y2.compare(zi)))){
+				zr = (new Segment(ray.origin, zi)).direction().norm();
+				if(zr < 0){zr = -1;}
 			}
 		}
 		
-		Vector z2i = z2.intersection(ray);
-		double z2r = -1;
-		if((Double.isFinite(z2i.x))&&(Double.isFinite(z2i.y))&&(Double.isFinite(z2i.z))){
-			if((!x1.compare(z2i).equals(x2.compare(z2i)))&&(!y1.compare(z2i).equals(y2.compare(z2i)))){
-				z2r = (new Segment(ray.origin, z2i)).direction().norm();
-				if(z2r < 0){z2r = -1;}
-			}
-		}
 		
 		//Calculate r
-		double max = Math.max(x1r, Math.max(x2r, Math.max(y1r, Math.max(y2r, Math.max(z1r, z2r)))));
-		if(x1r == -1) x1r = max;
-		if(x2r == -1) x2r = max;
-		if(y1r == -1) y1r = max;
-		if(y2r == -1) y2r = max;
-		if(z1r == -1) z1r = max;
-		if(z2r == -1) z2r = max;
-		r = Math.min(x1r, Math.min(x2r, Math.min(y1r, Math.min(y2r, Math.min(z1r, z2r))))); 
+		double max = Math.max(xr, Math.max(yr, zr));
+		if(xr == -1) xr = max;
+		if(yr == -1) yr = max;
+		if(zr == -1) zr = max;
+		r = Math.min(xr, Math.min(yr, zr)); 
 		
 		return r;
 	}
