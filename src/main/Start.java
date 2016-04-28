@@ -12,6 +12,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import components.Camera;
+import components.LightSource;
 import components.PhysicalObject;
 import components.Vector;
 import file.ParseFile;
@@ -26,6 +27,7 @@ import gui.ResolutionSelection;
 public class Start {
 	public static ArrayList<PhysicalObject> renderList = new ArrayList<PhysicalObject>();
 	public static Camera camera;
+	public static LightSource lightSource;
 	static File input;
 	public static DisplayMode[] modes;
 	public static int height;
@@ -153,6 +155,7 @@ public class Start {
 				Vector.createFromRectangular(0, 0, 0),
 				Vector.createFromRectangular(width, height, 600),
 				Vector.createFromRectangular(0, 0, 0));
+		lightSource = new LightSource(Vector.createFromRectangular(1000, 0, 0));
 		
 		//Begins the game loop
 		loop();
