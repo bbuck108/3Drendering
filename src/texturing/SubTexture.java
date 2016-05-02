@@ -16,7 +16,11 @@ public class SubTexture {
 	Link linkL;
 	/** Links on the bottom edge of the square*/
 	Link linkB;
-	/** an id for the texture which contains the SubTextures */
+	/** an id for the texture which contains the SubTextures
+	 * try to make id order +X, +Y, +Z, -X, -Y, -Z
+	 * subdivide these then from closer to +Y of +X
+	 * then subdivide these them from the most +Z of +X
+	 * repeat along the other directions */
 	int id;
 	
 	public SubTexture(Image i, Link lr, Link lt, Link ll, Link lb, int id) {

@@ -5,12 +5,11 @@ package texturing;
  * @author Connor Lehmacher */
 public class Link {
 	/** which SubTexture the link is to */
-	int endSubTexture;
-	/** which side on the SubTexture the link is to */
-	int endSide;
+	int end;
 	
-	public Link(int est, int es) {
-		endSubTexture = est;
-		endSide = es;
+	public Link(int e) {
+		end = e;
 	}
+	
+	public Link() {}
 }

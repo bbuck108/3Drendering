@@ -16,7 +16,6 @@ import file.ParseFile;
 import gui.ResolutionSelection;
 import object.PhysicalObject;
 import render.Camera;
-import render.LightSource;
 
 /** The main class in the application.
  * 
@@ -27,7 +26,6 @@ import render.LightSource;
 public class Start {
 	public static ArrayList<PhysicalObject> renderList = new ArrayList<PhysicalObject>();
 	public static Camera camera;
-	public static LightSource lightSource;
 	static File input;
 	public static DisplayMode[] modes;
 	public static int height;
@@ -155,7 +153,6 @@ public class Start {
 				Vector.createFromRectangular(0, 0, 0),
 				Vector.createFromRectangular(width, height, 600),
 				Vector.createFromRectangular(0, 0, 0));
-		lightSource = new LightSource(Vector.createFromRectangular(1000, 0, 0));
 		
 		//Begins the game loop
 		loop();
