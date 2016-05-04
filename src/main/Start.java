@@ -16,6 +16,7 @@ import file.ParseFile;
 import gui.ResolutionSelection;
 import object.PhysicalObject;
 import render.Camera;
+import render.LightSource;
 
 /** The main class in the application.
  * 
@@ -26,6 +27,7 @@ import render.Camera;
 public class Start {
 	public static ArrayList<PhysicalObject> renderList = new ArrayList<PhysicalObject>();
 	public static Camera camera;
+	public static LightSource lightSource;
 	static File input;
 	public static DisplayMode[] modes;
 	public static int height;
@@ -153,10 +155,7 @@ public class Start {
 				Vector.createFromRectangular(0, 0, 0),
 				Vector.createFromRectangular(width, height, 600),
 				Vector.createFromRectangular(0, 0, 0));
-<<<<<<< HEAD
 		lightSource = new LightSource(Vector.createFromRectangular(0, 1000, 0));
-=======
->>>>>>> branch 'master' of https://github.com/bbuck108/3drendering.git
 		
 		//Begins the game loop
 		loop();
