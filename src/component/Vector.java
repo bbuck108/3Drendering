@@ -76,7 +76,11 @@ public class Vector {
 	/** finds the angle of the vector on the x-y plane from 0 to 2 PI
 	 * not that a zero vector will have angle 0 */
 	public double theta() {
-		return Math.atan2(y, x) + Math.PI;
+		double answer = Math.atan2(y, x);
+		if(answer < 0) {
+			answer += 2 * Math.PI;
+		}
+		return answer;
 	}
 	
 	public double phi() {
