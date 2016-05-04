@@ -314,7 +314,7 @@ public class RectangularPrism extends Shape {
 		double thetaW2 = c.angleWith(getSide(Position.FRONT, Axis.Y).direction().negative());
 		double thetaH = c.angleWith(getSide(Position.FRONT, Axis.Z).direction());
 		double thetaH2 = c.angleWith(getSide(Position.FRONT, Axis.Z).direction().negative());
-		double minTheta = Math.min(thetaL, Math.min(thetaW, Math.min(thetaH, Math.min(thetaL2, Math.min(thetaH, Math.min(thetaW2, thetaH2))))));
+		double minTheta = Math.min(thetaL, Math.min(thetaW, Math.min(thetaH, Math.min(thetaL2, Math.min(thetaW2, thetaH2)))));
 		
 		if(minTheta == thetaL) {
 			return getSide(Position.FRONT, Axis.X).direction();
@@ -335,7 +335,7 @@ public class RectangularPrism extends Shape {
 			return getSide(Position.FRONT, Axis.Z).direction().negative();
 		}
 		
-		System.err.println("Problem with reflection.");
+		System.err.println("RectangularPrism: Problem with returning surface normal.");
 		return (new Vector());
 	}
 	

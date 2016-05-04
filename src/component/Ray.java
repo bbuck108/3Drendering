@@ -15,6 +15,16 @@ public class Ray {
 		this.setTheta(theta);
 		this.setPhi(phi);
 	}
+	public Ray(Segment segment){
+		this(segment.getStart(),
+				segment.direction().theta(),
+				segment.direction().phi());
+	}
+	public Ray(Vector origin, Vector direction){
+		this(origin,
+				direction.theta(),
+				direction.phi());
+	}
 	public Vector getV(){
 		return Vector.createFromSpherical(1, getTheta(), getPhi());
 	}

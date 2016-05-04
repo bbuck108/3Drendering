@@ -45,10 +45,24 @@ public class RayTrace extends RecursiveTask<double[]>{
 			
 			if(distance != -1){
 				Vector intersection = Vector.createFromSpherical(distance, ray.getTheta(), ray.getPhi()).plus(ray.getOrigin());
+				
+				
+				//Check for shadows
+				boolean shadow = false;
+				for(PhysicalObject t_1 : Start.renderList){
+					if(!object.getShape().equals(t_1.getShape())){
+						if(t_1.getShape().isIntersecting(new Ray(new Segment(intersection, Start.lightSource.location))) != -1){
+							shadow = true;
+						}
+					}
+				}
+				
 				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, Start.lightSource.location)).direction()));
 				if(shade < 0){shade = 0;}
+				if(shadow)   {shade = 0;}
 				shade = (0.2 + 0.8*shade);
 				color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
+				if(shadow) {color = Color.GREEN;}
 				double[] pair = {distance, color.getRGB()};
 				intersections.add(pair);
 				maxDistance = Math.max(distance, maxDistance);
