@@ -155,7 +155,7 @@ public class Start {
 				Vector.createFromRectangular(0, 0, 0),
 				Vector.createFromRectangular(width, height, 600),
 				Vector.createFromRectangular(0, 0, 0));
-		lightSource = new LightSource(Vector.createFromRectangular(0, 1000, 0));
+		lightSource = new LightSource(Vector.createFromRectangular(1000, 0, 0));
 		
 		//Begins the game loop
 		loop();

@@ -33,8 +33,8 @@ public class Camera{
 		ArrayList<RayTrace> pixelGroup = new ArrayList<RayTrace>();
 		for(int i = 0; i < screen.x; i++) {
 			for(int j = 0; j < screen.y; j++) {
-				double x = i - screen.x/2;
-				double y = j - screen.y/2;
+				double x = -i + screen.x/2;
+				double y = -j + screen.y/2;
 				
 				Vector angle = Vector.createFromRectangular(x, y, screen.z);
 				angle = angle.rotateBy2(rotation);
