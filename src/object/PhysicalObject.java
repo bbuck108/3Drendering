@@ -52,9 +52,10 @@ public class PhysicalObject {
 		color = c;
 	}
 	
-	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, boolean r) {
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, boolean render, boolean physics) {
 		this(motion, rotation, mass, c, s);
-		Start.addToRenderList(this);
+		if(render)  Start.addToRenderList(this);
+		if(physics) Start.addToPhysicsList(this);
 	}
 	
 	public PhysicalObject(JSONObject jsonObject) {
