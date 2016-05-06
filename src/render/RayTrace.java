@@ -58,10 +58,12 @@ public class RayTrace extends RecursiveTask<double[]>{
 				}
 				
 				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, Start.lightSource.getShape().getLocation())).direction()));
-				if(shade < 0){shade = 0;}
-				if(shadow)   {shade = 0;}
+				if(shade < 0) shade = 0;
+				if(shadow) shade = 0;
+				//Makes objects not completely black
 				shade = (0.2 + 0.8*shade);
-				color = new Color((int)(object.getColor().getRed()*shade),(int)(object.getColor().getGreen()*shade),(int)(object.getColor().getBlue()*shade));
+				color = object.getColor();
+				color = new Color((int)(color.getRed()*shade),(int)(color.getGreen()*shade),(int)(color.getBlue()*shade));
 				double[] pair = {distance, color.getRGB()};
 				intersections.add(pair);
 				maxDistance = Math.max(distance, maxDistance);
