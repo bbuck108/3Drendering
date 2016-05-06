@@ -1,25 +1,53 @@
-[
-	{
-		"velocity" : [0,0,50],
-		"rotationalVelocity" : [0,0,0],
-		"mass"     : 1,
-		"color"    : [255,255,0],
-		"shape"    : {
-						"type" : "Sphere",
-						"location" : [0, 0, 1000],
-						"radius"   : 100
-					}
-	},
-	{
-		"velocity" : [0,50,0],
-		"rotationalVelocity" : [0.3927,0.3927,0.3927],
-		"mass"     : 1,
-		"color"    : [255,0,0],
-		"shape"    : {
-						"type" : "RectangularPrism",
-						"location" : [0, 200, 1500],
-						"size" : [100, 100, 100],
-						"rotation" : [0, 0, 0]
-					}
-	}
-]
+{
+"camera" :	{
+				"render"   : false,
+				"velocity" : [0,0,0],
+				"rotationalVelocity" : [0,0,0],
+				"mass"     : 1,
+				"color"    : [255,255,0],
+				"shape"    : {
+								"type" : "Camera",
+								"location" : [0, 0, 0],
+								"rotation" : [0, 0, 0]
+							}
+			},
+"lightSource" :	{
+				"render"   : false,
+				"velocity" : [0,0,0],
+				"rotationalVelocity" : [0,0,0],
+				"mass"     : 1,
+				"color"    : [255,255,0],
+				"shape"    : {
+								"type" : "LightSource",
+								"location" : [1000, 0, 0],
+								"rotation" : [0, 0, 0]
+							}
+			},
+"objects" :	[
+		{
+			"render"   : true,
+			"velocity" : [0,0,0],
+			"rotationalVelocity" : [0,0,0],
+			"mass"     : 1,
+			"color"    : [255,255,0],
+			"shape"    : {
+							"type" : "Sphere",
+							"location" : [0, 0, 1000],
+							"radius"   : 100
+						}
+		},
+		{
+			"render"   : true,
+			"velocity" : [-50,0,0],
+			"rotationalVelocity" : [0,0,0],
+			"mass"     : 1,
+			"color"    : [255,0,0],
+			"shape"    : {
+							"type" : "RectangularPrism",
+							"location" : [500, 0, 800],
+							"size" : [100, 100, 100],
+							"rotation" : [0, 0, 0]
+						}
+		}
+	]
+}

@@ -1,14 +1,41 @@
-[
-	{
-		"velocity" : [0,0,0],
-		"rotationalVelocity" : [0.78539816339,0.78539816339,0.78539816339],
-		"mass"     : 1,
-		"color"    : [255,0,0],
-		"shape"    : {
+{
+"camera" :	{
+				"render"   : false,
+				"velocity" : [0,0,0],
+				"rotationalVelocity" : [0,0,0],
+				"mass"     : 1,
+				"color"    : [255,255,0],
+				"shape"    : {
+								"type" : "Camera",
+								"location" : [0, 0, 0],
+								"rotation" : [0, 0, 0]
+							}
+			},
+"lightSource" :	{
+				"render"   : false,
+				"velocity" : [0,0,0],
+				"rotationalVelocity" : [0,0,0],
+				"mass"     : 1,
+				"color"    : [255,0,0],
+				"shape"    : {
+								"type" : "LightSource",
+								"location" : [1000, 0, 0],
+								"rotation" : [0, 0, 0]
+							}
+			},
+"objects" :	[
+		{
+			"render"   : true,
+			"velocity" : [0,0,0],
+			"rotationalVelocity" : [0.1,0,0],
+			"mass"     : 1,
+			"color"    : [255,0,0],
+			"shape"    : {
 						"type" : "RectangularPrism",
 						"location" : [200, 0, 1000],
 						"size" : [100, 100, 100],
 						"rotation" : [0, 0, 0]
 					}
-	}
-]
+		}
+	]
+}

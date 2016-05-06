@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import component.Rotation;
 import component.Vector;
 import main.Start;
+import render.Camera;
+import render.LightSource;
 import shape.RectangularPrism;
 import shape.Shape;
 import shape.Sphere;
@@ -76,8 +78,17 @@ public class PhysicalObject {
 			case "RectangularPrism":
 				shape = new RectangularPrism(jsonObject.getJSONObject("shape"));
 				break;
+			case "Camera":
+				shape = new Camera(jsonObject.getJSONObject("shape"));
+				break;
+			case "LightSource":
+				shape = new LightSource(jsonObject.getJSONObject("shape"));
+				break;
 		}
-		Start.addToRenderList(this);
+		Start.addToPhysicsList(this);
+		if(jsonObject.getBoolean("render")){
+			Start.addToRenderList(this);
+		}
 	}
 
 	/** Redefines the location of the shape within physical object */

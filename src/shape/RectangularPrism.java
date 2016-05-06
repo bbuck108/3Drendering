@@ -108,22 +108,22 @@ public class RectangularPrism extends Shape {
 	}
 	
 	public void calculatePoints(){
-		point_1 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_2 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		point_3 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_4 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		point_5 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_6 = (new Segment(location, 
-				location.plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
-		point_7 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
-		point_8 = (new Segment(location,
-				location.plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_1 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_2 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_3 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_4 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_5 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(-size.x/2,  size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_6 = (new Segment(getLocation(), 
+				getLocation().plus(Vector.createFromRectangular(-size.x/2,  size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
+		point_7 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(-size.x/2, -size.y/2,  size.z/2)))).rotateBy(rotation).getEnd();
+		point_8 = (new Segment(getLocation(),
+				getLocation().plus(Vector.createFromRectangular(-size.x/2, -size.y/2, -size.z/2)))).rotateBy(rotation).getEnd();
 		pointsDefined = true;
 	}
 	
@@ -344,22 +344,22 @@ public class RectangularPrism extends Shape {
 		double min = Math.min(Math.abs(comp_x_front), Math.min(Math.abs(comp_x_back), Math.min(Math.abs(comp_y_front), Math.min(Math.abs(comp_y_back), Math.min(Math.abs(comp_z_front), Math.abs(comp_z_back))))));
 		
 		if(min == Math.abs(comp_x_front)) {
-			return new Segment(location, getCenter(Position.FRONT, Axis.X)).direction();
+			return new Segment(getLocation(), getCenter(Position.FRONT, Axis.X)).direction();
 		}
 		if(min == Math.abs(comp_y_front)) {
-			return new Segment(location, getCenter(Position.FRONT, Axis.Y)).direction();
+			return new Segment(getLocation(), getCenter(Position.FRONT, Axis.Y)).direction();
 		}
 		if(min == Math.abs(comp_z_front)) {
-			return new Segment(location, getCenter(Position.FRONT, Axis.Z)).direction();
+			return new Segment(getLocation(), getCenter(Position.FRONT, Axis.Z)).direction();
 		}
 		if(min == Math.abs(comp_x_back)) {
-			return new Segment(location, getCenter(Position.BACK , Axis.X)).direction();
+			return new Segment(getLocation(), getCenter(Position.BACK , Axis.X)).direction();
 		}
 		if(min == Math.abs(comp_y_back)) {
-			return new Segment(location, getCenter(Position.BACK , Axis.Y)).direction();
+			return new Segment(getLocation(), getCenter(Position.BACK , Axis.Y)).direction();
 		}
 		if(min == Math.abs(comp_z_back)) {
-			return new Segment(location, getCenter(Position.BACK , Axis.Z)).direction();
+			return new Segment(getLocation(), getCenter(Position.BACK , Axis.Z)).direction();
 		}
 		
 		System.err.println("RectangularPrism: Problem with returning surface normal.");
@@ -367,10 +367,10 @@ public class RectangularPrism extends Shape {
 	}
 	
 	public Shape translateBy(Vector v) {
-		return new RectangularPrism(location.plus(v), size, rotation);
+		return new RectangularPrism(getLocation().plus(v), size, rotation);
 	}
 	
 	public Shape rotateBy(Rotation r) {
-		return new RectangularPrism(location, size, rotation.plus(r));
+		return new RectangularPrism(getLocation(), size, rotation.plus(r));
 	}
 }

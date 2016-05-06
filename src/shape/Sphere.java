@@ -42,7 +42,7 @@ public class Sphere extends Shape{
 
 	@Override
 	public double isIntersecting(Ray ray) {
-		Vector EO = (new Segment(ray.getOrigin(), location)).direction();
+		Vector EO = (new Segment(ray.getOrigin(), getLocation())).direction();
 		Vector V  = Vector.createFromSpherical(EO.norm(), ray.getTheta(), ray.getPhi());
 		double v = EO.dot(V);
 		double disc = Util.sq(radius) - (Util.sq(EO.norm())-v);
@@ -59,16 +59,16 @@ public class Sphere extends Shape{
 	
 	@Override
 	public Vector getSurfaceNormal(Vector p) {
-		return (new Segment(location, p)).direction();
+		return (new Segment(getLocation(), p)).direction();
 	}
 	
 	@Override
 	public Shape translateBy(Vector p) {
-		return new Sphere(location.plus(p), radius);
+		return new Sphere(getLocation().plus(p), radius);
 	}
 
 	@Override
 	public Shape rotateBy(Rotation r) {
-		return new Sphere(location, radius, rotation.plus(r));
+		return new Sphere(getLocation(), radius, rotation.plus(r));
 	}	
 }

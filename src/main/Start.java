@@ -6,17 +6,16 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-import component.Vector;
 import file.ParseFile;
 import gui.ResolutionSelection;
 import object.PhysicalObject;
 import render.Camera;
-import render.LightSource;
 
 /** The main class in the application.
  * 
@@ -26,15 +25,20 @@ import render.LightSource;
 
 public class Start {
 	public static ArrayList<PhysicalObject> renderList = new ArrayList<PhysicalObject>();
-	public static Camera camera;
-	public static LightSource lightSource;
+	public static ArrayList<PhysicalObject> physicsList = new ArrayList<PhysicalObject>();
+	public static PhysicalObject camera;
+	public static PhysicalObject lightSource;
 	static File input;
 	public static DisplayMode[] modes;
+	public static DisplayMode displayMode;
 	public static int height;
 	public static int width;
 	
 	public static void addToRenderList(PhysicalObject p_1) {
 		renderList.add(p_1);
+	}
+	public static void addToPhysicsList(PhysicalObject physicalObject) {
+		physicsList.add(physicalObject);
 	}
 	
 	/**
@@ -90,8 +94,13 @@ public class Start {
 		window.showOpenDialog(window);
 		input = window.getSelectedFile();
 		
+		JSONObject scene = new JSONObject(ParseFile.parseFile(input.getPath()));
+		
+		camera = new PhysicalObject(scene.getJSONObject("camera"));
+		lightSource = new PhysicalObject(scene.getJSONObject("lightSource"));
+		
 		//Create objects from file
-		JSONArray set = new JSONArray(ParseFile.parseFile(input.getPath()));
+		JSONArray set = scene.getJSONArray("objects");
 		for(int i = 0; i<set.length();i++){
 			new PhysicalObject(set.getJSONObject(i));
 		}
@@ -101,13 +110,7 @@ public class Start {
 	public static void buildScreen(){
 		//Builds the screen
 		try{
-			modes = Display.getAvailableDisplayModes();
-			DisplayMode dm = (new ResolutionSelection()).getDisplayMode();
-			
-			height = dm.getHeight();
-			width = dm.getWidth();
-			
-			Display.setDisplayMode(dm);
+			Display.setDisplayMode(displayMode);
 			Display.setFullscreen(false);
 			Display.create();
 		} catch (LWJGLException e){
@@ -121,12 +124,23 @@ public class Start {
 		GL11.glOrtho(0, width, 0, height, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
+	public static void chooseResolution(){
+		try {
+			modes = Display.getAvailableDisplayModes();
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
+		displayMode = (new ResolutionSelection()).getDisplayMode();
+		
+		height = displayMode.getHeight();
+		width  = displayMode.getWidth();
+	}
 	
 	public static void loop() {
 		//Loop until the exit button is pressed
 		while (!Display.isCloseRequested()) {
 			//Move
-			for(PhysicalObject t_1: renderList){
+			for(PhysicalObject t_1: physicsList){
 				t_1.move();
 			}
 			
@@ -134,7 +148,7 @@ public class Start {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 		
             // render OpenGL here
-			camera.render();
+			((Camera) camera.getShape()).render();
 			//System.out.println("Done rendering");
              
 			//Update display
@@ -146,16 +160,11 @@ public class Start {
 	}
 	
 	public static void main(String[] args) {
+		chooseResolution();
+		
 		openSceneFile();
 		
 		buildScreen();
-
-
-		camera = new Camera(
-				Vector.createFromRectangular(0, 0, 0),
-				Vector.createFromRectangular(width, height, 600),
-				Vector.createFromRectangular(0, 0, 0));
-		lightSource = new LightSource(Vector.createFromRectangular(1000, 0, 0));
 		
 		//Begins the game loop
 		loop();

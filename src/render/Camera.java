@@ -4,30 +4,40 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ForkJoinPool;
 
+import org.json.JSONObject;
 import org.lwjgl.opengl.GL11;
 
 import component.Ray;
 import component.Rotation;
 import component.Vector;
+import main.Start;
+import shape.Shape;
 
 /** A collection of data and methods used to render the scene.
  * 
  * @author Benjamin Buck and Connor Lehmacher
  *
  */
-public class Camera{
-	Vector point;
+public class Camera extends Shape{
 	Vector screen;
-	Vector motion;
-	Rotation rotation;
 	
-	public Camera(Vector p, Vector s, Vector v) {
-		point = p;
+	public Camera(Vector location, Rotation rotation, Vector s) {
+		super(location,rotation);
 		screen = s;
-		motion = v;
-		rotation = new Rotation(0,0,0);
 	}
 	
+	public Camera(JSONObject jsonObject) {
+		this(Vector.createFromRectangular(
+					jsonObject.getJSONArray("location").getDouble(0),
+					jsonObject.getJSONArray("location").getDouble(1),
+					jsonObject.getJSONArray("location").getDouble(2)),
+				new Rotation(
+						jsonObject.getJSONArray("rotation").getDouble(0),
+						jsonObject.getJSONArray("rotation").getDouble(1),
+						jsonObject.getJSONArray("rotation").getDouble(2)),
+				Vector.createFromRectangular(Start.width, Start.height, Start.width/2));
+	}
+
 	public void render() {
 		ForkJoinPool pool = new ForkJoinPool(2*Runtime.getRuntime().availableProcessors());
 		ArrayList<RayTrace> pixelGroup = new ArrayList<RayTrace>();
@@ -40,7 +50,7 @@ public class Camera{
 				angle = angle.rotateBy2(rotation);
 				double theta = angle.theta();
 				double phi = angle.phi();
-				Ray ray = new Ray(point, theta, phi);
+				Ray ray = new Ray(getLocation(), theta, phi);
 				
 				pixelGroup.add(new RayTrace(i,j,ray));
 				pool.execute(pixelGroup.get(pixelGroup.size()-1));
@@ -63,5 +73,25 @@ public class Camera{
 			GL11.glVertex2d(i,j+1);
 			GL11.glEnd();
 		});
+	}
+
+	@Override
+	public double isIntersecting(Ray ray) {
+		return -1;
+	}
+
+	@Override
+	public Vector getSurfaceNormal(Vector v) {
+		return new Vector();
+	}
+
+	@Override
+	public Shape translateBy(Vector v) {
+		return new Camera(getLocation().plus(v), rotation, screen);
+	}
+	
+	@Override
+	public Shape rotateBy(Rotation r) {
+		return new Camera(getLocation(), rotation.plus(r), screen);
 	}
 }

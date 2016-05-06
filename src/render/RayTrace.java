@@ -51,13 +51,13 @@ public class RayTrace extends RecursiveTask<double[]>{
 				boolean shadow = false;
 				for(PhysicalObject t_1 : Start.renderList){
 					if(!object.getShape().equals(t_1.getShape())){
-						if(t_1.getShape().isIntersecting(new Ray(new Segment(intersection, Start.lightSource.location))) != -1){
+						if(t_1.getShape().isIntersecting(new Ray(new Segment(intersection, Start.lightSource.getShape().getLocation()))) != -1){
 							shadow = true;
 						}
 					}
 				}
 				
-				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, Start.lightSource.location)).direction()));
+				double shade = Math.cos(shape.getSurfaceNormal(intersection).angleWith((new Segment(intersection, Start.lightSource.getShape().getLocation())).direction()));
 				if(shade < 0){shade = 0;}
 				if(shadow)   {shade = 0;}
 				shade = (0.2 + 0.8*shade);

@@ -10,8 +10,8 @@ import component.Vector;
  */
 public abstract class Shape {
 	/** The location of a shape <b> must </b> be at the center of mass for uniform density */
-	final Vector location;
-	final Rotation rotation;
+	private final Vector location;
+	protected final Rotation rotation;
 	
 	/** Default constructor center at 0, 0, 0
 	 * is important for Physical Object functionality*/
@@ -37,4 +37,8 @@ public abstract class Shape {
 	
 	/**Rotates the object by some Rotation r*/
 	public abstract Shape rotateBy(Rotation r);
+
+	public Vector getLocation() {
+		return location;
+	}
 }
