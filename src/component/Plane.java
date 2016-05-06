@@ -30,6 +30,9 @@ public class Plane {
 		System.err.println("Invalid: "+t_1);
 		return null;
 	}
+	public double compareDouble(Vector point) {
+		return a * point.x + b * point.y + c * point.z + d;
+	}
 	public Vector intersection(Ray ray){
 		Vector n = Vector.createFromRectangular(a, b, c);
 		Vector v = ray.getV();

@@ -307,7 +307,7 @@ public class RectangularPrism extends Shape {
 	
 	/** Computes an angle of a perpendicular line from the rectangular prism based on a vector */
 	public Vector getSurfaceNormal(Vector p) {
-		Vector c = (new Segment(location, p)).direction();
+		/*Vector c = (new Segment(location, p)).direction();
 		double thetaL = c.angleWith(getSide(Position.FRONT, Axis.X).direction());
 		double thetaL2 = c.angleWith(getSide(Position.FRONT, Axis.X).direction().negative());
 		double thetaW = c.angleWith(getSide(Position.FRONT, Axis.Y).direction());
@@ -333,6 +333,33 @@ public class RectangularPrism extends Shape {
 		}
 		if(minTheta == thetaH2) {
 			return getSide(Position.FRONT, Axis.Z).direction().negative();
+		}*/
+		
+		double comp_x_front = getPlane(Position.FRONT, Axis.X).compareDouble(p);
+		double comp_x_back  = getPlane(Position.BACK , Axis.X).compareDouble(p);
+		double comp_y_front = getPlane(Position.FRONT, Axis.Y).compareDouble(p);
+		double comp_y_back  = getPlane(Position.BACK , Axis.Y).compareDouble(p);
+		double comp_z_front = getPlane(Position.FRONT, Axis.Z).compareDouble(p);
+		double comp_z_back  = getPlane(Position.BACK , Axis.Z).compareDouble(p);
+		double min = Math.min(Math.abs(comp_x_front), Math.min(Math.abs(comp_x_back), Math.min(Math.abs(comp_y_front), Math.min(Math.abs(comp_y_back), Math.min(Math.abs(comp_z_front), Math.abs(comp_z_back))))));
+		
+		if(min == Math.abs(comp_x_front)) {
+			return new Segment(location, getCenter(Position.FRONT, Axis.X)).direction();
+		}
+		if(min == Math.abs(comp_y_front)) {
+			return new Segment(location, getCenter(Position.FRONT, Axis.Y)).direction();
+		}
+		if(min == Math.abs(comp_z_front)) {
+			return new Segment(location, getCenter(Position.FRONT, Axis.Z)).direction();
+		}
+		if(min == Math.abs(comp_x_back)) {
+			return new Segment(location, getCenter(Position.BACK , Axis.X)).direction();
+		}
+		if(min == Math.abs(comp_y_back)) {
+			return new Segment(location, getCenter(Position.BACK , Axis.Y)).direction();
+		}
+		if(min == Math.abs(comp_z_back)) {
+			return new Segment(location, getCenter(Position.BACK , Axis.Z)).direction();
 		}
 		
 		System.err.println("RectangularPrism: Problem with returning surface normal.");
