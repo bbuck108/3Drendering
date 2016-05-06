@@ -62,7 +62,15 @@ public class RayTrace extends RecursiveTask<double[]>{
 				if(shadow) shade = 0;
 				//Makes objects not completely black
 				shade = (0.2 + 0.8*shade);
-				color = object.getColor();
+				
+				//Operations on shape and intersection to get
+				final int index = 0;
+				final int xPixel = 0;
+				final int yPixel = 0;
+				
+				//TODO texturing
+				int intColor = object.getTexture().getImage(index).getRGB(xPixel, yPixel);
+				//color = newColor(intColor);
 				color = new Color((int)(color.getRed()*shade),(int)(color.getGreen()*shade),(int)(color.getBlue()*shade));
 				double[] pair = {distance, color.getRGB()};
 				intersections.add(pair);
