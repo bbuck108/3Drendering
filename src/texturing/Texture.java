@@ -1,11 +1,7 @@
 package texturing;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 /** Texture for a physical object
  * @author Connor Lehmacher*/
@@ -29,15 +25,11 @@ public class Texture {
 	
 	/** Sets a particular image to be blank*/
 	public void defineDefaultImage(int index) {
-		BufferedImage img = null;
-		try {
-		    img = ImageIO.read(new File("image/Blank.jpg"));
-		}
-		catch (IOException e) {}
+		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		images.set(index, img);
 	}
 	
-	/** Fills the texture with all white images*/
+	/** Fills the texture with all black images*/
 	public void fillWithBlanks() {
 		int end = images.size();
 		for(int i = 0; i < end; i++) {
@@ -47,5 +39,9 @@ public class Texture {
 	
 	public void defineImage(int index, BufferedImage i) {
 		images.set(index, i);
+	}
+	
+	public BufferedImage getImage(int index) {
+		return images.get(index);
 	}
 }
