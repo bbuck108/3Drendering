@@ -35,7 +35,7 @@ public class Camera extends Shape{
 						jsonObject.getJSONArray("rotation").getDouble(0),
 						jsonObject.getJSONArray("rotation").getDouble(1),
 						jsonObject.getJSONArray("rotation").getDouble(2)),
-				Vector.createFromRectangular(Start.width, Start.height, Start.width/2));
+				Vector.createFromRectangular(Start.width, Start.height, Start.width/(2*Math.tan(jsonObject.getDouble("fov")/2))));
 	}
 
 	public void render() {
