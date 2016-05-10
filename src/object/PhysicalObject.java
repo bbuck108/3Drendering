@@ -13,6 +13,7 @@ import shape.RectangularPrism;
 import shape.RenderablePlane;
 import shape.Shape;
 import shape.Sphere;
+import texturing.Texture;
 
 /** Defines an object located in 3D space.
  * 
@@ -28,6 +29,7 @@ public class PhysicalObject {
 	private Color color;
 	/** This must contain an extended Class of Shape */
 	private Shape shape;
+	private Texture texture;
 	
 	//--------Constructors-------------//
 	/** Default Constructor (sets mass to 1) */
@@ -37,6 +39,7 @@ public class PhysicalObject {
 		velocity = new Vector();
 		rotationalVelocity = new Rotation();
 		shape = null;
+		texture = null;
 	}
 	
 	/** Sets the shape and sets mass to 1 */
@@ -45,16 +48,17 @@ public class PhysicalObject {
 		shape = s;
 	}
 	
-	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s) {
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, Texture t) {
 		this();
 		this.velocity = motion;
 		this.rotationalVelocity = rotation;
 		this.mass = mass;
 		color = c;
+		texture = t;
 	}
 	
-	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, boolean render, boolean physics) {
-		this(motion, rotation, mass, c, s);
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, Texture t, boolean render, boolean physics) {
+		this(motion, rotation, mass, c, s, t);
 		if(render)  Start.addToRenderList(this);
 		if(physics) Start.addToPhysicsList(this);
 	}
@@ -118,4 +122,7 @@ public class PhysicalObject {
 		return shape;
 	}
 
+	public Texture getTexture() {
+		return texture;
+	}
 }
