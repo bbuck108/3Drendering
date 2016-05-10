@@ -8,21 +8,21 @@ import util.Inequality;
  *
  */
 public class Plane {
-	double a;
-	double b;
-	double c;
-	double d;
+	private double a;
+	private double b;
+	private double c;
+	private double d;
 	
 	/**Constructs a plane from a normal vector and a point on the plane*/
 	public Plane(Vector normal, Vector point) {
 		a = normal.x;
 		b = normal.y;
-		c = normal.z;
-		d = -1 * normal.dot(point);
+		setC(normal.z);
+		setD(-1 * normal.dot(point));
 	}
 	
 	public Inequality compare(Vector point) {
-		double t_1 = a * point.x + b * point.y + c * point.z + d;
+		double t_1 = a * point.x + b * point.y + getC() * point.z + getD();
 		if(t_1 == 0) return Inequality.EQUAL;
 		if(t_1 <= 0) return Inequality.LESS;
 		if(t_1 >= 0) return Inequality.GREATER;
@@ -31,15 +31,31 @@ public class Plane {
 		return null;
 	}
 	public double compareDouble(Vector point) {
-		return a * point.x + b * point.y + c * point.z + d;
+		return a * point.x + b * point.y + getC() * point.z + getD();
 	}
 	public Vector intersection(Ray ray){
-		Vector n = Vector.createFromRectangular(a, b, c);
+		Vector n = Vector.createFromRectangular(a, b, getC());
 		Vector v = ray.getV();
-		double t = -1*(ray.getOrigin().dot(n)+d)/(v.dot(n));
+		double t = -1*(ray.getOrigin().dot(n)+getD())/(v.dot(n));
 		return ray.getOrigin().plus(v.scaleBy(t));
 	}
 	public Vector getNormalVector(){
 		return Vector.createFromRectangular(a, b, c);
+	}
+
+	public double getD() {
+		return d;
+	}
+
+	public void setD(double d) {
+		this.d = d;
+	}
+
+	public double getC() {
+		return c;
+	}
+
+	public void setC(double c) {
+		this.c = c;
 	}
 }
