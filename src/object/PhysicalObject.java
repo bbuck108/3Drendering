@@ -10,6 +10,7 @@ import main.Start;
 import render.Camera;
 import render.LightSource;
 import shape.RectangularPrism;
+import shape.RenderablePlane;
 import shape.Shape;
 import shape.Sphere;
 import texturing.Texture;
@@ -85,6 +86,9 @@ public class PhysicalObject {
 				break;
 			case "RectangularPrism":
 				shape = new RectangularPrism(jsonObject.getJSONObject("shape"));
+				break;
+			case "Plane":
+				shape = new RenderablePlane(jsonObject.getJSONObject("shape"));
 				break;
 			case "Camera":
 				shape = new Camera(jsonObject.getJSONObject("shape"));
