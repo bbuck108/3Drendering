@@ -11,18 +11,19 @@ public class Texture {
 	private ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 	
 	public Texture(String key) {
-		if(key.equals("Sphere")) {
-			//Full
+		if(key.equals("shape.Sphere") || key.equals("Sphere")) {
 			images.add(null);
 		}
-		if(key.equals("RectangularPrism")) {
+		else{ if(key.equals("shape.RectangularPrism") || key.equals("RectangularPrism")) {
 			for(int i = 0; i < 6; i++) {
 				images.add(null);
 			}
 		}
 		else {
+			images.add(null);
 			System.err.println("Unsupported Key");
-		}
+			System.err.println("You typed: " + key);
+		}}
 	}
 	
 	/** Sets a particular image to be blank*/
@@ -52,11 +53,11 @@ public class Texture {
 	}
 	
 	/** Makes the texture be solid one color */
-	public void defineFullColor(int index, Color c) {
+	public void defineFullColor(Color c) {
 		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		Graphics g = img.getGraphics();
 		g.setColor(c);
-		g.drawRect(0, 0, 100, 100);
+		g.fillRect(0, 0, 99, 99);
 		fillWithImages(img);
 	}
 	

@@ -41,14 +41,17 @@ public class PhysicalObject {
 		texture = null;
 	}
 	
-	/** Sets the shape and sets mass to 1 */
+	/** Sets the shape and sets mass to 1
+	 * defaults color to CYAN (I don't know why) */
 	public PhysicalObject(Shape s) {
 		this();
 		shape = s;
+		texture = new Texture(shape.getClass().getName());
+		texture.defineFullColor(Color.CYAN);
 	}
 	
 	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, Texture t) {
-		this();
+		this(s);
 		this.velocity = motion;
 		this.rotationalVelocity = rotation;
 		this.mass = mass;
@@ -94,6 +97,11 @@ public class PhysicalObject {
 		if(jsonObject.getBoolean("render")){
 			Start.addToRenderList(this);
 		}
+		//Implement texturing
+		//use this line of code before you get the images for the texture
+		texture = new Texture(shape.getClass().getName());
+		//temporary line remove when texturing added
+		texture.defineFullColor(color);
 	}
 
 	/** Redefines the location of the shape within physical object */

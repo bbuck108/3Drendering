@@ -13,7 +13,7 @@ public abstract class Shape {
 	private final Vector location;
 	protected final Rotation rotation;
 	
-	/** Default constructor center at 0, 0, 0
+ 	/** Default constructor center at 0, 0, 0
 	 * is important for Physical Object functionality*/
 	public Shape() {
 		location = new Vector();
@@ -29,8 +29,12 @@ public abstract class Shape {
 	/** Computes the length along a ray where it intersects with this shape */
 	public abstract double isIntersecting(Ray ray);
 	
-	/** Computes a perpendicular to the edge of the shape by a point which must intersect with the place */
+	/** Computes a perpendicular to the edge of the shape by a point which must intersect with the place approximately */
 	public abstract Vector getSurfaceNormal(Vector v);
+	
+	/** Computes two numbers from 0 to 99 which is a relative point on the surface of the shape
+	 * used for texturing; should almost intersect the shape */
+	public abstract double[] getTexturingPoint(Vector v);	
 	
 	/** Moves the center of a shape by some vector amount v */
 	public abstract Shape translateBy(Vector v);

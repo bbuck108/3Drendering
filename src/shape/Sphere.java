@@ -56,6 +56,11 @@ public class Sphere extends Shape{
 		
 		return r;
 	}
+
+	@Override
+	public double[] getTexturingPoint(Vector v) {
+		return new double[]{0, 0};
+	}
 	
 	@Override
 	public Vector getSurfaceNormal(Vector p) {

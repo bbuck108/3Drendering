@@ -366,6 +366,12 @@ public class RectangularPrism extends Shape {
 		return (new Vector());
 	}
 	
+
+	@Override
+	public double[] getTexturingPoint(Vector v) {
+		return new double[]{0, 0};
+	}
+	
 	public Shape translateBy(Vector v) {
 		return new RectangularPrism(getLocation().plus(v), size, rotation);
 	}

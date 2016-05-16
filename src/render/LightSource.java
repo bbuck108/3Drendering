@@ -40,4 +40,9 @@ public class LightSource extends Shape{
 	public Shape rotateBy(Rotation r) {
 		return new LightSource(getLocation(), rotation.plus(r));
 	}
+
+	@Override
+	public double[] getTexturingPoint(Vector v) {
+		return new double[]{0, 0};
+	}
 }

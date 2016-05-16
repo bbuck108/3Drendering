@@ -84,6 +84,7 @@ public class Camera extends Shape{
 	public Vector getSurfaceNormal(Vector v) {
 		return new Vector();
 	}
+	
 
 	@Override
 	public Shape translateBy(Vector v) {
@@ -93,5 +94,10 @@ public class Camera extends Shape{
 	@Override
 	public Shape rotateBy(Rotation r) {
 		return new Camera(getLocation(), rotation.plus(r), screen);
+	}
+
+	@Override
+	public double[] getTexturingPoint(Vector v) {
+		return new double[]{0, 0};
 	}
 }
