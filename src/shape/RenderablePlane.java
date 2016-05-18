@@ -36,6 +36,11 @@ public class RenderablePlane extends Shape {
 	public Vector getSurfaceNormal(Vector v) {
 		return plane.getNormalVector();
 	}
+	
+	@Override
+	public int[] getTexturingPoint(Vector v) {
+		return new int[]{0, 0, 0};
+	}
 
 	@Override
 	public Shape translateBy(Vector v) {
