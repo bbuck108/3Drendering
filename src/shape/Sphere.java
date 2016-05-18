@@ -56,10 +56,10 @@ public class Sphere extends Shape{
 		
 		return r;
 	}
-
+	
 	@Override
-	public double[] getTexturingPoint(Vector v) {
-		return new double[]{0, 0};
+	public int[] getTexturingPoint(Vector v) {
+		return new int[]{0, 0, 0};
 	}
 	
 	@Override

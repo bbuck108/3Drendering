@@ -42,7 +42,7 @@ public class LightSource extends Shape{
 	}
 
 	@Override
-	public double[] getTexturingPoint(Vector v) {
-		return new double[]{0, 0};
+	public int[] getTexturingPoint(Vector v) {
+		return new int[]{0, 0, 0};
 	}
 }

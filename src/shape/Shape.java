@@ -32,9 +32,10 @@ public abstract class Shape {
 	/** Computes a perpendicular to the edge of the shape by a point which must intersect with the place approximately */
 	public abstract Vector getSurfaceNormal(Vector v);
 	
-	/** Computes two numbers from 0 to 99 which is a relative point on the surface of the shape
-	 * used for texturing; should almost intersect the shape */
-	public abstract double[] getTexturingPoint(Vector v);	
+	/** Computes two numbers from 0 to 99 which is a relative point on the surface of the shape and index for which one to use
+	 * used for texturing; should almost intersect the shape
+	 * must be in form {index, xPoint, yPoint} <b> very important </b> */
+	public abstract int[] getTexturingPoint(Vector v);	
 	
 	/** Moves the center of a shape by some vector amount v */
 	public abstract Shape translateBy(Vector v);

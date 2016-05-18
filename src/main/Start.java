@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -163,6 +164,12 @@ public class Start {
 		chooseResolution();
 		
 		openSceneFile();
+		
+		renderList.get(0).getTexture().defineSidesColor(2, Color.BLUE);
+		renderList.get(0).getTexture().defineSidesColor(1, Color.GREEN);
+		renderList.get(0).getTexture().defineSidesColor(5, Color.YELLOW);
+		renderList.get(0).getTexture().defineSidesColor(4, Color.DARK_GRAY);
+		renderList.get(0).getTexture().defineSidesColor(3, Color.WHITE);
 		
 		buildScreen();
 		

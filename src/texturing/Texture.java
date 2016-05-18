@@ -15,6 +15,7 @@ public class Texture {
 			images.add(null);
 		}
 		else{ if(key.equals("shape.RectangularPrism") || key.equals("RectangularPrism")) {
+			//order: front:x,y,z , back:x,y,z
 			for(int i = 0; i < 6; i++) {
 				images.add(null);
 			}
@@ -59,6 +60,15 @@ public class Texture {
 		g.setColor(c);
 		g.fillRect(0, 0, 99, 99);
 		fillWithImages(img);
+	}
+	
+	/** Sets the color of one side */
+	public void defineSidesColor(int i, Color c) {
+		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		Graphics g = img.getGraphics();
+		g.setColor(c);
+		g.fillRect(0, 0, 99, 99);
+		defineImage(i, img);
 	}
 	
 	public BufferedImage getImage(int index) {

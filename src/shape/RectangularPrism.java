@@ -306,41 +306,14 @@ public class RectangularPrism extends Shape {
 	}
 	
 	/** Computes an angle of a perpendicular line from the rectangular prism based on a vector */
-	public Vector getSurfaceNormal(Vector p) {
-		/*Vector c = (new Segment(location, p)).direction();
-		double thetaL = c.angleWith(getSide(Position.FRONT, Axis.X).direction());
-		double thetaL2 = c.angleWith(getSide(Position.FRONT, Axis.X).direction().negative());
-		double thetaW = c.angleWith(getSide(Position.FRONT, Axis.Y).direction());
-		double thetaW2 = c.angleWith(getSide(Position.FRONT, Axis.Y).direction().negative());
-		double thetaH = c.angleWith(getSide(Position.FRONT, Axis.Z).direction());
-		double thetaH2 = c.angleWith(getSide(Position.FRONT, Axis.Z).direction().negative());
-		double minTheta = Math.min(thetaL, Math.min(thetaW, Math.min(thetaH, Math.min(thetaL2, Math.min(thetaW2, thetaH2)))));
+	public Vector getSurfaceNormal(Vector v) {
 		
-		if(minTheta == thetaL) {
-			return getSide(Position.FRONT, Axis.X).direction();
-		}
-		if(minTheta == thetaW) {
-			return getSide(Position.FRONT, Axis.Y).direction();
-		}
-		if(minTheta == thetaH) {
-			return getSide(Position.FRONT, Axis.Z).direction();
-		}
-		if(minTheta == thetaL2) {
-			return getSide(Position.FRONT, Axis.X).direction().negative();
-		}
-		if(minTheta == thetaW2) {
-			return getSide(Position.FRONT, Axis.Y).direction().negative();
-		}
-		if(minTheta == thetaH2) {
-			return getSide(Position.FRONT, Axis.Z).direction().negative();
-		}*/
-		
-		double comp_x_front = getPlane(Position.FRONT, Axis.X).compareDouble(p);
-		double comp_x_back  = getPlane(Position.BACK , Axis.X).compareDouble(p);
-		double comp_y_front = getPlane(Position.FRONT, Axis.Y).compareDouble(p);
-		double comp_y_back  = getPlane(Position.BACK , Axis.Y).compareDouble(p);
-		double comp_z_front = getPlane(Position.FRONT, Axis.Z).compareDouble(p);
-		double comp_z_back  = getPlane(Position.BACK , Axis.Z).compareDouble(p);
+		double comp_x_front = getPlane(Position.FRONT, Axis.X).compareDouble(v);
+		double comp_x_back  = getPlane(Position.BACK , Axis.X).compareDouble(v);
+		double comp_y_front = getPlane(Position.FRONT, Axis.Y).compareDouble(v);
+		double comp_y_back  = getPlane(Position.BACK , Axis.Y).compareDouble(v);
+		double comp_z_front = getPlane(Position.FRONT, Axis.Z).compareDouble(v);
+		double comp_z_back  = getPlane(Position.BACK , Axis.Z).compareDouble(v);
 		double min = Math.min(Math.abs(comp_x_front), Math.min(Math.abs(comp_x_back), Math.min(Math.abs(comp_y_front), Math.min(Math.abs(comp_y_back), Math.min(Math.abs(comp_z_front), Math.abs(comp_z_back))))));
 		
 		if(min == Math.abs(comp_x_front)) {
@@ -368,8 +341,34 @@ public class RectangularPrism extends Shape {
 	
 
 	@Override
-	public double[] getTexturingPoint(Vector v) {
-		return new double[]{0, 0};
+	/** Gives a point and an index for the side of the prism 
+	 * {index, xPoint, yPoint}*/
+	public int[] getTexturingPoint(Vector v) {
+		//Determines the distance to the closest plane
+		double comp_x_front = getPlane(Position.FRONT, Axis.X).compareDouble(v);
+		double comp_x_back  = getPlane(Position.BACK , Axis.X).compareDouble(v);
+		double comp_y_front = getPlane(Position.FRONT, Axis.Y).compareDouble(v);
+		double comp_y_back  = getPlane(Position.BACK , Axis.Y).compareDouble(v);
+		double comp_z_front = getPlane(Position.FRONT, Axis.Z).compareDouble(v);
+		double comp_z_back  = getPlane(Position.BACK , Axis.Z).compareDouble(v);
+		double min = Math.min(Math.abs(comp_x_front), Math.min(Math.abs(comp_x_back),
+				Math.min(Math.abs(comp_y_front), Math.min(Math.abs(comp_y_back),
+						Math.min(Math.abs(comp_z_front), Math.abs(comp_z_back))))));
+		
+		//Determines which image to use
+		int index = 0;
+		if(min == Math.abs(comp_x_front)) index = 0;
+		if(min == Math.abs(comp_y_front)) index = 1;
+		if(min == Math.abs(comp_z_front)) index = 2;
+		if(min == Math.abs(comp_x_back)) index = 3;
+		if(min == Math.abs(comp_y_back)) index = 4;
+		if(min == Math.abs(comp_z_back)) index = 5;
+		int xPoint = 0;
+		int yPoint = 0;
+		
+		
+		
+		return new int[]{index, xPoint, yPoint};
 	}
 	
 	public Shape translateBy(Vector v) {
