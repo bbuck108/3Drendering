@@ -39,9 +39,7 @@ public class Cylinder extends Shape{
 	}
 
 	@Override
-	public double[] getTexturingPoint(Vector v) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[] getTexturingPoint(Vector v) {
+		return new int[]{0, 0, 0};
 	}
-
 }

@@ -53,11 +53,4 @@ public class RenderablePlane extends Shape {
 		// TODO RenderablePlane rotations
 		return this;
 	}
-
-	@Override
-	public double[] getTexturingPoint(Vector v) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
