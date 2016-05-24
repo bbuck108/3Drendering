@@ -365,8 +365,44 @@ public class RectangularPrism extends Shape {
 		if(min == Math.abs(comp_z_back)) index = 5;
 		int xPoint = 0;
 		int yPoint = 0;
+		//All the indexes not on the z axis go towards the positive z plane
+		//z plane sides go toward positive x plane
+		if(index == 0) {
+			xPoint = (int) (getSide(Position.LEFT, Axis.Y).distanceTo(v) * 1000 / getSide(Position.LEFT, Axis.Z).length());
+			yPoint = (int) (getSide(Position.LEFT, Axis.Z).distanceTo(v) * 1000 / getSide(Position.LEFT, Axis.Y).length());
+		}
+		if(index == 1) {
+			xPoint = (int) (getSide(Position.FRONT, Axis.Z).distanceTo(v) * 1000 / getSide(Position.RIGHT, Axis.X).length());
+			yPoint = (int) (getSide(Position.RIGHT, Axis.X).distanceTo(v) * 1000 / getSide(Position.FRONT, Axis.Z).length());
+		}
+		//Not Fixed Yet TODO
+		if(index == 2) {
+			xPoint = (int) (getSide(Position.RIGHT, Axis.Z).distanceTo(v) * 1000 / getSide(Position.BACK, Axis.Y).length());
+			yPoint = (int) (getSide(Position.BACK, Axis.Y).distanceTo(v) * 1000 / getSide(Position.RIGHT, Axis.Z).length());
+		}
+		//Add More TODO
+		if(index == 5) {
+			xPoint = (int) (getSide(Position.BACK, Axis.X).distanceTo(v) * 1000 / getSide(Position.BACK, Axis.Y).length());
+			yPoint = (int) (getSide(Position.BACK, Axis.Y).distanceTo(v) * 1000 / getSide(Position.BACK, Axis.X).length());
+		}
 		
-		
+		//Error Testing for bad x and y Point values
+		if(xPoint > 999 || xPoint < 0) {
+			xPoint -= 1000;
+			System.err.println("Bad Texturing Value");
+		}
+		if(yPoint > 999 || yPoint < 0) {
+			yPoint -= 1000;
+			System.err.println("Bad Texturing Value");
+		}
+		if(xPoint > 999 || xPoint < 0) {
+			xPoint = 1;
+			System.err.println("Bad Texturing Value");
+		}
+		if(yPoint > 999 || yPoint < 0) {
+			yPoint = 1;
+			System.err.println("Bad Texturing Value");
+		}
 		
 		return new int[]{index, xPoint, yPoint};
 	}
