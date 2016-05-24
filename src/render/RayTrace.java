@@ -105,7 +105,7 @@ public class RayTrace extends RecursiveTask<double[]>{
 			}
 		}
 		double minDistance = maxDistance;
-		color = Color.WHITE;
+		color = Color.BLACK;
 		for(double[] pair : intersections){
 			if(pair[0]<=minDistance){
 				minDistance = pair[0];
