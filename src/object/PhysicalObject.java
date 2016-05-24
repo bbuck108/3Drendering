@@ -27,6 +27,7 @@ public class PhysicalObject {
 	private Rotation rotationalVelocity;
 	private double mass;
 	private Color color;
+	private double reflectivity;
 	/** This must contain an extended Class of Shape */
 	private Shape shape;
 	private Texture texture;
@@ -51,17 +52,18 @@ public class PhysicalObject {
 		texture.defineFullColor(Color.CYAN);
 	}
 	
-	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, Texture t) {
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, double reflect, Shape s, Texture t) {
 		this(s);
 		this.velocity = motion;
 		this.rotationalVelocity = rotation;
 		this.mass = mass;
 		color = c;
 		texture = t;
+		setReflectivity(reflect);
 	}
 	
-	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, Shape s, Texture t, boolean render, boolean physics) {
-		this(motion, rotation, mass, c, s, t);
+	public PhysicalObject(Vector motion, Rotation rotation, double mass, Color c, double reflect, Shape s, Texture t, boolean render, boolean physics) {
+		this(motion, rotation, mass, c, reflect, s, t);
 		if(render)  Start.addToRenderList(this);
 		if(physics) Start.addToPhysicsList(this);
 	}
@@ -76,6 +78,7 @@ public class PhysicalObject {
 				jsonObject.getJSONArray("rotationalVelocity").getDouble(1),
 				jsonObject.getJSONArray("rotationalVelocity").getDouble(2));
 		mass = jsonObject.getDouble("mass");
+		setReflectivity(jsonObject.getDouble("reflect"));
 		color = new Color(
 				jsonObject.getJSONArray("color").getInt(0),
 				jsonObject.getJSONArray("color").getInt(1),
@@ -132,5 +135,13 @@ public class PhysicalObject {
 
 	public Texture getTexture() {
 		return texture;
+	}
+
+	public double getReflectivity() {
+		return reflectivity;
+	}
+
+	public void setReflectivity(double reflectivity) {
+		this.reflectivity = reflectivity;
 	}
 }
