@@ -2,6 +2,7 @@ package shape;
 
 import component.Ray;
 import component.Rotation;
+import component.Segment;
 import component.Vector;
 
 /**
@@ -45,5 +46,13 @@ public abstract class Shape {
 
 	public Vector getLocation() {
 		return location;
+	}
+
+	public double isIntersecting(Segment segment) {
+		double distance = this.isIntersecting(new Ray(segment));
+		if(distance>segment.length()){
+			distance = -1;
+		}
+		return distance;
 	}
 }

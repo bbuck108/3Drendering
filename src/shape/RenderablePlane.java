@@ -7,6 +7,7 @@ import component.Ray;
 import component.Rotation;
 import component.Segment;
 import component.Vector;
+import main.Start;
 
 public class RenderablePlane extends Shape {
 	final Plane plane;
@@ -22,19 +23,27 @@ public class RenderablePlane extends Shape {
 					jsonObject.getJSONArray("normal").getDouble(1),
 					jsonObject.getJSONArray("normal").getDouble(2)),
 				Vector.createFromRectangular(
-					jsonObject.getJSONArray("location").getDouble(0),
-					jsonObject.getJSONArray("location").getDouble(1),
-					jsonObject.getJSONArray("location").getDouble(2)));
+						jsonObject.getJSONArray("location").getDouble(0),
+						jsonObject.getJSONArray("location").getDouble(1),
+						jsonObject.getJSONArray("location").getDouble(2)));
 	}
 
 	@Override
 	public double isIntersecting(Ray ray) {
+		if(new Segment (ray.getOrigin(), plane.intersection(ray)).direction().phi()>Math.PI/2){
+			return -1;
+		}else{
 		return new Segment (ray.getOrigin(), plane.intersection(ray)).length();
+		}
 	}
 
 	@Override
 	public Vector getSurfaceNormal(Vector v) {
-		return plane.getNormalVector();
+		if(Math.cos(plane.getNormalVector().angleWith((new Segment(v, Start.lightSource.getShape().getLocation())).direction())) > Math.cos(plane.getNormalVector().negative().angleWith((new Segment(v, Start.lightSource.getShape().getLocation())).direction()))){
+			return plane.getNormalVector();
+		}else{
+			return plane.getNormalVector().negative();
+		}
 	}
 	
 	@Override
@@ -44,8 +53,9 @@ public class RenderablePlane extends Shape {
 
 	@Override
 	public Shape translateBy(Vector v) {
-		Vector point = Vector.createFromRectangular(0, 0, (-1*plane.getD()/plane.getC()));
-		return new RenderablePlane(new Plane(plane.getNormalVector(), point.plus(v)));
+		//Vector point = Vector.createFromRectangular(0, 0, (-1*plane.getD()/plane.getC()));
+		//return new RenderablePlane(new Plane(plane.getNormalVector(), point.plus(v)));
+		return this;
 	}
 
 	@Override
