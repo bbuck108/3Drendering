@@ -165,4 +165,9 @@ public class Vector {
 	public void println() {
 		System.out.println(x + " " + y + " " + z);
 	}
+	
+	/** Returns true if all three components of the vector are finite*/
+	public boolean isFinite(){
+		return ((Double.isFinite(x))&&(Double.isFinite(y))&&(Double.isFinite(z)));
+	}
 }

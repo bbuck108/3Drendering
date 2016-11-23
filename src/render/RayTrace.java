@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.RecursiveTask;
 
+import component.Plane;
 import component.Ray;
 import component.Rotation;
 import component.Segment;
@@ -44,7 +45,6 @@ public class RayTrace extends RecursiveTask<double[]>{
 	@Override
 	protected double[] compute() {
 		ArrayList<double[]> intersections = new ArrayList<double[]>();
-		double maxDistance = 0;
 		
 		
 		for(PhysicalObject object: Start.renderList) {
@@ -54,7 +54,6 @@ public class RayTrace extends RecursiveTask<double[]>{
 				
 				if(distance != -1){
 					Vector intersection = Vector.createFromSpherical(distance, ray.getTheta(), ray.getPhi()).plus(ray.getOrigin());
-					
 					
 					//Check for shadows
 					boolean shadow = false;
@@ -96,20 +95,31 @@ public class RayTrace extends RecursiveTask<double[]>{
 					
 					//Apply shade
 					color = new Color((int)(color.getRed()*shade),(int)(color.getGreen()*shade),(int)(color.getBlue()*shade));
+					if(color.equals(Color.BLACK)){
+						System.out.println(object.getClass().getName());
+					}
+					
 					
 					//Send data
 					double[] pair = {distance, color.getRGB()};
 					intersections.add(pair);
-					maxDistance = Math.max(distance, maxDistance);
 				}
+			}
+		}
+		double maxDistance = 0;
+		for(double[] pair : intersections){
+			if(Double.isFinite(pair[0])){
+				maxDistance = Math.max(maxDistance, pair[0]);
 			}
 		}
 		double minDistance = maxDistance;
 		color = Color.BLACK;
 		for(double[] pair : intersections){
-			if(pair[0]<=minDistance){
-				minDistance = pair[0];
-				color = new Color((int) pair[1]);
+			if(Double.isFinite(pair[0])) {
+				if(pair[0]<=minDistance){
+					minDistance = pair[0];
+					color = new Color((int) pair[1]);
+				}
 			}
 		}
 		

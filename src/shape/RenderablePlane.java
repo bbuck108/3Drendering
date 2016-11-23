@@ -30,13 +30,18 @@ public class RenderablePlane extends Shape {
 
 	@Override
 	public double isIntersecting(Ray ray) {
+		double distance = new Segment (ray.getOrigin(), plane.intersection(ray)).length();
 		if(new Segment (ray.getOrigin(), plane.intersection(ray)).direction().phi()>Math.PI/2){
 			return -1;
 		}else{
-		return new Segment (ray.getOrigin(), plane.intersection(ray)).length();
+			if(!Double.isFinite(distance)){
+				return -1;
+			}else{
+				return distance;
+			}
 		}
 	}
-
+	
 	@Override
 	public Vector getSurfaceNormal(Vector v) {
 		if(Math.cos(plane.getNormalVector().angleWith((new Segment(v, Start.lightSource.getShape().getLocation())).direction())) > Math.cos(plane.getNormalVector().negative().angleWith((new Segment(v, Start.lightSource.getShape().getLocation())).direction()))){
