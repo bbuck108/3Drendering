@@ -87,6 +87,11 @@ public class Segment {
 		return new Segment(start.scaleBy(a), end.scaleBy(a));
 	}
 	
+	/** Determines the length to a line extended from the segment to a point */
+	public double distanceTo(Vector v) {
+		return (new Segment(v, start)).direction().cross((new Segment(v, end)).direction()).norm() / length();
+	}
+	
 	//--------------Getter-Methods--------------//
 	public Vector getStart() { return start; }
 	public Vector getEnd() { return end; }

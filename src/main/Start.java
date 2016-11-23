@@ -1,6 +1,9 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -165,12 +168,26 @@ public class Start {
 		
 		openSceneFile();
 		
-		/* Fun Colors
-		renderList.get(0).getTexture().defineSidesColor(2, Color.BLUE);
-		renderList.get(0).getTexture().defineSidesColor(1, Color.GREEN);
-		renderList.get(0).getTexture().defineSidesColor(5, Color.YELLOW);
-		renderList.get(0).getTexture().defineSidesColor(4, Color.DARK_GRAY);
-		renderList.get(0).getTexture().defineSidesColor(3, Color.WHITE); */
+		//Fun Colors
+		//renderList.get(0).getTexture().defineSidesColor(0, Color.BLUE);
+		//renderList.get(0).getTexture().defineSidesColor(4, Color.GREEN);
+		//renderList.get(0).getTexture().defineSidesColor(1, new Color(153, 255, 51));
+		//renderList.get(0).getTexture().defineSidesColor(2, Color.CYAN);
+		//renderList.get(0).getTexture().defineSidesColor(3, new Color(127, 0, 255));
+		BufferedImage img = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
+		Graphics g = img.getGraphics();
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, 499, 499);
+		g.setColor(Color.BLUE);
+		g.fillRect(500, 0, 999, 499);
+		g.setColor(Color.RED);
+		g.fillRect(0, 500, 499, 999);
+		g.setColor(Color.MAGENTA);
+		g.fillRect(500, 500, 999, 999);
+		g.setColor(Color.black);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 200));
+		g.drawString("Hello", 400, 400);
+		renderList.get(0).getTexture().fillWithImages(img);
 		
 		
 		buildScreen();

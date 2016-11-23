@@ -29,7 +29,7 @@ public class Texture {
 	
 	/** Sets a particular image to be blank*/
 	public void defineDefaultImage(int index) {
-		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
 		images.set(index, img);
 	}
 	
@@ -55,19 +55,19 @@ public class Texture {
 	
 	/** Makes the texture be solid one color */
 	public void defineFullColor(Color c) {
-		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
 		Graphics g = img.getGraphics();
 		g.setColor(c);
-		g.fillRect(0, 0, 99, 99);
+		g.fillRect(0, 0, 999, 999);
 		fillWithImages(img);
 	}
 	
 	/** Sets the color of one side */
 	public void defineSidesColor(int i, Color c) {
-		BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
 		Graphics g = img.getGraphics();
 		g.setColor(c);
-		g.fillRect(0, 0, 99, 99);
+		g.fillRect(0, 0, 999, 999);
 		defineImage(i, img);
 	}
 	
